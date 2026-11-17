@@ -164,3 +164,17 @@ Yes! FastGem can be self-hosted anywhere using Docker, Python/Node.js, or 1-clic
 FastGem is open-source under the **Source-Available Community License**. Free to use, inspect, modify, and self-host for internal and commercial applications.
 
 - **GitHub Repository**: [https://github.com/JQCVSC/FastGem](https://github.com/JQCVSC/FastGem)
+
+
+## Connected runtime
+
+The website’s Agent Studio now calls the FastGem runtime through `VITE_FASTGEM_RUNTIME_URL` instead of returning simulated canned responses. Run the runtime from the [`JQCVSC/FastGem`](https://github.com/JQCVSC/FastGem) repository, then point this website at it:
+
+```bash
+cp .env.example .env
+# Set VITE_FASTGEM_RUNTIME_URL=http://localhost:8000
+npm install
+npm run dev
+```
+
+The current website sign-in is still a frontend demo gate. It does not validate passwords or perform Google OAuth yet. Authentication should be added as a separate identity layer before public deployment.

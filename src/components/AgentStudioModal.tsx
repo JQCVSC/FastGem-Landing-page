@@ -11,6 +11,7 @@ import { McpView } from './McpView';
 import { SkillsView } from './SkillsView';
 import { TokenUsageView } from './TokenUsageView';
 import { SchedulerView } from './SchedulerView';
+import { runAgent } from '../lib/fastgemApi';
 import { 
   X, Send, Bot, Terminal, Cpu, Database, RefreshCw, Sparkles, Check, Copy, Code2, 
   ArrowLeft, Trash2, MessageSquare, Plus, ChevronDown, ChevronRight, Settings, 
@@ -46,6 +47,8 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
   const [projectsExpanded, setProjectsExpanded] = useState(true);
   const [chatsExpanded, setChatsExpanded] = useState(true);
   const [memoryDrawerOpen, setMemoryDrawerOpen] = useState(false);
+  const [runtimeError, setRuntimeError] = useState<string | null>(null);
+  const [sessionId, setSessionId] = useState<string | undefined>();
 
   // Settings page view state
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -152,42 +155,22 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
 
     if (!promptText) setUserInput('');
     setIsProcessing(true);
-
-    setTimeout(() => {
-      let responseText = '';
-      let toolsUsed: string[] = [];
-      const queryLower = textToSend.toLowerCase();
-
-      if (queryLower.includes('compare') || queryLower.includes('gemini') || queryLower.includes('model')) {
-        toolsUsed = ['memory_search', 'model_benchmark'];
-        responseText = `### Gemini 3 Engine Agent Capabilities\n\n1. **Gemini 3.6 Flash**: Sub-second latency for high-throughput agent loops and streaming.\n2. **Gemini 3.1 Pro**: Deep reasoning across 2,000,000+ token context windows.\n\nI have loaded your context from MEMORY.md cleanly.`;
-      } else if (queryLower.includes('code') || queryLower.includes('typescript') || queryLower.includes('script') || queryLower.includes('api')) {
-        toolsUsed = ['sandbox_bash', 'code_ast'];
-        responseText = `Here is the TypeScript implementation for running ${agentName}:\n\n\`\`\`typescript\nimport { GoogleGenAI } from "@google/genai";\n\nexport async function queryAgent(prompt: string) {\n  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });\n  const res = await ai.models.generateContent({\n    model: "${selectedModel}",\n    contents: prompt,\n  });\n  return res.text;\n}\n\`\`\`\n*Executed in FastGem sandbox: 12ms response time.*`;
-      } else {
-        toolsUsed = [selectedAgent.tools[0] || 'agent_runner', 'memory_search'];
-        responseText = `I am **${agentName}** (${selectedAgent.avatarEmoji}). I processed your request using tool \`${selectedAgent.tools[0] || 'agent_runner'}\`.\n\nAll session instructions from SOUL.md are strictly enforced, and state is preserved in MEMORY.md across your 2,000,000 token window.\n\nWhat would you like to run next?`;
-      }
-
+    setRuntimeError(null);
+    try {
+      const result = await runAgent(selectedAgent.id, textToSend, sessionId);
+      setSessionId(result.sessionId);
       const agentMsg = {
         sender: 'agent' as const,
-        text: responseText,
+        text: result.text,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        toolsUsed
+        toolsUsed: ['gemini', `model:${result.model}`]
       };
-
-      setThreads(prev => prev.map(t => {
-        if (t.id === activeThreadId) {
-          return {
-            ...t,
-            messages: [...t.messages, agentMsg]
-          };
-        }
-        return t;
-      }));
-
+      setThreads(prev => prev.map(t => t.id === activeThreadId ? { ...t, messages: [...t.messages, agentMsg] } : t));
+    } catch (error) {
+      setRuntimeError(error instanceof Error ? error.message : 'FastGem runtime is unavailable');
+    } finally {
       setIsProcessing(false);
-    }, 1000);
+    }
   };
 
   const agentSettingsTabs = [
@@ -748,6 +731,11 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
             <div className="flex-1 flex overflow-hidden">
               
               <div className="flex-1 flex flex-col overflow-hidden relative">
+                {runtimeError && (
+                  <div className="mx-4 mt-4 rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-xs text-red-200">
+                    <strong className="font-semibold">Runtime unavailable:</strong> {runtimeError}
+                  </div>
+                )}
                 {messages.length === 0 ? (
                   /* ------------- INITIAL EMPTY STATE ------------- */
                   <div className="flex-1 flex flex-col items-center justify-center p-6 text-center max-w-3xl mx-auto w-full animate-in fade-in duration-300">
@@ -934,4 +922,3 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
   );
 };
 ;
-
