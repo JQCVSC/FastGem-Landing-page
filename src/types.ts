@@ -4,7 +4,7 @@ export interface AgentPreset {
   soulFile: string;
   avatarEmoji: string;
   description: string;
-  model: 'gemini-3.6-flash' | 'gemini-3.1-pro' | 'gemini-2.5-flash' | 'gemini-2.5-pro' | string;
+  model: 'gemini-2.5-flash' | 'gemini-2.5-pro' | 'gemini-3.6-flash' | 'gemini-3.1-pro' | string;
   systemInstruction: string;
   tools: string[];
   samplePrompts: string[];
@@ -27,6 +27,7 @@ export interface FeatureCard {
   id: string;
   emoji: string;
   title: string;
+  subtitle: string;
   description: string;
   tag: string;
   details: string[];

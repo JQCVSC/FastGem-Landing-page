@@ -1,151 +1,130 @@
-import { AgentPreset, FaqItem, DeployEnv, FeatureCard } from '../types';
+import { AgentPreset, FaqItem, FeatureCard } from '../types';
 
 export const AGENT_PRESETS: AgentPreset[] = [
   {
     id: 'researcher',
-    name: 'SOUL.md — Tech Researcher',
+    name: 'Research Assistant',
     soulFile: 'SOUL.md',
     avatarEmoji: '🤖',
-    description: 'Specialized in deep multi-source technical analysis and literature review.',
-    model: 'gemini-3.1-pro',
-    systemInstruction: 'You are an autonomous technical researcher powered by Gemini. You summarize web resources, analyze schemas, and output clean markdown reports.',
-    tools: ['web_fetch', 'memory_search', 'pdf_reader'],
+    description: 'Focused on structured research synthesis, document summaries, and technical analysis.',
+    model: 'gemini-2.5-flash',
+    systemInstruction: 'You are a focused technical researcher powered by Google Gemini. You synthesize information clearly, track session context, and output well-structured markdown responses.',
+    tools: ['session_context', 'markdown_export'],
     samplePrompts: [
-      'Compare Gemini 3.6 Flash vs 3.1 Pro economics for agent loops.',
-      'Analyze the latency impact of zero-copy context caching.',
-      'Generate a summary of autonomous agent benchmark results.'
+      'Summarize the trade-offs between stateful sessions and stateless prompt calls.',
+      'Outline a clear architecture for a Gemini-powered internal knowledge assistant.',
+      'Compare structured outputs vs streaming text for an agent dashboard.'
     ]
   },
   {
     id: 'code-architect',
-    name: 'SOUL.md — Code Architect',
+    name: 'TypeScript Helper',
     soulFile: 'SOUL.md',
     avatarEmoji: '⚡',
-    description: 'Engineered for sub-second function calling, refactoring, and sandbox execution.',
-    model: 'gemini-3.6-flash',
-    systemInstruction: 'You are an elite software architect agent. You write strict TypeScript/Go code, enforce zero-dependency paradigms, and generate automated tests.',
-    tools: ['sandbox_bash', 'code_ast', 'git_commit'],
+    description: 'Configured for TypeScript API design, Express route patterns, and debugging.',
+    model: 'gemini-2.5-flash',
+    systemInstruction: 'You are a TypeScript and Express engineering assistant. You write clean, strongly typed code and keep architecture straightforward and inspectable.',
+    tools: ['session_context', 'schema_helper'],
     samplePrompts: [
-      'Build a lightweight Express route handler for agent webhook streaming.',
-      'Write a zero-dependency LRU cache in TypeScript.',
-      'Refactor this function call schema to adhere to OpenAPI 3.1.'
+      'Draft an Express endpoint handler for submitting an agent run.',
+      'Show how to persist agent session messages cleanly in a local JSON store.',
+      'Write a TypeScript client wrapper for GET /api/agents and POST /api/agents/:agentId/runs.'
     ]
   },
   {
-    id: 'discord-mod',
-    name: 'SOUL.md — Community Bot',
+    id: 'support-agent',
+    name: 'Support & Docs Agent',
     soulFile: 'SOUL.md',
     avatarEmoji: '💬',
-    description: 'Channel-isolated assistant with perfect thread recall and tool routing.',
-    model: 'gemini-3.6-flash',
-    systemInstruction: 'You are a helpful community discord moderator. You answer questions accurately with context from MEMORY.md.',
-    tools: ['discord_api', 'faq_lookup', 'ticket_router'],
+    description: 'Session-aware assistant for customer support, onboarding, and internal workflows.',
+    model: 'gemini-2.5-flash',
+    systemInstruction: 'You are a helpful product support specialist. Answer questions clearly using the session history and keep explanations practical and concise.',
+    tools: ['session_context'],
     samplePrompts: [
-      'How do I deploy FastGem on Firebase Cloud Functions?',
-      'Is there an official Docker image available?',
-      'Can FastGem store session logs in SQLite?'
+      'How do I configure VITE_FASTGEM_RUNTIME_URL for local development?',
+      'What HTTP endpoints does the FastGem runtime expose?',
+      'How does FastGem persist agent sessions during development?'
     ]
-  }
-];
-
-export const DEPLOY_ENVS: DeployEnv[] = [
-  {
-    name: 'Local (SQLite)',
-    support: 'Native / Zero Config',
-    description: 'Runs directly in-memory or on local disk with zero daemon dependencies. Ideal for quick dev loops.',
-    badgeType: 'native'
-  },
-  {
-    name: 'Firebase / Cloud Functions (Serverless)',
-    support: 'Supported (Firestore Backend)',
-    description: 'Auto-scales to zero. Stores session state and long-term memory seamlessly in Cloud Firestore.',
-    badgeType: 'supported'
-  },
-  {
-    name: 'Docker',
-    support: 'Official Images Available',
-    description: 'Pre-packaged container images on GitHub Container Registry (ghcr.io/fastgem-ai/fastgem).',
-    badgeType: 'official'
-  },
-  {
-    name: 'Kubernetes / Cloud Run',
-    support: 'Enterprise Ready',
-    description: 'High-availability cluster deployment with automatic load balancing and encrypted secret mounting.',
-    badgeType: 'enterprise'
   }
 ];
 
 export const FEATURE_CARDS: FeatureCard[] = [
   {
-    id: 'agent-factory',
+    id: 'agent-workspaces',
     emoji: '🤖',
-    title: 'Agent Factory',
-    description: 'Create and run many agents, each with its own SOUL.md personality, system instructions, memory, and tools. Per-agent model overrides and visual management dashboard.',
-    tag: 'Multi-Agent',
+    title: 'Agent Workspaces',
+    subtitle: 'Configure agents around a clear purpose',
+    description: 'Create focused agents for research, coding, customer support, analysis, or internal workflows. Each agent can have its own instructions, model, and operating context.',
+    tag: 'Feature 01',
     details: [
-      'Per-agent custom SOUL.md personality files',
-      'Individual tool permissions & sandbox boundary settings',
-      'Visual web dashboard for live monitoring and manual override'
+      'Dedicated name, description, and system instructions per agent',
+      'Independent model configuration per workspace',
+      'Clean separation between agent definitions and sessions'
     ]
   },
   {
-    id: 'gemini-engine',
-    emoji: '⚡',
-    title: 'Powered by Gemini 3 Engine',
-    description: 'Toggle between Gemini 3.6 Flash, Gemini 3.1 Pro, Flash-Lite, and custom fine-tuned endpoints. Sub-second function calling, strict JSON schema validation, native multimodal inputs, and Flash economics.',
-    tag: 'Performance',
-    details: [
-      'Sub-second function calling latency with Gemini 3.6 Flash & 3.1 Pro',
-      'Native multimodal stream processor (vision, audio, video)',
-      'Ultra-low token costs with Flash-Lite economics'
-    ]
-  },
-  {
-    id: 'connect-channels',
+    id: 'persistent-sessions',
     emoji: '💬',
-    title: 'Connect Any Channel',
-    description: 'Bind Telegram, Discord, Slack, or custom webhooks per agent. Sessions stay isolated per channel and chat, so threads never bleed into each other.',
-    tag: 'Integrations',
+    title: 'Persistent Sessions',
+    subtitle: 'Keep conversations connected',
+    description: 'FastGem persists agent sessions locally so conversations can continue across requests instead of starting from zero every time.',
+    tag: 'Feature 02',
     details: [
-      'First-class Telegram, Discord, and Slack bot drivers',
-      'Isolated session state per channel ID',
-      'Custom HTTP Webhooks for proprietary internal tools'
+      'Session history stored locally by agent ID',
+      'Resume multi-turn conversations in Agent Studio or via API',
+      'Inspectable session state across requests'
     ]
   },
   {
-    id: 'tools-sandbox',
-    emoji: '🛡️',
-    title: 'Tools & Sandbox',
-    description: 'Built-in web fetch, Firestore queries, and system tools. Run them in secure Docker containers or cloud functions with automatic workspace sync.',
-    tag: 'Security',
+    id: 'gemini-native',
+    emoji: '⚡',
+    title: 'Gemini-Native Execution',
+    subtitle: 'Designed around Google Gemini',
+    description: 'FastGem uses Google’s Gemini API directly through the official Gemini SDK. Choose the model that fits your agent’s task and keep the execution path clear and inspectable.',
+    tag: 'Feature 03',
     details: [
-      'Ephemeral Docker container execution for untrusted code',
-      'Built-in secure web scraping & search tools',
-      'Instant workspace state synchronization'
+      'Direct integration via the official Google Gemini SDK',
+      'Configurable via FASTGEM_MODEL (defaulting to Gemini 2.5 Flash)',
+      'Zero heavy abstraction layers hiding prompt execution'
     ]
   },
   {
-    id: 'skills-plugins',
-    emoji: '🧩',
-    title: 'Skills & Plugins',
-    description: 'Define custom tools via simple JSON schemas or Python/Go functions. Native support for Google AI Studio function declarations and REST endpoints.',
-    tag: 'Extensibility',
+    id: 'runtime-api',
+    emoji: '🔌',
+    title: 'Runtime API',
+    subtitle: 'Use the console or bring your own interface',
+    description: 'Run agents through the FastGem dashboard or call the runtime from another application using a simple HTTP API.',
+    tag: 'Feature 04',
     details: [
-      'Declarative JSON schema plugin system',
-      'Native AI Studio function declaration compatibility',
-      'Auto-generation of OpenAPI spec callers'
+      'Clean REST endpoints for agents, sessions, and runs',
+      'Health check endpoint at GET /health',
+      'Connect external frontends, scripts, or internal services'
     ]
   },
   {
-    id: 'perfect-recall',
-    emoji: '🧠',
-    title: 'Perfect Recall Memory',
-    description: 'Infinite session context backed by Gemini’s 2M+ token window. Long-term MEMORY.md auto-updated by background heartbeats, full session history, and a drop-in /api/v1/agent/run endpoint.',
-    tag: 'State & Memory',
+    id: 'streaming-foundation',
+    emoji: '📡',
+    title: 'Streaming Foundation',
+    subtitle: 'Built for responsive agent experiences',
+    description: 'FastGem includes a streaming endpoint foundation for delivering agent events to clients as work progresses.',
+    tag: 'Feature 05',
     details: [
-      '2M+ token sliding window with zero context loss',
-      'Automated background MEMORY.md compaction',
-      'Drop-in REST endpoint for stateless agent calls'
+      'Dedicated GET /api/agents/:agentId/runs/stream endpoint',
+      'Designed for progressive response delivery',
+      'Foundation for real-time console and client UI updates'
+    ]
+  },
+  {
+    id: 'local-first-persistence',
+    emoji: '💾',
+    title: 'Local-First Persistence',
+    subtitle: 'Start locally and control your data',
+    description: 'The current runtime stores agents and sessions locally in a straightforward data file. It is easy to inspect during development and can evolve toward a production database as your deployment grows.',
+    tag: 'Feature 06',
+    details: [
+      'Human-inspectable local data file for rapid iteration',
+      'Zero database setup required to run locally',
+      'Clear boundary to swap in a durable database for production'
     ]
   }
 ];
@@ -154,36 +133,41 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     id: 'faq-1',
     question: 'What is FastGem?',
-    answer: 'FastGem is a lightweight runtime engineered specifically to deploy and manage high-throughput Google Gemini AI agents.'
+    answer: 'FastGem is a lightweight runtime and web control plane for building, configuring, and operating Google Gemini agents.'
   },
   {
-    id: 'faq-compare',
-    question: 'How does FastGem compare to generic agent frameworks?',
-    answer: 'Unlike heavy generic frameworks, FastGem is optimized natively for Gemini\'s 2M+ token context window, structured JSON outputs, and fast streaming performance.'
+    id: 'faq-2',
+    question: 'Is FastGem an AI model?',
+    answer: 'No. FastGem is the runtime and control plane. It connects to Google Gemini through the Gemini API.'
   },
   {
-    id: 'faq-llm',
-    question: 'Which LLM providers are supported?',
-    answer: 'FastGem is natively optimized for Google Gemini models (including Gemini 3.6 Flash, Gemini 3.1 Pro, and Flash-Lite) via Google AI Studio and Vertex AI. Through OpenAI-compatible proxy routing and custom provider adapters, FastGem can also interface with OpenAI, Anthropic, and local Ollama models.'
+    id: 'faq-3',
+    question: 'Can I use FastGem without the website?',
+    answer: 'Yes. The runtime exposes HTTP endpoints that can be used by your own application.'
   },
   {
-    id: 'faq-sandbox',
-    question: 'How is tool execution sandboxed?',
-    answer: 'FastGem executes tools through an isolated execution engine. Code execution, shell commands, and custom scripts run inside lightweight, ephemeral Docker containers or gVisor-sandboxed microVMs with strict CPU/RAM cgroups, read-only root filesystems, and configurable network access policies.'
+    id: 'faq-4',
+    question: 'Does FastGem save sessions?',
+    answer: 'Yes. The current runtime persists agents and sessions locally for development.'
   },
   {
-    id: 'faq-license',
-    question: "What's the license?",
-    answer: "FastGem is available under an open-source Source-Available Community License. You are free to inspect, modify, self-host, and deploy FastGem in your infrastructure without restrictions."
+    id: 'faq-5',
+    question: 'Does FastGem support production authentication?',
+    answer: 'Not yet. The current website sign-in screen is a demonstration flow. Production authentication is planned as a separate identity layer.'
   },
   {
-    id: 'faq-chat',
-    question: 'How do end-users chat with my agents?',
-    answer: 'End-users can interact with your agents through multiple pre-built channels: the included FastGem web chat UI / Agent Studio, multi-channel bot integrations (Telegram, Discord, Slack, and WhatsApp), or directly via clean REST and WebSocket APIs (/api/v1/agent/chat) embedded into your existing applications.'
+    id: 'faq-6',
+    question: 'Can I self-host FastGem?',
+    answer: 'Yes. The current runtime is designed to run locally or on infrastructure you control. Production deployment requires adding the appropriate security, persistence, and operational controls.'
   },
   {
-    id: 'faq-selfhost',
-    question: 'Can I host FastGem on my own server?',
-    answer: 'Yes, FastGem can be self-hosted anywhere using Docker, Python/Node.js, or 1-click cloud deployments on Cloud Run, GCP, AWS, or DigitalOcean.'
+    id: 'faq-7',
+    question: 'Does FastGem support tools?',
+    answer: 'The console and runtime are structured to support tools, but secure sandboxed tool execution is still part of the roadmap.'
+  },
+  {
+    id: 'faq-8',
+    question: 'Which Gemini models are supported?',
+    answer: 'FastGem uses the model configured through FASTGEM_MODEL, with Gemini 2.5 Flash as the current default in the runtime. Other compatible Gemini models can be configured as the implementation evolves.'
   }
 ];

@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
-import { DeploymentSection } from './components/DeploymentSection';
+import { WhatIsSection } from './components/WhatIsSection';
 import { FeaturesSection } from './components/FeaturesSection';
-import { OpenSourceSection } from './components/OpenSourceSection';
+import { ConsoleStudioSection } from './components/ConsoleStudioSection';
+import { HowItWorksSection } from './components/HowItWorksSection';
 import { QuickStartSection } from './components/QuickStartSection';
+import { RuntimeApiSection } from './components/RuntimeApiSection';
+import { SelfHostingAndStatusSection } from './components/SelfHostingAndStatusSection';
 import { FaqSection } from './components/FaqSection';
 import { FinalCtaSection } from './components/FinalCtaSection';
 import { Footer } from './components/Footer';
@@ -69,17 +72,26 @@ export default function App() {
           onOpenQuickStart={handleScrollToQuickStart}
         />
 
-        <DeploymentSection />
+        <WhatIsSection />
 
         <FeaturesSection />
 
-        <OpenSourceSection 
-          onOpenStudio={handleGetStarted}
+        <ConsoleStudioSection 
+          onOpenConsole={handleGetStarted}
+          onOpenStudio={() => handleOpenStudio()}
         />
+
+        <HowItWorksSection />
 
         <QuickStartSection 
           onOpenStudio={handleGetStarted}
         />
+
+        <RuntimeApiSection 
+          onOpenDocs={() => setDocsOpen(true)}
+        />
+
+        <SelfHostingAndStatusSection />
 
         <FaqSection />
 
@@ -97,14 +109,14 @@ export default function App() {
         onOpenTerms={() => setTermsOpen(true)}
       />
 
-      {/* Auth Screen Modal (FastClaw Sign in / Sign up) */}
+      {/* Console Entry Modal (Development Preview) */}
       <AuthModal 
         isOpen={authOpen}
         onClose={() => setAuthOpen(false)}
         onSuccess={handleAuthSuccess}
       />
 
-      {/* Interactive FastGem Gateway Dashboard */}
+      {/* Interactive FastGem Console Dashboard */}
       <FastGemDashboard 
         isOpen={dashboardOpen}
         username={user}
@@ -112,7 +124,7 @@ export default function App() {
         onOpenStudio={(agent) => handleOpenStudio(agent)}
       />
 
-      {/* Interactive Agent View */}
+      {/* Interactive Agent Studio */}
       <AgentStudioModal 
         isOpen={studioOpen}
         initialAgent={selectedAgentPreset}

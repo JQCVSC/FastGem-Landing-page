@@ -11,7 +11,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenStudio, onOpenDocs, onOpen
   return (
     <footer className="w-full bg-[#060e20] py-16 border-t border-[#3c4a46]/20 text-[#bacac5]">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-14">
           {/* Brand Info */}
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
@@ -24,40 +24,40 @@ export const Footer: React.FC<FooterProps> = ({ onOpenStudio, onOpenDocs, onOpen
               <span className="font-bold text-xl text-white tracking-tight">FastGem</span>
             </div>
             <p className="text-sm leading-relaxed text-[#bacac5]/80">
-              The Gemini-native AI agent runtime. Yours to run.
+              A lightweight, self-hostable runtime and control plane for Google Gemini agents.
             </p>
           </div>
 
-          {/* Column 1: Resources */}
+          {/* Column 1: Product */}
           <div className="flex flex-col gap-3">
             <h4 className="text-[#dae2fd] font-mono text-xs font-bold uppercase tracking-wider mb-1">
-              Resources
+              Platform
             </h4>
-            <button onClick={onOpenDocs} className="text-left hover:text-[#ff6b00] dark:hover:text-[#ff8c00] transition-colors text-sm cursor-pointer">
-              Documentation
-            </button>
-            <button onClick={onOpenDocs} className="text-left hover:text-[#ff6b00] dark:hover:text-[#ff8c00] transition-colors text-sm cursor-pointer">
-              Changelog (v2.5.0)
-            </button>
-            <button onClick={onOpenDocs} className="text-left hover:text-[#ff6b00] dark:hover:text-[#ff8c00] transition-colors text-sm cursor-pointer">
-              API Reference
-            </button>
+            <a href="#features" className="text-left hover:text-[#f59e0b] transition-colors text-sm">
+              Features
+            </a>
+            <a href="#how-it-works" className="text-left hover:text-[#f59e0b] transition-colors text-sm">
+              How It Works
+            </a>
+            <a href="#quick-start" className="text-left hover:text-[#f59e0b] transition-colors text-sm">
+              Quick Start
+            </a>
           </div>
 
-          {/* Column 2: Community */}
+          {/* Column 2: Developers */}
           <div className="flex flex-col gap-3">
             <h4 className="text-[#dae2fd] font-mono text-xs font-bold uppercase tracking-wider mb-1">
-              Community
+              Developers
             </h4>
-            <a href="https://discord.gg" target="_blank" rel="noopener noreferrer" className="hover:text-[#ff6b00] dark:hover:text-[#ff8c00] transition-colors text-sm">
-              Discord
+            <button onClick={onOpenDocs} className="text-left hover:text-[#f59e0b] transition-colors text-sm cursor-pointer">
+              Runtime API Reference
+            </button>
+            <a href="https://github.com/JQCVSC/FastGem" target="_blank" rel="noopener noreferrer" className="hover:text-[#f59e0b] transition-colors text-sm">
+              GitHub Repository
             </a>
-            <a href="https://github.com/JQCVSC/FastGem" target="_blank" rel="noopener noreferrer" className="hover:text-[#ff6b00] dark:hover:text-[#ff8c00] transition-colors text-sm">
-              GitHub
-            </a>
-            <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#ff6b00] dark:hover:text-[#ff8c00] transition-colors text-sm">
-              Twitter / X
-            </a>
+            <button onClick={onOpenStudio} className="text-left text-[#f59e0b] hover:underline transition-colors text-sm font-mono cursor-pointer">
+              Open Agent Console
+            </button>
           </div>
 
           {/* Column 3: Legal */}
@@ -65,27 +65,19 @@ export const Footer: React.FC<FooterProps> = ({ onOpenStudio, onOpenDocs, onOpen
             <h4 className="text-[#dae2fd] font-mono text-xs font-bold uppercase tracking-wider mb-1">
               Legal
             </h4>
-            <button onClick={onOpenPrivacy} className="text-left hover:text-[#ff6b00] dark:hover:text-[#ff8c00] transition-colors text-sm cursor-pointer">
+            <button onClick={onOpenPrivacy} className="text-left hover:text-[#f59e0b] transition-colors text-sm cursor-pointer">
               Privacy Policy
             </button>
-            <button onClick={onOpenTerms} className="text-left hover:text-[#ff6b00] dark:hover:text-[#ff8c00] transition-colors text-sm cursor-pointer">
+            <button onClick={onOpenTerms} className="text-left hover:text-[#f59e0b] transition-colors text-sm cursor-pointer">
               Terms of Service
-            </button>
-            <button onClick={onOpenStudio} className="text-left text-[#ff6b00] dark:text-[#ff8c00] hover:underline transition-colors text-sm font-mono cursor-pointer">
-              ★ Launch Web Studio
             </button>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-[#3c4a46]/20 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono uppercase tracking-widest text-[#bacac5]/60">
-          <span>© 2026 FastGem AI. Built for speed.</span>
-          <div className="flex items-center gap-6">
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#ff6b00] animate-pulse"></span>
-              System Status: Nominal
-            </span>
-          </div>
+          <span>© 2026 FastGem. Gemini-native agent runtime.</span>
+          <span>Local-first development preview</span>
         </div>
       </div>
     </footer>

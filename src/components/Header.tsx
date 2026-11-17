@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Terminal, Code, MessageSquare, User, ArrowRight, Menu, X, Sparkles, Sun, Moon } from 'lucide-react';
+import { Code, Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 interface HeaderProps {
@@ -36,11 +36,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenStudio, onOpenDocs }) => {
         ? 'bg-black/95 backdrop-blur-xl border-b border-[#2b3850]/50 shadow-[0_4px_20px_rgba(0,0,0,0.8)]' 
         : 'bg-black/90 backdrop-blur-xl border-b border-[#2b3850]/30 shadow-[0_1px_8px_rgba(0,0,0,0.5)]'
     }`}>
-      <div className="h-20 max-w-[1200px] mx-auto px-6 flex items-center justify-between">
+      <div className="h-20 max-w-[1200px] mx-auto px-6 flex items-center justify-between gap-8">
         {/* Logo */}
         <div 
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="flex items-center cursor-pointer group"
+          className="flex items-center cursor-pointer group shrink-0"
         >
           <img 
             src="https://i.imgur.com/hkRlTDp.png" 
@@ -51,52 +51,51 @@ export const Header: React.FC<HeaderProps> = ({ onOpenStudio, onOpenDocs }) => {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-8 px-8">
+        <nav className="hidden lg:flex items-center gap-7">
           <button 
             onClick={() => scrollToSection('features')}
-            className={`font-mono text-xs uppercase tracking-wider transition-colors ${
+            className={`font-mono text-xs uppercase tracking-wider transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
               activeTab === 'features' ? 'spectrum-gradient-text font-bold' : 'text-[#bacac5] hover:text-[#dae2fd]'
             }`}
           >
             Features
           </button>
           <button 
+            onClick={() => scrollToSection('how-it-works')}
+            className={`font-mono text-xs uppercase tracking-wider transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+              activeTab === 'how-it-works' ? 'spectrum-gradient-text font-bold' : 'text-[#bacac5] hover:text-[#dae2fd]'
+            }`}
+          >
+            How It Works
+          </button>
+          <button 
             onClick={() => scrollToSection('quick-start')}
-            className={`font-mono text-xs uppercase tracking-wider transition-colors ${
+            className={`font-mono text-xs uppercase tracking-wider transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
               activeTab === 'quick-start' ? 'spectrum-gradient-text font-bold' : 'text-[#bacac5] hover:text-[#dae2fd]'
             }`}
           >
             Quick Start
           </button>
           <button 
-            onClick={() => scrollToSection('deploy')}
-            className={`font-mono text-xs uppercase tracking-wider transition-colors ${
-              activeTab === 'deploy' ? 'spectrum-gradient-text font-bold' : 'text-[#bacac5] hover:text-[#dae2fd]'
+            onClick={() => scrollToSection('runtime-api')}
+            className={`font-mono text-xs uppercase tracking-wider transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+              activeTab === 'runtime-api' ? 'spectrum-gradient-text font-bold' : 'text-[#bacac5] hover:text-[#dae2fd]'
             }`}
           >
-            Deploy
-          </button>
-          <button 
-            onClick={() => scrollToSection('faq')}
-            className={`font-mono text-xs uppercase tracking-wider transition-colors ${
-              activeTab === 'faq' ? 'spectrum-gradient-text font-bold' : 'text-[#bacac5] hover:text-[#dae2fd]'
-            }`}
-          >
-            FAQ
+            Runtime
           </button>
           <a 
             href="https://github.com/JQCVSC/FastGem" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="font-mono text-xs text-[#bacac5] hover:text-[#dae2fd] transition-colors uppercase tracking-wider"
+            className="font-mono text-xs text-[#bacac5] hover:text-[#dae2fd] transition-colors uppercase tracking-wider whitespace-nowrap shrink-0"
           >
             GitHub
           </a>
-
         </nav>
 
         {/* Header Right Actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 shrink-0">
           {/* Theme Toggle Button */}
           <button
             onClick={toggleTheme}
@@ -110,35 +109,26 @@ export const Header: React.FC<HeaderProps> = ({ onOpenStudio, onOpenDocs }) => {
             )}
           </button>
 
-          <div className="hidden md:flex items-center gap-3 border-r border-[#3c4a46]/30 pr-3">
-            <button 
-              onClick={onOpenDocs}
-              title="View Code & API Specs"
-              className="text-[#bacac5] hover:text-[#3b82f6] transition-colors flex items-center justify-center p-1.5 rounded-lg hover:bg-[#171f33]"
-            >
-              <Code className="w-5 h-5" />
-            </button>
-            <a 
-              href="#faq"
-              onClick={(e) => { e.preventDefault(); scrollToSection('faq'); }}
-              title="Community & Forum"
-              className="text-[#bacac5] hover:text-[#a855f7] transition-colors flex items-center justify-center p-1.5 rounded-lg hover:bg-[#171f33]"
-            >
-              <MessageSquare className="w-5 h-5" />
-            </a>
-          </div>
+          <button 
+            onClick={onOpenDocs}
+            title="Read the Runtime API"
+            className="hidden md:flex text-[#bacac5] hover:text-[#3b82f6] transition-colors items-center justify-center p-2 rounded-lg hover:bg-[#171f33] cursor-pointer"
+          >
+            <Code className="w-5 h-5" />
+          </button>
 
           <button 
             onClick={onOpenStudio}
-            className="px-5 py-2.5 bg-gradient-to-r from-[#ef4444] via-[#f59e0b] via-[#10b981] via-[#3b82f6] to-[#a855f7] text-white font-mono text-xs font-extrabold uppercase tracking-wider rounded-lg hover:opacity-95 hover:scale-[1.02] transition-all shadow-[0_0_20px_rgba(239,68,68,0.3)] hover:shadow-[0_0_30px_rgba(168,85,247,0.45)] flex items-center gap-2 cursor-pointer"
+            className="px-5 py-2.5 bg-gradient-to-r from-[#ef4444] via-[#f59e0b] via-[#10b981] via-[#3b82f6] to-[#a855f7] text-white font-mono text-xs font-extrabold uppercase tracking-wider rounded-lg hover:opacity-95 hover:scale-[1.02] transition-all shadow-[0_0_20px_rgba(239,68,68,0.3)] hover:shadow-[0_0_30px_rgba(168,85,247,0.45)] flex items-center gap-2 cursor-pointer whitespace-nowrap shrink-0"
           >
-            Get Started →
+            Open Console
           </button>
 
           {/* Mobile Menu Button */}
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden text-[#bacac5] hover:text-[#dae2fd] p-2"
+            aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -165,38 +155,45 @@ export const Header: React.FC<HeaderProps> = ({ onOpenStudio, onOpenDocs }) => {
             Features
           </button>
           <button 
+            onClick={() => scrollToSection('how-it-works')}
+            className="text-left font-mono text-sm uppercase text-[#bacac5] hover:text-[#ff6b00] py-2 border-b border-[#3c4a46]/20"
+          >
+            How It Works
+          </button>
+          <button 
             onClick={() => scrollToSection('quick-start')}
             className="text-left font-mono text-sm uppercase text-[#bacac5] hover:text-[#ff6b00] py-2 border-b border-[#3c4a46]/20"
           >
             Quick Start
           </button>
           <button 
-            onClick={() => scrollToSection('deploy')}
+            onClick={() => scrollToSection('runtime-api')}
             className="text-left font-mono text-sm uppercase text-[#bacac5] hover:text-[#ff6b00] py-2 border-b border-[#3c4a46]/20"
           >
-            Deploy
+            Runtime
           </button>
-          <button 
-            onClick={() => scrollToSection('faq')}
+          <a 
+            href="https://github.com/JQCVSC/FastGem"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-left font-mono text-sm uppercase text-[#bacac5] hover:text-[#ff6b00] py-2 border-b border-[#3c4a46]/20"
           >
-            FAQ
-          </button>
+            GitHub
+          </a>
           <button 
             onClick={() => { setMobileMenuOpen(false); onOpenDocs(); }}
             className="text-left font-mono text-sm uppercase text-[#ff6b00] py-2 flex items-center gap-2"
           >
-            <Sparkles className="w-4 h-4" /> Interactive API Docs
+            <Code className="w-4 h-4" /> Read the Runtime API
           </button>
           <button 
             onClick={() => { setMobileMenuOpen(false); onOpenStudio(); }}
             className="w-full mt-2 py-3 bg-[#ff6b00] text-white font-mono text-xs font-bold uppercase rounded-lg text-center"
           >
-            Test Agent Studio Live
+            Open Console
           </button>
         </div>
       )}
     </header>
   );
 };
-
