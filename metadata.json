@@ -1,0 +1,6 @@
+{
+  "name": "FastGem",
+  "description": "The fastest way to run your own Gemini AI agents. Lightweight AI agent runtime engineered natively for Google Gemini.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

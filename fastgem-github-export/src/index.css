@@ -1,0 +1,274 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #090d16;
+  --color-surface-dim: #090d16;
+  --color-surface-bright: #1c273e;
+  --color-surface-container-lowest: #050810;
+  --color-surface-container-low: #0f172a;
+  --color-surface-container: #131d33;
+  --color-surface-container-high: #1e2a45;
+  --color-surface-container-highest: #283656;
+  --color-slate-surface: #1e293b;
+  --color-terminal-header: #1e293b;
+  --color-on-surface: #f1f5f9;
+  --color-on-surface-variant: #94a3b8;
+  --color-outline-variant: #2b3850;
+  --color-primary: #ef4444;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #8b5cf6;
+  --color-on-primary-container: #f5f3ff;
+  --color-secondary: #f59e0b;
+  --color-error: #ef4444;
+  --color-background: #090d16;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-sans: "Inter", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: #090d16;
+    color: #f1f5f9;
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+}
+
+/* Light Theme Overrides */
+html.light, [data-theme="light"] {
+  color-scheme: light;
+}
+
+html.light body,
+[data-theme="light"] body,
+.light body {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+/* Light Mode Section & Full Page Background Overrides */
+.light .bg-\[\#0b1326\],
+.light .bg-\[\#090d16\],
+.light .bg-\[\#060e20\],
+.light .bg-\[\#050810\],
+.light .bg-\[\#0d0f17\] {
+  background-color: #f8fafc !important;
+}
+
+/* Light Mode Card & Modal Container Overrides (Turns all dark cards into clean white cards) */
+.light .bg-\[\#1E293B\],
+.light .bg-\[\#1e293b\],
+.light .bg-\[\#131b2e\],
+.light .bg-\[\#10192d\],
+.light .bg-\[\#1c273e\],
+.light .bg-\[\#0f172a\],
+.light .bg-\[\#131d33\],
+.light .bg-\[\#201829\],
+.light .bg-\[\#120e18\],
+.light .bg-\[\#181220\],
+.light .bg-\[\#14101a\],
+.light .bg-\[\#2d3449\],
+.light .bg-\[\#2d3449\]\/40,
+.light .bg-\[\#161d2d\],
+.light .bg-\[\#141b2a\],
+.light .bg-\[\#1a2030\],
+.light .bg-\[\#1a2233\],
+.light .bg-\[\#222a3e\],
+.light .bg-\[\#1e273a\],
+.light .bg-\[\#182030\],
+.light .bg-\[\#232f45\],
+.light .bg-\[\#273248\] {
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Light Mode Sidebar & Secondary Panels */
+.light .bg-\[\#131826\],
+.light .bg-\[\#171f33\],
+.light .bg-\[\#18233a\],
+.light .bg-\[\#283656\],
+.light .bg-\[\#1c1626\],
+.light .bg-\[\#222a3d\],
+.light .bg-\[\#281f34\],
+.light .bg-\[\#2e233b\],
+.light .bg-\[\#261d30\],
+.light .bg-\[\#1d293d\],
+.light .bg-\[\#1e2a40\] {
+  background-color: #f1f5f9 !important;
+}
+
+/* Active Highlight Pill in Light Mode */
+.light .bg-\[\#1e2a45\] {
+  background-color: #e0f2fe !important;
+  color: #0369a1 !important;
+}
+
+/* Light Mode Primary Action Accent Button */
+.light .bg-\[\#3b2d54\] {
+  background-color: #ea580c !important;
+  color: #ffffff !important;
+}
+
+/* Light Mode Accent Adjustments */
+.light .text-\[\#ff6b00\],
+.light .text-\[\#ff5500\],
+.light .text-\[\#f97316\] {
+  color: #c2410c !important;
+}
+
+.light .bg-\[\#ff6b00\],
+.light .bg-\[\#ff5500\],
+.light .bg-\[\#f97316\] {
+  background-color: #ea580c !important;
+  color: #ffffff !important;
+}
+
+.light .bg-\[\#ff6b00\]\/10,
+.light .bg-\[\#f97316\]\/10 {
+  background-color: rgba(234, 88, 12, 0.12) !important;
+}
+
+.light .bg-\[\#ff6b00\]\/20,
+.light .bg-\[\#f97316\]\/20 {
+  background-color: rgba(234, 88, 12, 0.2) !important;
+}
+
+.light .border-\[\#ff6b00\]\/30,
+.light .border-\[\#f97316\]\/30 {
+  border-color: rgba(234, 88, 12, 0.35) !important;
+}
+
+/* Terminal & Code Blocks remain dark slate in light mode for developer contrast */
+.light .bg-\[\#060e20\] .p-6,
+.light .bg-\[\#0a0f1d\],
+.light .bg-\[\#0d1424\] {
+  background-color: #0f172a !important;
+}
+
+/* Ensure text inside dark terminal containers remains light and legible */
+.light .bg-\[\#060e20\] .p-6 .text-\[\#dae2fd\],
+.light .bg-\[\#060e20\] .p-6 .text-\[\#bacac5\],
+.light .bg-\[\#0a0f1d\] .text-white,
+.light .bg-\[\#0d1424\] .text-white {
+  color: #f8fafc !important;
+}
+
+.light .bg-\[\#060e20\] .p-6 .text-\[\#ff6b00\],
+.light .bg-\[\#060e20\] .p-6 .text-\[\#ff8c00\] {
+  color: #fb923c !important;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090d16;
+}
+
+.light ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e2a45;
+  border-radius: 4px;
+}
+
+.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #283656;
+}
+
+.glow-teal,
+.glow-orange {
+  box-shadow: 0 0 25px rgba(255, 107, 0, 0.25);
+}
+
+.light .glow-teal,
+.light .glow-orange {
+  box-shadow: 0 0 25px rgba(234, 88, 12, 0.2);
+}
+
+.glow-teal-lg,
+.glow-orange-lg {
+  box-shadow: 0 0 45px rgba(255, 107, 0, 0.35);
+}
+
+.glow-purple {
+  box-shadow: 0 0 30px rgba(245, 158, 11, 0.25);
+}
+
+/* Custom Multi-Color Spectrum Palette (Red, Yellow, Green, Blue, Purple) */
+.logo-gradient-text,
+.agent-gradient-text,
+.spectrum-gradient-text {
+  background: linear-gradient(135deg, #ef4444 0%, #f59e0b 25%, #10b981 50%, #3b82f6 75%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.light .logo-gradient-text,
+.light .agent-gradient-text,
+.light .spectrum-gradient-text {
+  background: linear-gradient(135deg, #dc2626 0%, #d97706 25%, #059669 50%, #2563eb 75%, #9333ea 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Multi-Color Spectrum Buttons */
+.btn-spectrum,
+.spectrum-btn {
+  background: linear-gradient(135deg, #ef4444 0%, #f59e0b 25%, #10b981 50%, #3b82f6 75%, #a855f7 100%);
+  color: #ffffff !important;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(239, 68, 68, 0.25), 0 4px 25px rgba(59, 130, 246, 0.25);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-spectrum:hover,
+.spectrum-btn:hover {
+  opacity: 0.95;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(168, 85, 247, 0.4), 0 8px 30px rgba(16, 185, 129, 0.35);
+}
+
+.btn-spectrum-outline {
+  position: relative;
+  background: linear-gradient(#131d33, #131d33) padding-box, linear-gradient(135deg, #ef4444 0%, #f59e0b 25%, #10b981 50%, #3b82f6 75%, #a855f7 100%) border-box;
+  border: 2px solid transparent;
+  color: #f1f5f9;
+  transition: all 0.25s ease;
+}
+
+.btn-spectrum-outline:hover {
+  background: linear-gradient(#1e2a45, #1e2a45) padding-box, linear-gradient(135deg, #ef4444 0%, #f59e0b 25%, #10b981 50%, #3b82f6 75%, #a855f7 100%) border-box;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+}
+
+.agent-badge-gradient,
+.spectrum-badge {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(245, 158, 11, 0.15) 25%, rgba(16, 185, 129, 0.15) 50%, rgba(59, 130, 246, 0.15) 75%, rgba(168, 85, 247, 0.15) 100%);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+}
+
+.glow-spectrum {
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.2), 0 0 40px rgba(59, 130, 246, 0.2), 0 0 50px rgba(168, 85, 247, 0.2);
+}
+
+.logo-border-glow {
+  border-color: rgba(255, 107, 0, 0.35);
+  box-shadow: 0 0 15px rgba(255, 107, 0, 0.2), inset 0 0 15px rgba(245, 158, 11, 0.1);
+}
+
+
