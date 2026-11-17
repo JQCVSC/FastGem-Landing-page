@@ -178,3 +178,21 @@ npm run dev
 ```
 
 The current website sign-in is still a frontend demo gate. It does not validate passwords or perform Google OAuth yet. Authentication should be added as a separate identity layer before public deployment.
+
+
+## Product previews
+
+FastGem’s website and console are designed as one continuous workflow: discover the runtime, sign in, manage agents, and open Agent Studio for hands-on testing.
+
+![FastGem landing page](public/previews/landing-hero.png)
+
+_Landing page — Gemini-native positioning, feature navigation, and the main Get Started entry point._
+
+| Sign in | Runtime dashboard |
+| --- | --- |
+| ![FastGem sign-in screen](public/previews/sign-in.png) | ![FastGem console dashboard](public/previews/console-dashboard.png) |
+| Demo sign-in surface, ready for real authentication integration. | Gateway overview with agents, models, API keys, and launch controls. |
+
+![FastGem Agent Studio](public/previews/agent-studio.png)
+
+_Agent Studio — select an agent, start a chat, and run prompts through the connected FastGem runtime._
