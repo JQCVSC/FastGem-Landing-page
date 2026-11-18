@@ -32,6 +32,9 @@ FastGem is not an AI model. It is the runtime and product foundation around Goog
 - Persistent local sessions and conversation history.
 - React console with agent overview, model settings, API-oriented views, and Agent Studio.
 - Agent Studio connected to the runtime through `VITE_FASTGEM_RUNTIME_URL`.
+- Agent Studio loads available agents from the runtime instead of relying only on mock presets.
+- Each chat thread keeps its own runtime session, with Markdown rendering and Google Gemini model metadata.
+- Agent responses can stream provider-generated token events over Server-Sent Events.
 - Runtime health, agent, session, run, and streaming endpoints.
 - A separate landing-page website that explains the architecture and provides the console entry point.
 - Product preview screenshots in [`public/previews/`](public/previews/).
@@ -88,7 +91,7 @@ Set this to the deployed FastGem runtime origin when the website and runtime are
 
 ```env
 GEMINI_API_KEY=
-FASTGEM_MODEL=gemini-2.5-flash
+FASTGEM_MODEL=gemini-3.8-flash
 FASTGEM_PORT=8000
 FASTGEM_DATA_DIR=.fastgem
 ```
@@ -109,7 +112,7 @@ POST /api/agents/:agentId/runs
 GET  /api/agents/:agentId/runs/stream?prompt=...
 ```
 
-Use these endpoints to inspect agents, create sessions, submit prompts, and connect another frontend or service to FastGem. The website’s Agent Studio uses the run endpoint and carries the returned session ID across messages.
+Use these endpoints to inspect agents, create sessions, submit prompts, and connect another frontend or service to FastGem. The website’s Agent Studio loads agents from `/api/agents`, uses the streaming run endpoint, and carries a separate returned session ID per chat thread.
 
 ## Product workflow
 

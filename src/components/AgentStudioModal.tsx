@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { AGENT_PRESETS } from '../data/mockData';
 import { AgentPreset } from '../types';
 import { useTheme } from '../context/ThemeContext';
@@ -11,7 +13,7 @@ import { McpView } from './McpView';
 import { SkillsView } from './SkillsView';
 import { TokenUsageView } from './TokenUsageView';
 import { SchedulerView } from './SchedulerView';
-import { runAgent } from '../lib/fastgemApi';
+import { listAgents, streamAgent, RuntimeAgent } from '../lib/fastgemApi';
 import { 
   X, Send, Bot, Terminal, Cpu, Database, RefreshCw, Sparkles, Check, Copy, Code2, 
   ArrowLeft, Trash2, MessageSquare, Plus, ChevronDown, ChevronRight, Settings, 
@@ -30,8 +32,38 @@ interface ChatThread {
   id: string;
   title: string;
   agentId: string;
-  messages: Array<{ sender: 'user' | 'agent'; text: string; timestamp: string; toolsUsed?: string[] }>;
+  sessionId?: string;
+  messages: Array<{
+    id: string;
+    sender: 'user' | 'agent';
+    text: string;
+    timestamp: string;
+    metadata?: { provider: string; model: string };
+  }>;
 }
+
+const runtimeAgentToPreset = (agent: RuntimeAgent): AgentPreset => {
+  const preset = AGENT_PRESETS.find((candidate) => candidate.id === agent.id);
+  return {
+    ...(preset || {
+      id: agent.id,
+      name: agent.name,
+      soulFile: 'SOUL.md',
+      avatarEmoji: '🤖',
+      description: agent.description,
+      model: agent.model,
+      systemInstruction: agent.systemInstruction,
+      tools: agent.tools,
+      samplePrompts: [],
+    }),
+    id: agent.id,
+    name: agent.name,
+    description: agent.description,
+    model: agent.model,
+    systemInstruction: agent.systemInstruction,
+    tools: agent.tools,
+  };
+};
 
 export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({ 
   isOpen, 
@@ -48,7 +80,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
   const [chatsExpanded, setChatsExpanded] = useState(true);
   const [memoryDrawerOpen, setMemoryDrawerOpen] = useState(false);
   const [runtimeError, setRuntimeError] = useState<string | null>(null);
-  const [sessionId, setSessionId] = useState<string | undefined>();
+  const [runtimeAgents, setRuntimeAgents] = useState<AgentPreset[]>([]);
 
   // Settings page view state
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -99,6 +131,22 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
     }
   }, [initialAgent, isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    let cancelled = false;
+    listAgents()
+      .then((agents) => {
+        if (cancelled || agents.length === 0) return;
+        const presets = agents.map(runtimeAgentToPreset);
+        setRuntimeAgents(presets);
+        setSelectedAgent((current) => presets.find((agent) => agent.id === current.id) || presets[0]);
+      })
+      .catch((error) => {
+        if (!cancelled) setRuntimeError(error instanceof Error ? error.message : 'FastGem runtime is unavailable');
+      });
+    return () => { cancelled = true; };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const currentThread = threads.find(t => t.id === activeThreadId) || threads[0];
@@ -111,6 +159,9 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
     setSystemInstruction(agent.systemInstruction);
     setSelectedModel(agent.model);
     setAgentDropdownOpen(false);
+    setThreads((prev) => prev.map((thread) => thread.id === activeThreadId
+      ? { ...thread, agentId: agent.id, sessionId: undefined, messages: [] }
+      : thread));
   };
 
   const handleNewChat = () => {
@@ -135,7 +186,12 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
     const textToSend = promptText || userInput;
     if (!textToSend.trim() || isProcessing) return;
 
+    const threadId = activeThreadId;
+    const selectedAgentId = selectedAgent.id;
+    const selectedThread = threads.find((thread) => thread.id === threadId);
+    const assistantMessageId = `message-${Date.now()}-agent`;
     const userMsg = {
+      id: `message-${Date.now()}-user`,
       sender: 'user' as const,
       text: textToSend,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
@@ -147,7 +203,12 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
         return {
           ...t,
           title: isFirst ? (textToSend.length > 25 ? textToSend.substring(0, 25) + '...' : textToSend) : t.title,
-          messages: [...t.messages, userMsg]
+          messages: [...t.messages, userMsg, {
+            id: assistantMessageId,
+            sender: 'agent' as const,
+            text: '',
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          }]
         };
       }
       return t;
@@ -157,17 +218,35 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
     setIsProcessing(true);
     setRuntimeError(null);
     try {
-      const result = await runAgent(selectedAgent.id, textToSend, sessionId);
-      setSessionId(result.sessionId);
-      const agentMsg = {
-        sender: 'agent' as const,
-        text: result.text,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        toolsUsed: ['gemini', `model:${result.model}`]
-      };
-      setThreads(prev => prev.map(t => t.id === activeThreadId ? { ...t, messages: [...t.messages, agentMsg] } : t));
+      let completed = false;
+      await streamAgent(selectedAgentId, textToSend, selectedThread?.sessionId, (event) => {
+        if (event.type === 'token') {
+          setThreads((prev) => prev.map((thread) => thread.id === threadId
+            ? { ...thread, messages: thread.messages.map((message) => message.id === assistantMessageId
+              ? { ...message, text: message.text + event.text }
+              : message) }
+            : thread));
+        }
+        if (event.type === 'done') {
+          completed = true;
+          setThreads((prev) => prev.map((thread) => thread.id === threadId
+            ? {
+                ...thread,
+                sessionId: event.sessionId,
+                messages: thread.messages.map((message) => message.id === assistantMessageId
+                  ? { ...message, metadata: { provider: 'Google Gemini', model: event.model } }
+                  : message),
+              }
+            : thread));
+        }
+        if (event.type === 'error') throw new Error(event.error);
+      });
+      if (!completed) throw new Error('FastGem streaming ended before a complete response was received');
     } catch (error) {
       setRuntimeError(error instanceof Error ? error.message : 'FastGem runtime is unavailable');
+      setThreads((prev) => prev.map((thread) => thread.id === threadId
+        ? { ...thread, messages: thread.messages.filter((message) => message.id !== assistantMessageId) }
+        : thread));
     } finally {
       setIsProcessing(false);
     }
@@ -555,7 +634,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                 {agentDropdownOpen && (
                   <div className="absolute top-full left-0 right-0 mt-1 z-50 bg-[#0f172a] border border-[#2b3850] rounded-xl shadow-2xl p-1.5 space-y-1 max-h-60 overflow-y-auto">
                     <div className="px-2.5 py-1 text-[10px] font-mono font-extrabold uppercase tracking-widest text-[#ff8c00]">Switch Agent</div>
-                    {AGENT_PRESETS.map((agent) => (
+                    {(runtimeAgents.length > 0 ? runtimeAgents : AGENT_PRESETS).map((agent) => (
                       <button
                         key={agent.id}
                         onClick={() => handleSelectAgent(agent)}
@@ -820,19 +899,19 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                                 : 'bg-[#131d33] border border-[#2b3850] text-[#dae2fd] shadow-md'
                             }`}
                           >
-                            {msg.toolsUsed && msg.toolsUsed.length > 0 && (
+                            {msg.metadata && (
                               <div className="mb-3 pb-2 border-b border-[#2b3850] flex items-center gap-2 font-mono text-xs text-[#ff6b00]">
-                                <Terminal className="w-3.5 h-3.5 text-[#ff6b00]" />
-                                <span className="text-[#bacac5]">Tool Execution:</span>
-                                {msg.toolsUsed.map((t, tidx) => (
-                                  <span key={tidx} className="bg-[#ff6b00]/10 px-2 py-0.5 rounded text-[11px] border border-[#ff6b00]/30 text-[#ff8c00]">
-                                    {t}
-                                  </span>
-                                ))}
+                                <Cpu className="w-3.5 h-3.5 text-[#ff6b00]" />
+                                <span className="text-[#bacac5]">Provider:</span>
+                                <span className="bg-[#ff6b00]/10 px-2 py-0.5 rounded text-[11px] border border-[#ff6b00]/30 text-[#ff8c00]">{msg.metadata.provider}</span>
+                                <span className="text-[#bacac5]">Model:</span>
+                                <span className="bg-[#ff6b00]/10 px-2 py-0.5 rounded text-[11px] border border-[#ff6b00]/30 text-[#ff8c00]">{msg.metadata.model}</span>
                               </div>
                             )}
 
-                            <div className="whitespace-pre-wrap">{msg.text}</div>
+                            <div className="space-y-3 [&_p]:leading-7 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-[#090d16] [&_pre]:p-3 [&_code]:font-mono [&_a]:text-[#ff9d4d]">
+                              <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.text || ' '}</ReactMarkdown>
+                            </div>
                           </div>
                         </div>
                       ))}
@@ -840,7 +919,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                       {isProcessing && (
                         <div className="flex items-center gap-3 spectrum-gradient-text font-mono text-xs bg-[#131d33] p-4 rounded-2xl border border-[#a855f7]/40 w-fit animate-pulse shadow-md">
                           <RefreshCw className="w-4 h-4 animate-spin text-[#3b82f6]" />
-                          <span>{agentName || selectedAgent.name} is thinking & executing tools...</span>
+                          <span>{agentName || selectedAgent.name} is streaming a response...</span>
                         </div>
                       )}
                     </div>

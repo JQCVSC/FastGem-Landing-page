@@ -7,7 +7,7 @@ export const AGENT_PRESETS: AgentPreset[] = [
     soulFile: 'SOUL.md',
     avatarEmoji: '🤖',
     description: 'Focused on structured research synthesis, document summaries, and technical analysis.',
-    model: 'gemini-2.5-flash',
+    model: 'gemini-3.8-flash',
     systemInstruction: 'You are a focused technical researcher powered by Google Gemini. You synthesize information clearly, track session context, and output well-structured markdown responses.',
     tools: ['session_context', 'markdown_export'],
     samplePrompts: [
@@ -22,7 +22,7 @@ export const AGENT_PRESETS: AgentPreset[] = [
     soulFile: 'SOUL.md',
     avatarEmoji: '⚡',
     description: 'Configured for TypeScript API design, Express route patterns, and debugging.',
-    model: 'gemini-2.5-flash',
+    model: 'gemini-3.8-flash',
     systemInstruction: 'You are a TypeScript and Express engineering assistant. You write clean, strongly typed code and keep architecture straightforward and inspectable.',
     tools: ['session_context', 'schema_helper'],
     samplePrompts: [
@@ -37,7 +37,7 @@ export const AGENT_PRESETS: AgentPreset[] = [
     soulFile: 'SOUL.md',
     avatarEmoji: '💬',
     description: 'Session-aware assistant for customer support, onboarding, and internal workflows.',
-    model: 'gemini-2.5-flash',
+    model: 'gemini-3.8-flash',
     systemInstruction: 'You are a helpful product support specialist. Answer questions clearly using the session history and keep explanations practical and concise.',
     tools: ['session_context'],
     samplePrompts: [

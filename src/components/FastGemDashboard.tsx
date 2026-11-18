@@ -52,7 +52,7 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
   onClose,
   onOpenStudio
 }) => {
-  const [activeNav, setActiveNav] = useState<'overview' | 'agents' | 'models' | 'apikeys' | 'settings' | 'account' | 'general'>('overview');
+  const [activeNav, setActiveNav] = useState<'overview' | 'agents' | 'models' | 'apikeys' | 'settings' | 'account' | 'general' | 'channels' | 'mcp' | 'skills' | 'tokenusage' | 'scheduler'>('overview');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [agents, setAgents] = useState<Array<{ id: string; name: string; model: string; status: 'active' | 'idle' }>>([
     { id: '1', name: 'SOUL.md — Tech Researcher', model: 'Gemini 3.1 Pro', status: 'active' },
