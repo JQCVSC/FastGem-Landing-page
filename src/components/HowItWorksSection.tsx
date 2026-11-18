@@ -30,13 +30,13 @@ export const HowItWorksSection: React.FC = () => {
   ];
 
   return (
-    <section className="w-full py-24 px-6 bg-[#0b1326]" id="how-it-works">
+    <section className="w-full py-24 px-6 bg-[#dfe5ee] dark:bg-[#0b1326] transition-colors" id="how-it-works">
       <div className="max-w-[1200px] mx-auto">
         <div className="max-w-[700px] mb-14">
           <span className="spectrum-gradient-text font-mono text-xs uppercase tracking-widest block mb-3 font-extrabold">
             How It Works
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold text-[#dae2fd] tracking-tight">
+          <h2 className="text-3xl md:text-5xl font-bold text-[#0f172a] dark:text-[#dae2fd] tracking-tight">
             From definition to running session in five steps.
           </h2>
         </div>
@@ -45,16 +45,16 @@ export const HowItWorksSection: React.FC = () => {
           {steps.map((step) => (
             <div
               key={step.num}
-              className="bg-[#131d33] border border-[#2b3850] rounded-2xl p-6 flex flex-col justify-between"
+              className="bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 flex flex-col justify-between"
             >
               <div>
                 <span className="font-mono text-sm font-extrabold spectrum-gradient-text block mb-4">
                   Step {step.num}
                 </span>
-                <h3 className="text-lg font-bold text-[#f1f5f9] mb-2.5">
+                <h3 className="text-lg font-bold text-[#0f172a] dark:text-[#f1f5f9] mb-2.5">
                   {step.title}
                 </h3>
-                <p className="text-sm text-[#bacac5] leading-relaxed">
+                <p className="text-sm text-[#2d3c52] dark:text-[#bacac5] leading-relaxed">
                   {step.description}
                 </p>
               </div>

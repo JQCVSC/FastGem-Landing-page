@@ -31,44 +31,46 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#0b1326] px-4 py-8 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#dfe5ee] dark:bg-[#0b1326] px-4 py-8 animate-in fade-in duration-200 transition-colors">
       {/* Top Left Close/Back Button */}
       <button 
         onClick={onClose}
-        className="absolute top-6 left-6 text-[#bacac5] hover:text-[#dae2fd] flex items-center gap-2 font-mono text-xs uppercase tracking-wider transition-colors bg-[#131b2e] px-3.5 py-2 rounded-xl border border-[#2b3850] hover:border-[#a855f7]/40 cursor-pointer"
+        className="absolute top-6 left-6 text-[#2d3c52] dark:text-[#bacac5] hover:text-[#0f172a] dark:hover:text-[#dae2fd] flex items-center gap-2 font-mono text-xs uppercase tracking-wider transition-colors bg-[#eaeff6] dark:bg-[#131b2e] px-3.5 py-2 rounded-xl border border-[#bcc8da] dark:border-[#2b3850] hover:border-[#7e22ce]/40 dark:hover:border-[#a855f7]/40 cursor-pointer"
       >
-        <ArrowLeft className="w-4 h-4 text-[#f59e0b]" /> Back to Home
+        <ArrowLeft className="w-4 h-4 text-[#b45309] dark:text-[#f59e0b]" /> Back to Home
       </button>
 
       {/* Main Centered Console Entry Card */}
       <div className="w-full max-w-[440px] flex flex-col items-center text-center">
         {signedInUser ? (
-          <div className="bg-[#131b2e] border border-[#2b3850] p-8 rounded-2xl w-full flex flex-col items-center gap-4 animate-in zoom-in-95 duration-200 shadow-2xl">
-            <div className="w-12 h-12 rounded-full bg-[#10b981]/20 border border-[#10b981]/40 flex items-center justify-center text-[#10b981]">
+          <div className="bg-[#eaeff6] dark:bg-[#131b2e] border border-[#bcc8da] dark:border-[#2b3850] p-8 rounded-2xl w-full flex flex-col items-center gap-4 animate-in zoom-in-95 duration-200 shadow-xl">
+            <div className="w-12 h-12 rounded-full bg-[#047857]/15 dark:bg-[#10b981]/20 border border-[#047857]/35 dark:border-[#10b981]/40 flex items-center justify-center text-[#047857] dark:text-[#10b981]">
               <CheckCircle2 className="w-7 h-7" />
             </div>
-            <h3 className="text-2xl font-bold text-[#dae2fd]">Opening console, {signedInUser}</h3>
-            <p className="text-sm text-[#bacac5]">Loading the FastGem development console...</p>
+            <h3 className="text-2xl font-bold text-[#0f172a] dark:text-[#dae2fd]">Opening console, {signedInUser}</h3>
+            <p className="text-sm text-[#4b5b73] dark:text-[#bacac5]">Loading the FastGem development console...</p>
           </div>
         ) : (
-          <div className="w-full bg-[#131b2e] border border-[#2b3850] rounded-2xl p-8 shadow-2xl">
+          <div className="w-full bg-[#eaeff6] dark:bg-[#131b2e] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-8 shadow-xl">
             {/* FastGem Logo Image */}
             <div className="mb-4 flex justify-center">
-              <img 
-                src="https://i.imgur.com/hkRlTDp.png" 
-                alt="FastGem Logo" 
-                className="h-12 w-auto object-contain"
-                referrerPolicy="no-referrer"
-              />
+              <div className="bg-[#131b2e] px-3 py-1.5 rounded-xl dark:bg-transparent dark:p-0">
+                <img 
+                  src="https://i.imgur.com/hkRlTDp.png" 
+                  alt="FastGem Logo" 
+                  className="h-10 dark:h-12 w-auto object-contain"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
             </div>
 
             {/* Heading */}
-            <h2 className="text-2xl font-bold text-[#f1f5f9] tracking-tight mb-2">
+            <h2 className="text-2xl font-bold text-[#0f172a] dark:text-[#f1f5f9] tracking-tight mb-2">
               Enter the FastGem console
             </h2>
 
             {/* Supporting copy */}
-            <p className="text-[#94a3b8] text-sm leading-relaxed mb-6">
+            <p className="text-[#4b5b73] dark:text-[#94a3b8] text-sm leading-relaxed mb-6">
               Open the development console to configure agents, inspect runtime capabilities, and test Gemini sessions.
             </p>
 
@@ -76,7 +78,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
             <button
               type="button"
               disabled
-              className="w-full py-3.5 px-4 bg-[#090d16] text-[#94a3b8] font-medium text-sm rounded-xl border border-[#2b3850] flex items-center justify-center gap-3 mb-4 opacity-70 cursor-not-allowed"
+              className="w-full py-3.5 px-4 bg-[#dce3ed] dark:bg-[#090d16] text-[#4b5b73] dark:text-[#94a3b8] font-medium text-sm rounded-xl border border-[#bcc8da] dark:border-[#2b3850] flex items-center justify-center gap-3 mb-4 opacity-75 cursor-not-allowed"
             >
               <svg className="w-5 h-5 shrink-0 opacity-60" viewBox="0 0 24 24">
                 <path
@@ -101,9 +103,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
 
             {/* Divider */}
             <div className="w-full flex items-center mb-4">
-              <div className="flex-1 border-t border-[#2b3850]"></div>
+              <div className="flex-1 border-t border-[#bcc8da] dark:border-[#2b3850]"></div>
               <span className="px-3 text-xs text-[#64748b] uppercase font-mono tracking-wider">or</span>
-              <div className="flex-1 border-t border-[#2b3850]"></div>
+              <div className="flex-1 border-t border-[#bcc8da] dark:border-[#2b3850]"></div>
             </div>
 
             {/* Form */}
@@ -116,10 +118,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                   onFocus={() => setFocusedInput('username')}
                   onBlur={() => setFocusedInput(null)}
                   placeholder="Display name for this session (optional)"
-                  className={`w-full bg-[#090d16] text-[#dae2fd] placeholder-[#64748b] text-sm px-4 py-3.5 rounded-xl focus:outline-none transition-all ${
+                  className={`w-full bg-[#dce3ed] dark:bg-[#090d16] text-[#0f172a] dark:text-[#dae2fd] placeholder-[#64748b] text-sm px-4 py-3.5 rounded-xl focus:outline-none transition-all ${
                     focusedInput === 'username' 
-                      ? 'border-2 border-[#a855f7]' 
-                      : 'border border-[#2b3850] hover:border-[#3c4a68]'
+                      ? 'border-2 border-[#7e22ce] dark:border-[#a855f7]' 
+                      : 'border border-[#bcc8da] dark:border-[#2b3850] hover:border-[#94a3b8] dark:hover:border-[#3c4a68]'
                   }`}
                 />
               </div>
@@ -139,9 +141,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
             </form>
 
             {/* Disclaimer */}
-            <div className="mt-6 p-3 bg-[#090d16] border border-[#2b3850] rounded-xl flex items-start gap-2.5 text-left">
-              <Info className="w-4 h-4 text-[#f59e0b] shrink-0 mt-0.5" />
-              <p className="text-xs text-[#94a3b8] leading-relaxed">
+            <div className="mt-6 p-3 bg-[#dce3ed] dark:bg-[#090d16] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl flex items-start gap-2.5 text-left">
+              <Info className="w-4 h-4 text-[#b45309] dark:text-[#f59e0b] shrink-0 mt-0.5" />
+              <p className="text-xs text-[#4b5b73] dark:text-[#94a3b8] leading-relaxed">
                 Development preview — production authentication is not enabled yet.
               </p>
             </div>

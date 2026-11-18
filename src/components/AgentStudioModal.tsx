@@ -49,7 +49,7 @@ const runtimeAgentToPreset = (agent: RuntimeAgent): AgentPreset => {
       id: agent.id,
       name: agent.name,
       soulFile: 'SOUL.md',
-      avatarEmoji: '🤖',
+      avatarEmoji: 'https://i.imgur.com/GZVnWPR.png',
       description: agent.description,
       model: agent.model,
       systemInstruction: agent.systemInstruction,
@@ -290,22 +290,22 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-[150] bg-[#090d16] text-[#dae2fd] flex font-sans antialiased overflow-hidden animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-[150] bg-[#dfe5ee] dark:bg-[#090d16] text-[#0f172a] dark:text-[#dae2fd] flex font-sans antialiased overflow-hidden animate-in fade-in duration-200">
       {/* Ambient Landing Page Background Glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-[45%] h-[45%] bg-[#ef4444]/10 blur-[140px] rounded-full pointer-events-none"></div>
-      <div className="absolute top-[20%] right-[-10%] w-[45%] h-[45%] bg-[#3b82f6]/10 blur-[130px] rounded-full pointer-events-none"></div>
-      <div className="absolute bottom-[-10%] left-[30%] w-[40%] h-[40%] bg-[#a855f7]/10 blur-[120px] rounded-full pointer-events-none"></div>
+      <div className="absolute top-[-10%] left-[-10%] w-[45%] h-[45%] bg-[#ef4444]/5 dark:bg-[#ef4444]/10 blur-[140px] rounded-full pointer-events-none"></div>
+      <div className="absolute top-[20%] right-[-10%] w-[45%] h-[45%] bg-[#3b82f6]/5 dark:bg-[#3b82f6]/10 blur-[130px] rounded-full pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] left-[30%] w-[40%] h-[40%] bg-[#a855f7]/5 dark:bg-[#a855f7]/10 blur-[120px] rounded-full pointer-events-none"></div>
       
       {/* ----------------- SETTINGS PAGE OVERLAY VIEW ----------------- */}
       {isSettingsOpen ? (
-        <div className="w-full h-full bg-[#090d16] flex overflow-hidden animate-in fade-in duration-200 relative z-10">
+        <div className="w-full h-full bg-[#dfe5ee] dark:bg-[#090d16] flex overflow-hidden animate-in fade-in duration-200 relative z-10">
           {/* Settings Left Sidebar */}
-          <aside className="w-[230px] sm:w-[250px] bg-[#0f172a] border-r border-[#2b3850] flex flex-col justify-between shrink-0 p-4 select-none">
+          <aside className="w-[230px] sm:w-[250px] bg-[#d5dde8] dark:bg-[#0f172a] border-r border-[#bcc8da] dark:border-[#2b3850] flex flex-col justify-between shrink-0 p-4 select-none">
             <div className="space-y-6 overflow-y-auto">
               
               {/* AGENT Section */}
               <div>
-                <div className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-[#ff8c00] px-3 mb-2">
+                <div className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-[#c2410c] dark:text-[#ff8c00] px-3 mb-2">
                   AGENT
                 </div>
                 <div className="space-y-1">
@@ -318,11 +318,11 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                         onClick={() => setActiveSettingsTab(tab.id)}
                         className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
                           isActive
-                            ? 'bg-[#1e2a45] text-white shadow-sm border-l-2 border-[#ff6b00]'
-                            : 'text-[#bacac5] hover:bg-[#131d33] hover:text-white'
+                            ? 'bg-[#eaeff6] dark:bg-[#1e2a45] text-[#0f172a] dark:text-white shadow-sm border-l-2 border-[#ea580c] dark:border-[#ff6b00]'
+                            : 'text-[#2d3c52] dark:text-[#bacac5] hover:bg-[#cdd7e5] dark:hover:bg-[#131d33] hover:text-[#0f172a] dark:hover:text-white'
                         }`}
                       >
-                        <Icon className={`w-4 h-4 ${isActive ? 'text-[#ff6b00]' : 'text-[#bacac5]'}`} />
+                        <Icon className={`w-4 h-4 ${isActive ? 'text-[#ea580c] dark:text-[#ff6b00]' : 'text-[#4b5b73] dark:text-[#bacac5]'}`} />
                         <span>{tab.label}</span>
                       </button>
                     );
@@ -332,7 +332,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
 
               {/* USER Section */}
               <div>
-                <div className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-[#ff8c00] px-3 mb-2">
+                <div className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-[#c2410c] dark:text-[#ff8c00] px-3 mb-2">
                   USER
                 </div>
                 <div className="space-y-1">
@@ -345,11 +345,11 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                         onClick={() => setActiveSettingsTab(tab.id)}
                         className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
                           isActive
-                            ? 'bg-[#1e2a45] text-white shadow-sm border-l-2 border-[#ff6b00]'
-                            : 'text-[#bacac5] hover:bg-[#131d33] hover:text-white'
+                            ? 'bg-[#eaeff6] dark:bg-[#1e2a45] text-[#0f172a] dark:text-white shadow-sm border-l-2 border-[#ea580c] dark:border-[#ff6b00]'
+                            : 'text-[#2d3c52] dark:text-[#bacac5] hover:bg-[#cdd7e5] dark:hover:bg-[#131d33] hover:text-[#0f172a] dark:hover:text-white'
                         }`}
                       >
-                        <Icon className={`w-4 h-4 ${isActive ? 'text-[#ff6b00]' : 'text-[#bacac5]'}`} />
+                        <Icon className={`w-4 h-4 ${isActive ? 'text-[#ea580c] dark:text-[#ff6b00]' : 'text-[#4b5b73] dark:text-[#bacac5]'}`} />
                         <span>{tab.label}</span>
                       </button>
                     );
@@ -359,26 +359,26 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
 
             </div>
 
-            <div className="pt-4 border-t border-[#2b3850]">
+            <div className="pt-4 border-t border-[#bcc8da] dark:border-[#2b3850]">
               <button
                 onClick={() => setIsSettingsOpen(false)}
-                className="w-full py-2 px-3 bg-[#131d33] hover:bg-[#1e2a45] border border-[#2b3850] text-xs text-[#bacac5] hover:text-white rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full py-2 px-3 bg-[#eaeff6] hover:bg-[#cdd7e5] dark:bg-[#131d33] dark:hover:bg-[#1e2a45] border border-[#bcc8da] dark:border-[#2b3850] text-xs text-[#2d3c52] dark:text-[#bacac5] hover:text-[#0f172a] dark:hover:text-white rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer"
               >
-                <ArrowLeft className="w-3.5 h-3.5 text-[#ff6b00]" />
+                <ArrowLeft className="w-3.5 h-3.5 text-[#ea580c] dark:text-[#ff6b00]" />
                 <span>Back to Chat</span>
               </button>
             </div>
           </aside>
 
           {/* Settings Right Main Area */}
-          <main className="flex-1 bg-[#090d16] flex flex-col h-full overflow-hidden">
+          <main className="flex-1 bg-[#dfe5ee] dark:bg-[#090d16] flex flex-col h-full overflow-hidden">
             {/* Top Bar Header */}
-            <header className="p-6 sm:p-8 pb-4 flex items-center justify-between shrink-0 border-b border-[#2b3850]">
+            <header className="p-6 sm:p-8 pb-4 flex items-center justify-between shrink-0 border-b border-[#bcc8da] dark:border-[#2b3850]">
               <div>
-                <h1 className="text-2xl sm:text-3xl font-bold text-[#f1f5f9] tracking-tight">
+                <h1 className="text-2xl sm:text-3xl font-bold text-[#0f172a] dark:text-[#f1f5f9] tracking-tight">
                   {activeSettingsTab}
                 </h1>
-                <p className="text-xs sm:text-sm text-[#bacac5] mt-1 font-sans">
+                <p className="text-xs sm:text-sm text-[#2d3c52] dark:text-[#bacac5] mt-1 font-sans">
                   {renderTabSubtitle(activeSettingsTab)}
                 </p>
               </div>
@@ -386,7 +386,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleSaveSettings}
-                  className="bg-[#ff6b00] hover:bg-[#ea580c] text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider font-mono flex items-center gap-2 transition-all cursor-pointer shadow-md shadow-[#ff6b00]/20 active:scale-95"
+                  className="bg-[#ea580c] hover:bg-[#c2410c] dark:bg-[#ff6b00] dark:hover:bg-[#ea580c] text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider font-mono flex items-center gap-2 transition-all cursor-pointer shadow-md shadow-[#ff6b00]/20 active:scale-95"
                 >
                   {savedToast ? <Check className="w-4 h-4 text-white" /> : <Save className="w-4 h-4" />}
                   <span>{savedToast ? 'Saved!' : 'Save'}</span>
@@ -394,7 +394,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
 
                 <button
                   onClick={() => setIsSettingsOpen(false)}
-                  className="p-2 text-[#bacac5] hover:text-white hover:bg-[#1e2a45] rounded-xl transition-colors cursor-pointer"
+                  className="p-2 text-[#4b5b73] dark:text-[#bacac5] hover:text-[#0f172a] dark:hover:text-white hover:bg-[#cdd7e5] dark:hover:bg-[#1e2a45] rounded-xl transition-colors cursor-pointer"
                   title="Close Settings"
                 >
                   <X className="w-5 h-5" />
@@ -408,29 +408,29 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
               {/* ------------ PROFILE TAB ------------ */}
               {activeSettingsTab === 'Profile' && (
                 <>
-                  <div className="bg-[#0f172a] border border-[#2b3850] rounded-2xl p-6 space-y-6 shadow-md">
+                  <div className="bg-[#eaeff6] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 space-y-6 shadow-md">
                     <div className="flex flex-col sm:flex-row items-start gap-5">
                       {/* Avatar Square */}
-                      <div className="w-20 h-20 rounded-2xl bg-[#131d33] border border-[#2b3850] flex items-center justify-center shrink-0 shadow-inner">
-                        <Bot className="w-9 h-9 text-[#ff6b00]" />
+                      <div className="w-20 h-20 rounded-2xl bg-[#dce3ed] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] flex items-center justify-center shrink-0 shadow-inner">
+                        <Bot className="w-9 h-9 text-[#ea580c] dark:text-[#ff6b00]" />
                       </div>
 
                       {/* Name Input & ID */}
                       <div className="flex-1 w-full space-y-3">
                         <div>
-                          <label className="text-sm font-medium text-[#f1f5f9] mb-1.5 block">
+                          <label className="text-sm font-medium text-[#0f172a] dark:text-[#f1f5f9] mb-1.5 block">
                             Name
                           </label>
                           <input
                             type="text"
                             value={agentName}
                             onChange={(e) => setAgentName(e.target.value)}
-                            className="w-full bg-[#131d33] border border-[#2b3850] rounded-xl px-4 py-2.5 text-sm text-[#f1f5f9] focus:outline-none focus:border-[#ff6b00] transition-colors font-sans"
+                            className="w-full bg-[#dce3ed] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl px-4 py-2.5 text-sm text-[#0f172a] dark:text-[#f1f5f9] focus:outline-none focus:border-[#ea580c] dark:focus:border-[#ff6b00] transition-colors font-sans"
                             placeholder="Agent Name"
                           />
                         </div>
                         <div>
-                          <span className="font-mono text-xs text-[#ff6b00] bg-[#131d33] px-3 py-1 rounded-md inline-block border border-[#2b3850]">
+                          <span className="font-mono text-xs text-[#c2410c] dark:text-[#ff6b00] bg-[#dce3ed] dark:bg-[#131d33] px-3 py-1 rounded-md inline-block border border-[#bcc8da] dark:border-[#2b3850]">
                             ID: agt_f96f4f078be5220abece
                           </span>
                         </div>
@@ -439,34 +439,34 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
 
                     {/* Description Textarea */}
                     <div>
-                      <label className="text-sm font-medium text-[#f1f5f9] mb-1.5 block">
+                      <label className="text-sm font-medium text-[#0f172a] dark:text-[#f1f5f9] mb-1.5 block">
                         Description
                       </label>
                       <textarea
                         rows={3}
                         value={agentDescription}
                         onChange={(e) => setAgentDescription(e.target.value)}
-                        className="w-full bg-[#131d33] border border-[#2b3850] rounded-xl p-4 text-sm text-[#f1f5f9] focus:outline-none focus:border-[#ff6b00] transition-colors resize-none font-sans"
+                        className="w-full bg-[#dce3ed] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl p-4 text-sm text-[#0f172a] dark:text-[#f1f5f9] focus:outline-none focus:border-[#ea580c] dark:focus:border-[#ff6b00] transition-colors resize-none font-sans"
                         placeholder="Agent Description"
                       />
                     </div>
                   </div>
 
                   {/* Public Access Toggle Card */}
-                  <div className="bg-[#0f172a] border border-[#2b3850] rounded-2xl p-6 flex items-center justify-between shadow-md">
+                  <div className="bg-[#eaeff6] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 flex items-center justify-between shadow-md">
                     <div>
-                      <div className="text-base font-medium text-[#f1f5f9]">Public access</div>
-                      <div className="text-xs text-[#bacac5] mt-0.5">Only you can use this agent.</div>
+                      <div className="text-base font-medium text-[#0f172a] dark:text-[#f1f5f9]">Public access</div>
+                      <div className="text-xs text-[#4b5b73] dark:text-[#bacac5] mt-0.5">Only you can use this agent.</div>
                     </div>
 
                     <button
                       type="button"
                       onClick={() => setIsPublicAccess(!isPublicAccess)}
                       className={`w-12 h-6 rounded-full p-1 transition-colors cursor-pointer flex items-center ${
-                        isPublicAccess ? 'bg-[#ff6b00] justify-end' : 'bg-[#1e2a45] justify-start'
+                        isPublicAccess ? 'bg-[#ea580c] dark:bg-[#ff6b00] justify-end' : 'bg-[#bcc8da] dark:bg-[#1e2a45] justify-start'
                       }`}
                     >
-                      <span className={`w-4 h-4 rounded-full shadow-md transform transition-transform ${isPublicAccess ? 'bg-white' : 'bg-[#bacac5]'}`} />
+                      <span className={`w-4 h-4 rounded-full shadow-md transform transition-transform ${isPublicAccess ? 'bg-white' : 'bg-[#f8fafc] dark:bg-[#bacac5]'}`} />
                     </button>
                   </div>
                 </>
@@ -476,7 +476,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
               {activeSettingsTab === 'Customize' && (
                 <div className="space-y-6 animate-in fade-in duration-150">
                   {/* Sub-navigation Menu Items above system instructions */}
-                  <div className="border-b border-[#2b3850] pb-0">
+                  <div className="border-b border-[#bcc8da] dark:border-[#2b3850] pb-0">
                     <div className="flex items-center gap-6 sm:gap-8 overflow-x-auto scrollbar-none">
                       {(['Soul', 'Identity', 'User', 'Tools', 'Bootstrap', 'Heartbeat', 'Memory', 'Agents'] as CustomizeTabType[]).map((tab) => {
                         const isActive = activeCustomizeTab === tab;
@@ -486,13 +486,13 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                             onClick={() => setActiveCustomizeTab(tab)}
                             className={`pb-3 text-xs sm:text-sm font-medium transition-all relative whitespace-nowrap cursor-pointer ${
                               isActive
-                                ? 'text-[#ff6b00] font-semibold'
-                                : 'text-[#bacac5] hover:text-white'
+                                ? 'text-[#c2410c] dark:text-[#ff6b00] font-semibold'
+                                : 'text-[#4b5b73] dark:text-[#bacac5] hover:text-[#0f172a] dark:hover:text-white'
                             }`}
                           >
                             <span>{tab}</span>
                             {isActive && (
-                              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#ff6b00] rounded-full" />
+                              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#ea580c] dark:bg-[#ff6b00] rounded-full" />
                             )}
                           </button>
                         );
@@ -501,8 +501,8 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                   </div>
 
                   {/* Markdown File Editor Box */}
-                  <div className="bg-[#0f172a] border border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-md flex flex-col min-h-[420px] transition-all">
-                    <div className="text-xs sm:text-sm font-mono text-[#bacac5] mb-4 select-none font-medium">
+                  <div className="bg-[#eaeff6] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-md flex flex-col min-h-[420px] transition-all">
+                    <div className="text-xs sm:text-sm font-mono text-[#4b5b73] dark:text-[#bacac5] mb-4 select-none font-medium">
                       # {activeCustomizeTab.toUpperCase()}.md
                     </div>
                     <textarea
@@ -516,7 +516,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                         }
                       }}
                       placeholder="Write your content here..."
-                      className="w-full flex-1 bg-[#131d33] border border-[#2b3850] rounded-xl p-4 text-[#dae2fd] font-mono text-xs sm:text-sm focus:outline-none focus:border-[#ff6b00] resize-none leading-relaxed placeholder:text-[#bacac5]/40"
+                      className="w-full flex-1 bg-[#dce3ed] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl p-4 text-[#0f172a] dark:text-[#dae2fd] font-mono text-xs sm:text-sm focus:outline-none focus:border-[#ea580c] dark:focus:border-[#ff6b00] resize-none leading-relaxed placeholder:text-[#64748b] dark:placeholder:text-[#bacac5]/40"
                     />
                   </div>
                 </div>
@@ -524,79 +524,79 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
 
               {/* ------------ MODELS TAB ------------ */}
               {activeSettingsTab === 'Models' && (
-                <div className="bg-[#0f172a] border border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-md">
+                <div className="bg-[#eaeff6] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-md">
                   <ModelsView agentName={agentName || selectedAgent.name} />
                 </div>
               )}
 
               {/* ------------ CONTEXT TAB ------------ */}
               {activeSettingsTab === 'Context' && (
-                <div className="bg-[#0f172a] border border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-md">
+                <div className="bg-[#eaeff6] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-md">
                   <ContextView agentName={agentName || selectedAgent.name} />
                 </div>
               )}
 
               {/* ------------ CHANNELS TAB ------------ */}
               {activeSettingsTab === 'Channels' && (
-                <div className="bg-[#0f172a] border border-[#2b3850] rounded-2xl p-6 shadow-md">
+                <div className="bg-[#eaeff6] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 shadow-md">
                   <ChannelsView agentName={agentName || selectedAgent.name} />
                 </div>
               )}
 
               {/* ------------ PLUGINS TAB ------------ */}
               {activeSettingsTab === 'Plugins' && (
-                <div className="bg-[#0f172a] border border-[#2b3850] rounded-2xl p-6 shadow-md">
+                <div className="bg-[#eaeff6] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 shadow-md">
                   <PluginsView agentName={agentName || selectedAgent.name} />
                 </div>
               )}
 
               {/* ------------ ACCOUNT TAB ------------ */}
               {activeSettingsTab === 'Account' && (
-                <div className="bg-[#0f172a] border border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-md">
+                <div className="bg-[#eaeff6] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-md">
                   <AccountView />
                 </div>
               )}
 
               {/* ------------ MCP TAB ------------ */}
               {activeSettingsTab === 'MCP' && (
-                <div className="bg-[#0f172a] border border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-md">
+                <div className="bg-[#eaeff6] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-md">
                   <McpView agentName={agentName || selectedAgent.name} />
                 </div>
               )}
 
               {/* ------------ SKILLS TAB ------------ */}
               {activeSettingsTab === 'Skills' && (
-                <div className="bg-[#0f172a] border border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-md">
+                <div className="bg-[#eaeff6] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-md">
                   <SkillsView agentName={agentName || selectedAgent.name} />
                 </div>
               )}
 
               {/* ------------ TOKEN USAGE TAB ------------ */}
               {activeSettingsTab === 'Token Usage' && (
-                <div className="bg-[#0f172a] border border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-md">
+                <div className="bg-[#eaeff6] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-md">
                   <TokenUsageView agentName={agentName || selectedAgent.name} />
                 </div>
               )}
 
               {/* ------------ SCHEDULER TAB ------------ */}
               {activeSettingsTab === 'Scheduler' && (
-                <div className="bg-[#0f172a] border border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-md">
+                <div className="bg-[#eaeff6] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-md">
                   <SchedulerView agentName={agentName || selectedAgent.name} />
                 </div>
               )}
 
               {/* ------------ GENERIC FALLBACK FOR OTHER TABS ------------ */}
               {['Knowledge', 'General'].includes(activeSettingsTab) && (
-                <div className="bg-[#0f172a] border border-[#2b3850] rounded-2xl p-8 text-center space-y-4">
-                  <div className="w-12 h-12 rounded-2xl bg-[#131d33] border border-[#2b3850] text-[#ff6b00] flex items-center justify-center mx-auto">
+                <div className="bg-[#eaeff6] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-8 text-center space-y-4">
+                  <div className="w-12 h-12 rounded-2xl bg-[#dce3ed] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] text-[#ea580c] dark:text-[#ff6b00] flex items-center justify-center mx-auto">
                     <Sliders className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg font-medium text-[#f1f5f9]">{activeSettingsTab} Configuration</h3>
-                  <p className="text-xs text-[#bacac5] max-w-md mx-auto">
-                    Settings and parameters for {activeSettingsTab.toLowerCase()} are loaded and active under FastGem Gemini 3.6 engine runtime.
+                  <h3 className="text-lg font-medium text-[#0f172a] dark:text-[#f1f5f9]">{activeSettingsTab} Configuration</h3>
+                  <p className="text-xs text-[#2d3c52] dark:text-[#bacac5] max-w-md mx-auto">
+                    Settings and parameters for {activeSettingsTab.toLowerCase()} are loaded and active under the FastGem Gemini runtime.
                   </p>
                   <div className="pt-2">
-                    <span className="font-mono text-xs text-[#ff6b00] bg-[#131d33] px-3 py-1.5 rounded-lg border border-[#ff6b00]/30">
+                    <span className="font-mono text-xs text-[#c2410c] dark:text-[#ff6b00] bg-[#dce3ed] dark:bg-[#131d33] px-3 py-1.5 rounded-lg border border-[#ea580c]/30 dark:border-[#ff6b00]/30">
                       Status: Active & Configured
                     </span>
                   </div>
@@ -613,7 +613,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
           <aside 
             className={`${
               sidebarOpen ? 'w-[260px] sm:w-[280px]' : 'w-0'
-            } bg-[#0f172a] border-r border-[#2b3850] flex flex-col shrink-0 transition-all duration-300 overflow-hidden relative z-20 select-none`}
+            } bg-[#d5dde8] dark:bg-[#0f172a] border-r border-[#bcc8da] dark:border-[#2b3850] flex flex-col shrink-0 transition-all duration-300 overflow-hidden relative z-20 select-none`}
           >
             <div className="p-3 flex flex-col gap-3 h-full overflow-y-auto">
               
@@ -621,33 +621,55 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
               <div className="relative">
                 <button
                   onClick={() => setAgentDropdownOpen(!agentDropdownOpen)}
-                  className="w-full p-2.5 bg-[#131d33] hover:bg-[#1e2a45] border border-[#2b3850] rounded-xl flex items-center justify-between text-xs text-[#f1f5f9] transition-all cursor-pointer"
+                  className="w-full p-2.5 bg-[#eaeff6] hover:bg-[#cdd7e5] dark:bg-[#131d33] dark:hover:bg-[#1e2a45] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl flex items-center justify-between text-xs text-[#0f172a] dark:text-[#f1f5f9] transition-all cursor-pointer"
                 >
                   <div className="flex items-center gap-2.5 truncate">
-                    <span className="text-base">{selectedAgent.avatarEmoji}</span>
+                    <span className="text-base inline-flex items-center justify-center shrink-0">
+                      {selectedAgent.avatarEmoji.startsWith('http') ? (
+                        <img
+                          src={selectedAgent.avatarEmoji}
+                          alt={agentName || selectedAgent.name}
+                          className="w-5 h-5 rounded object-contain shrink-0"
+                          referrerPolicy="no-referrer"
+                        />
+                      ) : (
+                        selectedAgent.avatarEmoji
+                      )}
+                    </span>
                     <span className="font-semibold truncate">{agentName || selectedAgent.name}</span>
                   </div>
-                  <ChevronsUpDown className="w-4 h-4 text-[#bacac5] shrink-0 ml-1" />
+                  <ChevronsUpDown className="w-4 h-4 text-[#4b5b73] dark:text-[#bacac5] shrink-0 ml-1" />
                 </button>
 
                 {/* Agent Selector Dropdown Overlay */}
                 {agentDropdownOpen && (
-                  <div className="absolute top-full left-0 right-0 mt-1 z-50 bg-[#0f172a] border border-[#2b3850] rounded-xl shadow-2xl p-1.5 space-y-1 max-h-60 overflow-y-auto">
-                    <div className="px-2.5 py-1 text-[10px] font-mono font-extrabold uppercase tracking-widest text-[#ff8c00]">Switch Agent</div>
+                  <div className="absolute top-full left-0 right-0 mt-1 z-50 bg-[#eaeff6] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl shadow-2xl p-1.5 space-y-1 max-h-60 overflow-y-auto">
+                    <div className="px-2.5 py-1 text-[10px] font-mono font-extrabold uppercase tracking-widest text-[#c2410c] dark:text-[#ff8c00]">Switch Agent</div>
                     {(runtimeAgents.length > 0 ? runtimeAgents : AGENT_PRESETS).map((agent) => (
                       <button
                         key={agent.id}
                         onClick={() => handleSelectAgent(agent)}
                         className={`w-full p-2 rounded-lg text-left text-xs flex items-center gap-2.5 transition-colors cursor-pointer ${
                           selectedAgent.id === agent.id 
-                            ? 'bg-[#1e2a45] text-[#ff6b00] font-semibold' 
-                            : 'text-[#bacac5] hover:bg-[#131d33] hover:text-white'
+                            ? 'bg-[#dce3ed] dark:bg-[#1e2a45] text-[#c2410c] dark:text-[#ff6b00] font-semibold' 
+                            : 'text-[#2d3c52] dark:text-[#bacac5] hover:bg-[#cdd7e5] dark:hover:bg-[#131d33] hover:text-[#0f172a] dark:hover:text-white'
                         }`}
                       >
-                        <span className="text-sm">{agent.avatarEmoji}</span>
+                        <span className="text-sm inline-flex items-center justify-center shrink-0">
+                          {agent.avatarEmoji.startsWith('http') ? (
+                            <img
+                              src={agent.avatarEmoji}
+                              alt={agent.name}
+                              className="w-5 h-5 rounded object-contain shrink-0"
+                              referrerPolicy="no-referrer"
+                            />
+                          ) : (
+                            agent.avatarEmoji
+                          )}
+                        </span>
                         <div className="truncate">
                           <div className="truncate">{agent.name}</div>
-                          <div className="text-[10px] text-[#bacac5]/70 font-mono">{agent.model}</div>
+                          <div className="text-[10px] text-[#4b5b73] dark:text-[#bacac5]/70 font-mono">{agent.model}</div>
                         </div>
                       </button>
                     ))}
@@ -655,16 +677,16 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                 )}
               </div>
 
-              <div className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-[#ff8c00] px-1 pt-1">
+              <div className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-[#c2410c] dark:text-[#ff8c00] px-1 pt-1">
                 AGENT
               </div>
 
               {/* + New Chat Button */}
               <button
                 onClick={handleNewChat}
-                className="w-full py-2.5 px-3 bg-[#131d33] hover:bg-[#1e2a45] border border-[#2b3850] hover:border-[#ff6b00]/40 text-white rounded-xl text-xs font-medium flex items-center gap-2 transition-all shadow-sm cursor-pointer"
+                className="w-full py-2.5 px-3 bg-[#eaeff6] hover:bg-[#cdd7e5] dark:bg-[#131d33] dark:hover:bg-[#1e2a45] border border-[#bcc8da] dark:border-[#2b3850] hover:border-[#ea580c]/40 dark:hover:border-[#ff6b00]/40 text-[#0f172a] dark:text-white rounded-xl text-xs font-medium flex items-center gap-2 transition-all shadow-sm cursor-pointer"
               >
-                <Plus className="w-4 h-4 text-[#ff6b00]" />
+                <Plus className="w-4 h-4 text-[#ea580c] dark:text-[#ff6b00]" />
                 <span>New chat</span>
               </button>
 
@@ -672,7 +694,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
               <div className="mt-2">
                 <div 
                   onClick={() => setProjectsExpanded(!projectsExpanded)}
-                  className="flex items-center justify-between text-xs text-[#bacac5] hover:text-white px-1 py-1 cursor-pointer transition-colors"
+                  className="flex items-center justify-between text-xs text-[#2d3c52] dark:text-[#bacac5] hover:text-[#0f172a] dark:hover:text-white px-1 py-1 cursor-pointer transition-colors"
                 >
                   <div className="flex items-center gap-1.5">
                     {projectsExpanded ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
@@ -680,7 +702,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                   </div>
                   <button 
                     onClick={(e) => { e.stopPropagation(); }}
-                    className="hover:text-[#ff6b00] p-0.5" 
+                    className="hover:text-[#ea580c] dark:hover:text-[#ff6b00] p-0.5" 
                     title="Create Project"
                   >
                     <Plus className="w-3.5 h-3.5" />
@@ -688,7 +710,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                 </div>
 
                 {projectsExpanded && (
-                  <div className="pl-5 pt-1 pb-1 text-xs text-[#bacac5]/60 font-mono text-[11px]">
+                  <div className="pl-5 pt-1 pb-1 text-xs text-[#4b5b73] dark:text-[#bacac5]/60 font-mono text-[11px]">
                     No projects yet
                   </div>
                 )}
@@ -698,7 +720,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
               <div className="mt-1">
                 <div 
                   onClick={() => setChatsExpanded(!chatsExpanded)}
-                  className="flex items-center justify-between text-xs text-[#bacac5] hover:text-white px-1 py-1 cursor-pointer transition-colors"
+                  className="flex items-center justify-between text-xs text-[#2d3c52] dark:text-[#bacac5] hover:text-[#0f172a] dark:hover:text-white px-1 py-1 cursor-pointer transition-colors"
                 >
                   <div className="flex items-center gap-1.5">
                     {chatsExpanded ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
@@ -714,8 +736,8 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                         onClick={() => setActiveThreadId(thread.id)}
                         className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs truncate transition-all cursor-pointer ${
                           activeThreadId === thread.id
-                            ? 'bg-[#1e2a45] text-white font-medium border-l-2 border-[#ff6b00]'
-                            : 'text-[#bacac5] hover:bg-[#131d33] hover:text-white'
+                            ? 'bg-[#eaeff6] dark:bg-[#1e2a45] text-[#0f172a] dark:text-white font-medium border-l-2 border-[#ea580c] dark:border-[#ff6b00]'
+                            : 'text-[#2d3c52] dark:text-[#bacac5] hover:bg-[#cdd7e5] dark:hover:bg-[#131d33] hover:text-[#0f172a] dark:hover:text-white'
                         }`}
                       >
                         {thread.title}
@@ -725,31 +747,31 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                 )}
               </div>
 
-              <div className="mt-auto pt-3 border-t border-[#2b3850] space-y-2">
+              <div className="mt-auto pt-3 border-t border-[#bcc8da] dark:border-[#2b3850] space-y-2">
                 {/* Settings Button */}
                 <button 
                   onClick={() => {
                     setIsSettingsOpen(true);
                     setActiveSettingsTab('Profile');
                   }}
-                  className="w-full flex items-center gap-2.5 px-2.5 py-2 text-xs text-[#bacac5] hover:text-white hover:bg-[#131d33] rounded-xl transition-colors cursor-pointer"
+                  className="w-full flex items-center gap-2.5 px-2.5 py-2 text-xs text-[#2d3c52] dark:text-[#bacac5] hover:text-[#0f172a] dark:hover:text-white hover:bg-[#cdd7e5] dark:hover:bg-[#131d33] rounded-xl transition-colors cursor-pointer"
                 >
-                  <Settings className="w-4 h-4 text-[#bacac5]" />
+                  <Settings className="w-4 h-4 text-[#4b5b73] dark:text-[#bacac5]" />
                   <span>Settings</span>
                 </button>
 
                 {/* Bottom User Badge */}
-                <div className="p-2 bg-[#131d33] rounded-xl border border-[#2b3850] flex items-center justify-between">
+                <div className="p-2 bg-[#eaeff6] dark:bg-[#131d33] rounded-xl border border-[#bcc8da] dark:border-[#2b3850] flex items-center justify-between">
                   <div className="flex items-center gap-2.5 overflow-hidden">
-                    <div className="w-7 h-7 rounded-full bg-[#ff6b00]/20 text-[#ff8c00] border border-[#ff6b00]/40 flex items-center justify-center font-bold text-xs shrink-0">
+                    <div className="w-7 h-7 rounded-full bg-[#ea580c]/15 dark:bg-[#ff6b00]/20 text-[#c2410c] dark:text-[#ff8c00] border border-[#ea580c]/30 dark:border-[#ff6b00]/40 flex items-center justify-center font-bold text-xs shrink-0">
                       JE
                     </div>
                     <div className="truncate text-left">
-                      <div className="text-xs font-semibold text-white truncate">jembuildz</div>
-                      <div className="text-[10px] text-[#bacac5] truncate">user</div>
+                      <div className="text-xs font-semibold text-[#0f172a] dark:text-white truncate">jembuildz</div>
+                      <div className="text-[10px] text-[#4b5b73] dark:text-[#bacac5] truncate">user</div>
                     </div>
                   </div>
-                  <ChevronsUpDown className="w-3.5 h-3.5 text-[#bacac5] shrink-0" />
+                  <ChevronsUpDown className="w-3.5 h-3.5 text-[#4b5b73] dark:text-[#bacac5] shrink-0" />
                 </div>
               </div>
 
@@ -757,20 +779,20 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
           </aside>
 
           {/* ----------------- MAIN CHAT CANVAS ----------------- */}
-          <main className="flex-1 flex flex-col bg-[#090d16] h-full overflow-hidden relative z-10">
+          <main className="flex-1 flex flex-col bg-[#dfe5ee] dark:bg-[#090d16] h-full overflow-hidden relative z-10">
             
             {/* Top Header Navigation Bar */}
-            <header className="h-14 border-b border-[#2b3850] bg-[#090d16]/90 backdrop-blur-md px-4 flex items-center justify-between shrink-0 z-10">
+            <header className="h-14 border-b border-[#bcc8da] dark:border-[#2b3850] bg-[#d5dde8]/90 dark:bg-[#090d16]/90 backdrop-blur-md px-4 flex items-center justify-between shrink-0 z-10">
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setSidebarOpen(!sidebarOpen)}
-                  className="p-2 text-[#bacac5] hover:text-white hover:bg-[#1e2a45] rounded-lg transition-colors cursor-pointer"
+                  className="p-2 text-[#4b5b73] dark:text-[#bacac5] hover:text-[#0f172a] dark:hover:text-white hover:bg-[#cdd7e5] dark:hover:bg-[#1e2a45] rounded-lg transition-colors cursor-pointer"
                   title="Toggle sidebar"
                 >
                   <PanelLeft className="w-5 h-5" />
                 </button>
 
-                <span className="text-sm font-medium text-[#f1f5f9] flex items-center gap-2">
+                <span className="text-sm font-medium text-[#0f172a] dark:text-[#f1f5f9] flex items-center gap-2">
                   Chat with {agentName || selectedAgent.name}
                 </span>
               </div>
@@ -778,19 +800,21 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
               <div className="flex items-center gap-2">
                 <button
                   onClick={toggleTheme}
-                  className="p-2 text-[#bacac5] hover:text-white hover:bg-[#1e2a45] rounded-lg transition-colors cursor-pointer"
+                  className="p-2 text-[#4b5b73] dark:text-[#bacac5] hover:text-[#0f172a] dark:hover:text-white hover:bg-[#cdd7e5] dark:hover:bg-[#1e2a45] rounded-lg transition-colors cursor-pointer"
                   title={theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
                 >
                   {theme === 'dark' ? (
                     <Sun className="w-5 h-5 text-amber-300" />
                   ) : (
-                    <Moon className="w-5 h-5 text-[#ea580c]" />
+                    <Moon className="w-5 h-5 text-[#c2410c]" />
                   )}
                 </button>
                 <button 
                   onClick={() => setMemoryDrawerOpen(!memoryDrawerOpen)}
                   className={`p-2 rounded-lg transition-colors cursor-pointer ${
-                    memoryDrawerOpen ? 'bg-[#1e2a45] text-[#ff6b00]' : 'text-[#bacac5] hover:text-white hover:bg-[#1e2a45]'
+                    memoryDrawerOpen
+                      ? 'bg-[#cdd7e5] dark:bg-[#1e2a45] text-[#c2410c] dark:text-[#ff6b00]'
+                      : 'text-[#4b5b73] dark:text-[#bacac5] hover:text-[#0f172a] dark:hover:text-white hover:bg-[#cdd7e5] dark:hover:bg-[#1e2a45]'
                   }`}
                   title="Toggle MEMORY.md & SOUL.md Drawer"
                 >
@@ -798,7 +822,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                 </button>
                 <button
                   onClick={onClose}
-                  className="p-2 text-[#bacac5] hover:text-white hover:bg-[#1e2a45] rounded-lg transition-colors cursor-pointer"
+                  className="p-2 text-[#4b5b73] dark:text-[#bacac5] hover:text-[#0f172a] dark:hover:text-white hover:bg-[#cdd7e5] dark:hover:bg-[#1e2a45] rounded-lg transition-colors cursor-pointer"
                   title="Close View"
                 >
                   <X className="w-5 h-5" />
@@ -811,7 +835,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
               
               <div className="flex-1 flex flex-col overflow-hidden relative">
                 {runtimeError && (
-                  <div className="mx-4 mt-4 rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-xs text-red-200">
+                  <div className="mx-4 mt-4 rounded-xl border border-red-400/40 bg-red-500/10 px-4 py-3 text-xs text-red-800 dark:text-red-200">
                     <strong className="font-semibold">Runtime unavailable:</strong> {runtimeError}
                   </div>
                 )}
@@ -819,19 +843,21 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                   /* ------------- INITIAL EMPTY STATE ------------- */
                   <div className="flex-1 flex flex-col items-center justify-center p-6 text-center max-w-3xl mx-auto w-full animate-in fade-in duration-300">
                     <div className="mb-6 flex flex-col items-center gap-3">
-                      <img 
-                        src="https://i.imgur.com/hkRlTDp.png" 
-                        alt="FastGem Logo" 
-                        className="h-14 sm:h-16 w-auto object-contain drop-shadow-[0_0_30px_rgba(255,107,0,0.4)]"
-                        referrerPolicy="no-referrer"
-                      />
-                      <h1 className="text-2xl sm:text-3xl font-extrabold text-[#f1f5f9] tracking-tight mt-1">
+                      <span className="inline-flex items-center justify-center rounded-2xl bg-[#131b2e] px-4 py-2.5 dark:bg-transparent dark:p-0 shadow-sm dark:shadow-none">
+                        <img 
+                          src="https://i.imgur.com/hkRlTDp.png" 
+                          alt="FastGem Logo" 
+                          className="h-12 sm:h-14 w-auto object-contain drop-shadow-[0_0_24px_rgba(255,107,0,0.3)]"
+                          referrerPolicy="no-referrer"
+                        />
+                      </span>
+                      <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0f172a] dark:text-[#f1f5f9] tracking-tight mt-1">
                         What can I do for you?
                       </h1>
                     </div>
 
                     {/* Big Center Prompt Box */}
-                    <div className="w-full max-w-xl bg-[#131d33] border border-[#2b3850] rounded-2xl p-4 shadow-2xl transition-all focus-within:border-[#ff6b00]/60 focus-within:ring-1 focus-within:ring-[#ff6b00]/30 text-left">
+                    <div className="w-full max-w-xl bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-4 shadow-xl dark:shadow-2xl transition-all focus-within:border-[#ea580c]/60 dark:focus-within:border-[#ff6b00]/60 focus-within:ring-1 focus-within:ring-[#ea580c]/30 dark:focus-within:ring-[#ff6b00]/30 text-left">
                       <textarea
                         rows={3}
                         value={userInput}
@@ -843,13 +869,13 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                           }
                         }}
                         placeholder={`Message ${agentName || selectedAgent.name}... ("/" to pick a skill)`}
-                        className="w-full bg-transparent text-sm text-[#f1f5f9] placeholder-[#bacac5]/60 focus:outline-none resize-none font-sans"
+                        className="w-full bg-transparent text-sm text-[#0f172a] dark:text-[#f1f5f9] placeholder-[#4b5b73] dark:placeholder-[#bacac5]/60 focus:outline-none resize-none font-sans"
                       />
 
-                      <div className="flex items-center justify-between pt-3 border-t border-[#2b3850] mt-2">
+                      <div className="flex items-center justify-between pt-3 border-t border-[#bcc8da] dark:border-[#2b3850] mt-2">
                         <button
                           type="button"
-                          className="p-2 text-[#bacac5] hover:text-white hover:bg-[#1e2a45] rounded-lg transition-colors cursor-pointer"
+                          className="p-2 text-[#4b5b73] dark:text-[#bacac5] hover:text-[#0f172a] dark:hover:text-white hover:bg-[#cdd7e5] dark:hover:bg-[#1e2a45] rounded-lg transition-colors cursor-pointer"
                           title="Attach file or code snippet"
                         >
                           <Paperclip className="w-4 h-4" />
@@ -858,7 +884,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                         <button
                           onClick={() => handleSendMessage()}
                           disabled={!userInput.trim() || isProcessing}
-                          className="w-9 h-9 rounded-full bg-[#ff6b00] hover:bg-[#ea580c] text-white flex items-center justify-center transition-all disabled:opacity-30 cursor-pointer shrink-0 shadow-md shadow-[#ff6b00]/25"
+                          className="w-9 h-9 rounded-full bg-[#ea580c] hover:bg-[#c2410c] dark:bg-[#ff6b00] dark:hover:bg-[#ea580c] text-white flex items-center justify-center transition-all disabled:opacity-30 cursor-pointer shrink-0 shadow-md shadow-[#ff6b00]/25"
                           title="Send message"
                         >
                           <Send className="w-4 h-4" />
@@ -872,7 +898,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                         <button
                           key={idx}
                           onClick={() => handleSendMessage(prompt)}
-                          className="px-3.5 py-1.5 bg-[#131d33] hover:bg-[#1e2a45] border border-[#2b3850] rounded-full text-xs text-[#bacac5] hover:text-white transition-all cursor-pointer font-sans shadow-xs"
+                          className="px-3.5 py-1.5 bg-[#eaeff6] hover:bg-[#cdd7e5] dark:bg-[#131d33] dark:hover:bg-[#1e2a45] border border-[#bcc8da] dark:border-[#2b3850] rounded-full text-xs text-[#2d3c52] dark:text-[#bacac5] hover:text-[#0f172a] dark:hover:text-white transition-all cursor-pointer font-sans shadow-xs"
                         >
                           {prompt}
                         </button>
@@ -888,28 +914,28 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                           key={idx}
                           className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}
                         >
-                          <div className="text-[11px] text-[#bacac5] mb-1.5 px-1 font-mono">
+                          <div className="text-[11px] text-[#4b5b73] dark:text-[#bacac5] mb-1.5 px-1 font-mono">
                             {msg.sender === 'user' ? 'You' : (agentName || selectedAgent.name)} • {msg.timestamp}
                           </div>
 
                           <div
                             className={`max-w-[85%] rounded-2xl p-4 text-sm leading-relaxed ${
                               msg.sender === 'user'
-                                ? 'bg-[#1e2a45] text-white border border-[#ff6b00]/30 shadow-md'
-                                : 'bg-[#131d33] border border-[#2b3850] text-[#dae2fd] shadow-md'
+                                ? 'bg-[#d0dceb] dark:bg-[#1e2a45] text-[#0f172a] dark:text-white border border-[#ea580c]/30 dark:border-[#ff6b00]/30 shadow-md'
+                                : 'bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] text-[#0f172a] dark:text-[#dae2fd] shadow-md'
                             }`}
                           >
                             {msg.metadata && (
-                              <div className="mb-3 pb-2 border-b border-[#2b3850] flex items-center gap-2 font-mono text-xs text-[#ff6b00]">
-                                <Cpu className="w-3.5 h-3.5 text-[#ff6b00]" />
-                                <span className="text-[#bacac5]">Provider:</span>
-                                <span className="bg-[#ff6b00]/10 px-2 py-0.5 rounded text-[11px] border border-[#ff6b00]/30 text-[#ff8c00]">{msg.metadata.provider}</span>
-                                <span className="text-[#bacac5]">Model:</span>
-                                <span className="bg-[#ff6b00]/10 px-2 py-0.5 rounded text-[11px] border border-[#ff6b00]/30 text-[#ff8c00]">{msg.metadata.model}</span>
+                              <div className="mb-3 pb-2 border-b border-[#bcc8da] dark:border-[#2b3850] flex items-center gap-2 font-mono text-xs text-[#c2410c] dark:text-[#ff6b00]">
+                                <Cpu className="w-3.5 h-3.5 text-[#c2410c] dark:text-[#ff6b00]" />
+                                <span className="text-[#4b5b73] dark:text-[#bacac5]">Provider:</span>
+                                <span className="bg-[#ea580c]/10 dark:bg-[#ff6b00]/10 px-2 py-0.5 rounded text-[11px] border border-[#ea580c]/30 dark:border-[#ff6b00]/30 text-[#c2410c] dark:text-[#ff8c00]">{msg.metadata.provider}</span>
+                                <span className="text-[#4b5b73] dark:text-[#bacac5]">Model:</span>
+                                <span className="bg-[#ea580c]/10 dark:bg-[#ff6b00]/10 px-2 py-0.5 rounded text-[11px] border border-[#ea580c]/30 dark:border-[#ff6b00]/30 text-[#c2410c] dark:text-[#ff8c00]">{msg.metadata.model}</span>
                               </div>
                             )}
 
-                            <div className="space-y-3 [&_p]:leading-7 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-[#090d16] [&_pre]:p-3 [&_code]:font-mono [&_a]:text-[#ff9d4d]">
+                            <div className="space-y-3 [&_p]:leading-7 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-[#141c2f] [&_pre]:text-[#e2e8f0] dark:[&_pre]:bg-[#090d16] [&_pre]:p-3 [&_code]:font-mono [&_a]:text-[#c2410c] dark:[&_a]:text-[#ff9d4d]">
                               <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.text || ' '}</ReactMarkdown>
                             </div>
                           </div>
@@ -917,16 +943,16 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                       ))}
 
                       {isProcessing && (
-                        <div className="flex items-center gap-3 spectrum-gradient-text font-mono text-xs bg-[#131d33] p-4 rounded-2xl border border-[#a855f7]/40 w-fit animate-pulse shadow-md">
-                          <RefreshCw className="w-4 h-4 animate-spin text-[#3b82f6]" />
+                        <div className="flex items-center gap-3 spectrum-gradient-text font-mono text-xs bg-[#eaeff6] dark:bg-[#131d33] p-4 rounded-2xl border border-[#7c3aed]/35 dark:border-[#a855f7]/40 w-fit animate-pulse shadow-md">
+                          <RefreshCw className="w-4 h-4 animate-spin text-[#2563eb] dark:text-[#3b82f6]" />
                           <span>{agentName || selectedAgent.name} is streaming a response...</span>
                         </div>
                       )}
                     </div>
 
                     {/* Bottom Input Box for active chat */}
-                    <div className="p-4 bg-[#090d16] border-t border-[#2b3850] shrink-0">
-                      <div className="max-w-4xl mx-auto w-full bg-[#131d33] border border-[#2b3850] rounded-2xl p-3 shadow-xl transition-all focus-within:border-[#ff6b00]/70">
+                    <div className="p-4 bg-[#d5dde8] dark:bg-[#090d16] border-t border-[#bcc8da] dark:border-[#2b3850] shrink-0">
+                      <div className="max-w-4xl mx-auto w-full bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-3 shadow-md dark:shadow-xl transition-all focus-within:border-[#ea580c]/70 dark:focus-within:border-[#ff6b00]/70">
                         <textarea
                           rows={2}
                           value={userInput}
@@ -938,13 +964,13 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                             }
                           }}
                           placeholder={`Message ${agentName || selectedAgent.name}...`}
-                          className="w-full bg-transparent text-sm text-[#f1f5f9] placeholder-[#bacac5]/60 focus:outline-none resize-none font-sans"
+                          className="w-full bg-transparent text-sm text-[#0f172a] dark:text-[#f1f5f9] placeholder-[#4b5b73] dark:placeholder-[#bacac5]/60 focus:outline-none resize-none font-sans"
                         />
 
-                        <div className="flex items-center justify-between pt-2 border-t border-[#2b3850] mt-1">
+                        <div className="flex items-center justify-between pt-2 border-t border-[#bcc8da] dark:border-[#2b3850] mt-1">
                           <button
                             type="button"
-                            className="p-1.5 text-[#bacac5] hover:text-white hover:bg-[#1e2a45] rounded-lg transition-colors cursor-pointer"
+                            className="p-1.5 text-[#4b5b73] dark:text-[#bacac5] hover:text-[#0f172a] dark:hover:text-white hover:bg-[#cdd7e5] dark:hover:bg-[#1e2a45] rounded-lg transition-colors cursor-pointer"
                             title="Attach file"
                           >
                             <Paperclip className="w-4 h-4" />
@@ -953,7 +979,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                           <button
                             onClick={() => handleSendMessage()}
                             disabled={!userInput.trim() || isProcessing}
-                            className="w-8 h-8 rounded-full bg-[#ff6b00] hover:bg-[#ea580c] text-white font-bold flex items-center justify-center transition-all disabled:opacity-30 cursor-pointer shrink-0 shadow-md shadow-[#ff6b00]/25"
+                            className="w-8 h-8 rounded-full bg-[#ea580c] hover:bg-[#c2410c] dark:bg-[#ff6b00] dark:hover:bg-[#ea580c] text-white font-bold flex items-center justify-center transition-all disabled:opacity-30 cursor-pointer shrink-0 shadow-md shadow-[#ff6b00]/25"
                           >
                             <Send className="w-3.5 h-3.5" />
                           </button>
@@ -966,26 +992,26 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
 
               {/* Optional Right Memory Drawer */}
               {memoryDrawerOpen && (
-                <div className="w-[300px] bg-[#0f172a] border-l border-[#2b3850] p-4 flex flex-col gap-4 overflow-y-auto shrink-0 animate-in slide-in-from-right duration-200">
-                  <div className="flex items-center justify-between border-b border-[#2b3850] pb-2">
-                    <span className="font-mono text-xs uppercase text-[#ff6b00] font-bold flex items-center gap-1.5">
+                <div className="w-[300px] bg-[#d5dde8] dark:bg-[#0f172a] border-l border-[#bcc8da] dark:border-[#2b3850] p-4 flex flex-col gap-4 overflow-y-auto shrink-0 animate-in slide-in-from-right duration-200">
+                  <div className="flex items-center justify-between border-b border-[#bcc8da] dark:border-[#2b3850] pb-2">
+                    <span className="font-mono text-xs uppercase text-[#c2410c] dark:text-[#ff6b00] font-bold flex items-center gap-1.5">
                       <Database className="w-4 h-4" /> Agent Context
                     </span>
-                    <button onClick={() => setMemoryDrawerOpen(false)} className="text-[#bacac5] hover:text-white">
+                    <button onClick={() => setMemoryDrawerOpen(false)} className="text-[#4b5b73] dark:text-[#bacac5] hover:text-[#0f172a] dark:hover:text-white">
                       <X className="w-4 h-4" />
                     </button>
                   </div>
 
                   <div>
-                    <label className="text-xs text-[#bacac5] mb-1 block font-mono">SOUL.md System Rules</label>
-                    <div className="p-2.5 bg-[#131d33] border border-[#2b3850] rounded-xl text-xs text-[#dae2fd] font-mono leading-relaxed">
+                    <label className="text-xs text-[#4b5b73] dark:text-[#bacac5] mb-1 block font-mono">SOUL.md System Rules</label>
+                    <div className="p-2.5 bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl text-xs text-[#0f172a] dark:text-[#dae2fd] font-mono leading-relaxed">
                       {systemInstruction}
                     </div>
                   </div>
 
                   <div>
-                    <label className="text-xs text-[#bacac5] mb-1 block font-mono">MEMORY.md Window</label>
-                    <pre className="p-2.5 bg-[#131d33] border border-[#2b3850] rounded-xl text-[11px] text-[#ff8c00] font-mono leading-relaxed whitespace-pre-wrap">
+                    <label className="text-xs text-[#4b5b73] dark:text-[#bacac5] mb-1 block font-mono">MEMORY.md Window</label>
+                    <pre className="p-2.5 bg-[#141c2f] dark:bg-[#131d33] border border-[#2b3850] rounded-xl text-[11px] text-[#ff9d4d] dark:text-[#ff8c00] font-mono leading-relaxed whitespace-pre-wrap">
                       {`- Active Agent: ${agentName || selectedAgent.name}\n- Model: ${selectedModel}\n- Context Window: 2M Tokens\n- Active Tools: [${selectedAgent.tools.join(', ')}]`}
                     </pre>
                   </div>
@@ -1000,4 +1026,3 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
     </div>
   );
 };
-;

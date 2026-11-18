@@ -49,7 +49,7 @@ export const PluginsView: React.FC<PluginsViewProps> = ({
 
       {/* ------------ EMPTY DASHED STATE CONTAINER ------------ */}
       {plugins.length === 0 ? (
-        <div className="w-full rounded-2xl border-2 border-dashed border-slate-200 dark:border-[#2b3850]/80 p-12 sm:p-16 flex flex-col items-center justify-center text-center bg-slate-50/50 dark:bg-[#0b1326]/40 transition-all">
+        <div className="w-full rounded-2xl border-2 border-dashed border-[#bcc8da] dark:border-[#2b3850]/80 p-12 sm:p-16 flex flex-col items-center justify-center text-center bg-[#dce3ed]/60 dark:bg-[#0b1326]/40 transition-all">
           {/* Soft Orange/Peach Plug Icon Box */}
           <div className="w-16 h-16 rounded-2xl bg-amber-100/80 dark:bg-[#ff6b00]/15 border border-amber-200 dark:border-[#ff6b00]/30 flex items-center justify-center mb-5 text-[#ea580c] dark:text-[#ff8c00] shadow-xs">
             <Plug className="w-8 h-8 rotate-45 stroke-[1.75]" />
@@ -111,7 +111,7 @@ export const PluginsView: React.FC<PluginsViewProps> = ({
             {plugins.map((plugin) => (
               <div
                 key={plugin.id}
-                className="bg-white dark:bg-[#131b2e] border border-slate-200 dark:border-[#2b3850] rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs"
+                className="bg-[#dfe5ee] dark:bg-[#131b2e] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs"
               >
                 <div className="flex items-start gap-3.5">
                   <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-[#ff6b00]/10 border border-amber-200 dark:border-[#ff6b00]/30 flex items-center justify-center shrink-0 text-[#ea580c] dark:text-[#ff8c00] mt-0.5">

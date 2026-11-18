@@ -323,19 +323,19 @@ export const ChannelsView: React.FC<ChannelsViewProps> = ({
       </div>
 
       {/* ------------ LIVE SANDBOX QUICK BANNER ------------ */}
-      <div className="mb-8 p-5 bg-[#131d33] border border-[#2b3850] rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-md">
+      <div className="mb-8 p-5 bg-[#dce3ed] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-md">
         <div className="flex items-center gap-3.5">
-          <div className="w-10 h-10 rounded-xl bg-[#10b981]/15 border border-[#10b981]/30 flex items-center justify-center text-[#10b981] shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-[#10b981]/15 border border-[#10b981]/30 flex items-center justify-center text-[#059669] dark:text-[#10b981] shrink-0">
             <Zap className="w-5 h-5" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-sm font-bold text-white">Live Webhook Endpoint & Channel Relay</h3>
-              <span className="text-[10px] font-mono font-bold bg-[#10b981]/20 text-[#10b981] px-2 py-0.5 rounded-full border border-[#10b981]/30 uppercase">
+              <h3 className="text-sm font-bold text-[#0f172a] dark:text-white">Live Webhook Endpoint & Channel Relay</h3>
+              <span className="text-[10px] font-mono font-bold bg-[#10b981]/15 dark:bg-[#10b981]/20 text-[#047857] dark:text-[#10b981] px-2 py-0.5 rounded-full border border-[#10b981]/30 uppercase">
                 Active
               </span>
             </div>
-            <p className="text-xs text-[#bacac5] mt-0.5">
+            <p className="text-xs text-[#2d3c52] dark:text-[#bacac5] mt-0.5">
               Simulate instant messages or send raw HTTP webhook payloads to verify response latency and bot logic.
             </p>
           </div>
@@ -344,9 +344,9 @@ export const ChannelsView: React.FC<ChannelsViewProps> = ({
         <div className="flex items-center gap-2.5 w-full md:w-auto">
           <button
             onClick={() => handleOpenSimulator('webhook')}
-            className="w-full md:w-auto px-3.5 py-2 bg-[#1e2a45] hover:bg-[#28385b] border border-[#2b3850] text-xs font-semibold text-white rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full md:w-auto px-3.5 py-2 bg-[#eaeff6] hover:bg-[#cdd7e5] dark:bg-[#1e2a45] dark:hover:bg-[#28385b] border border-[#bcc8da] dark:border-[#2b3850] text-xs font-semibold text-[#0f172a] dark:text-white rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
-            <Terminal className="w-3.5 h-3.5 text-[#ff6b00]" />
+            <Terminal className="w-3.5 h-3.5 text-[#ea580c] dark:text-[#ff6b00]" />
             <span>Webhook Tester</span>
           </button>
         </div>
@@ -359,7 +359,7 @@ export const ChannelsView: React.FC<ChannelsViewProps> = ({
           return (
             <div
               key={channel.id}
-              className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-[#2b3850] hover:border-slate-300 dark:hover:border-[#ff6b00]/40 rounded-2xl p-6 flex flex-col justify-between transition-all duration-200 shadow-xs hover:shadow-md group relative"
+              className="bg-[#dfe5ee] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] hover:border-[#94a3b8] dark:hover:border-[#ff6b00]/40 rounded-2xl p-6 flex flex-col justify-between transition-all duration-200 shadow-xs hover:shadow-md group relative"
             >
               <div>
                 {/* Header row: Icon + Name */}
@@ -394,7 +394,7 @@ export const ChannelsView: React.FC<ChannelsViewProps> = ({
                   className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs ${
                     isConnected
                       ? 'border border-emerald-300 dark:border-[#10b981]/40 bg-emerald-50 dark:bg-[#10b981]/15 text-emerald-700 dark:text-[#10b981] hover:bg-emerald-100 dark:hover:bg-[#10b981]/25'
-                      : 'border border-slate-200 dark:border-[#2b3850] bg-slate-50 dark:bg-[#131d33] hover:bg-slate-100 dark:hover:bg-[#1e2a45] text-slate-700 dark:text-[#dae2fd] hover:text-slate-900 dark:hover:text-white'
+                      : 'border border-[#bcc8da] dark:border-[#2b3850] bg-[#dce3ed] dark:bg-[#131d33] hover:bg-[#cdd7e5] dark:hover:bg-[#1e2a45] text-[#0f172a] dark:text-[#dae2fd] hover:text-[#0f172a] dark:hover:text-white'
                   }`}
                 >
                   {isConnected ? (
@@ -404,7 +404,7 @@ export const ChannelsView: React.FC<ChannelsViewProps> = ({
                     </>
                   ) : (
                     <>
-                      <Plus className="w-4 h-4 text-slate-400 dark:text-[#bacac5]" />
+                      <Plus className="w-4 h-4 text-[#4b5b73] dark:text-[#bacac5]" />
                       <span>Connect</span>
                     </>
                   )}
@@ -413,7 +413,7 @@ export const ChannelsView: React.FC<ChannelsViewProps> = ({
                 {/* Quick Test Button */}
                 <button
                   onClick={() => handleOpenSimulator(channel.id)}
-                  className="py-2.5 px-3 rounded-xl text-xs font-semibold border border-[#2b3850] bg-[#131d33] hover:bg-[#1e2a45] text-[#bacac5] hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
+                  className="py-2.5 px-3 rounded-xl text-xs font-semibold border border-[#bcc8da] dark:border-[#2b3850] bg-[#dce3ed] hover:bg-[#cdd7e5] dark:bg-[#131d33] dark:hover:bg-[#1e2a45] text-[#2d3c52] hover:text-[#0f172a] dark:text-[#bacac5] dark:hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
                   title={`Send test message on ${channel.name}`}
                 >
                   <Send className="w-3.5 h-3.5 text-[#ff6b00]" />
@@ -429,12 +429,12 @@ export const ChannelsView: React.FC<ChannelsViewProps> = ({
       {activeModalChannel && (
         <div className="fixed inset-0 z-[200] bg-black/70 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
           <div 
-            className="w-full max-w-md bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-[#2b3850] rounded-2xl p-6 shadow-2xl relative text-[#0f172a] dark:text-[#f1f5f9]"
+            className="w-full max-w-md bg-[#eaeff6] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 shadow-2xl relative text-[#0f172a] dark:text-[#f1f5f9]"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setActiveModalChannel(null)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white p-1 rounded-lg"
+              className="absolute top-4 right-4 text-[#4b5b73] hover:text-[#0f172a] dark:text-slate-400 dark:hover:text-white p-1 rounded-lg"
             >
               <X className="w-5 h-5" />
             </button>
@@ -447,7 +447,7 @@ export const ChannelsView: React.FC<ChannelsViewProps> = ({
                 <h3 className="text-lg font-bold text-[#0f172a] dark:text-[#f1f5f9]">
                   Connect {activeModalChannel.name}
                 </h3>
-                <p className="text-xs text-slate-500 dark:text-[#bacac5]">
+                <p className="text-xs text-[#4b5b73] dark:text-[#bacac5]">
                   Relay messages between {agentName} and {activeModalChannel.name}.
                 </p>
               </div>
@@ -455,7 +455,7 @@ export const ChannelsView: React.FC<ChannelsViewProps> = ({
 
             <form onSubmit={handleSaveModal} className="space-y-4">
               <div>
-                <label className="text-xs font-semibold text-slate-700 dark:text-[#dae2fd] mb-1.5 block">
+                <label className="text-xs font-semibold text-[#0f172a] dark:text-[#dae2fd] mb-1.5 block">
                   {activeModalChannel.inputLabel || 'API Token / Key'}
                 </label>
                 <input
@@ -464,11 +464,11 @@ export const ChannelsView: React.FC<ChannelsViewProps> = ({
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   placeholder={activeModalChannel.placeholder}
-                  className="w-full bg-slate-50 dark:bg-[#131d33] border border-slate-200 dark:border-[#2b3850] rounded-xl px-4 py-2.5 text-xs text-[#0f172a] dark:text-[#f1f5f9] focus:outline-none focus:border-[#ff6b00] font-mono transition-colors"
+                  className="w-full bg-[#dce3ed] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl px-4 py-2.5 text-xs text-[#0f172a] dark:text-[#f1f5f9] focus:outline-none focus:border-[#ea580c] dark:focus:border-[#ff6b00] font-mono transition-colors"
                 />
               </div>
 
-              <div className="bg-slate-50 dark:bg-[#131d33] p-3 rounded-xl border border-slate-200/80 dark:border-[#2b3850] text-[11px] text-slate-500 dark:text-[#bacac5] flex items-start gap-2">
+              <div className="bg-[#dce3ed] dark:bg-[#131d33] p-3 rounded-xl border border-[#bcc8da] dark:border-[#2b3850] text-[11px] text-[#2d3c52] dark:text-[#bacac5] flex items-start gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                 <span>
                   Credentials are encrypted and stored in your secure workspace environment configuration.

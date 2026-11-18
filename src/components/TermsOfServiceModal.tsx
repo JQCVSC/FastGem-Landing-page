@@ -10,26 +10,28 @@ export const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({ isOpen
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#0b1326] text-[#dae2fd] min-h-screen flex flex-col animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#dfe5ee] dark:bg-[#0b1326] text-[#0f172a] dark:text-[#dae2fd] min-h-screen flex flex-col animate-in fade-in duration-200">
       {/* Top Header Navigation */}
-      <header className="sticky top-0 z-10 bg-[#060e20]/90 backdrop-blur-md border-b border-[#2b3850]/60 px-6 py-4">
+      <header className="sticky top-0 z-10 bg-[#d5dde8]/95 dark:bg-[#060e20]/90 backdrop-blur-md border-b border-[#bcc8da] dark:border-[#2b3850]/60 px-6 py-4">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <button
             onClick={onClose}
-            className="flex items-center gap-2 text-sm font-medium text-[#ff6b00] hover:text-[#ff8c00] transition-colors cursor-pointer group"
+            className="flex items-center gap-2 text-sm font-medium text-[#b45309] dark:text-[#ff6b00] hover:text-[#92400e] dark:hover:text-[#ff8c00] transition-colors cursor-pointer group"
           >
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             <span>Back to home</span>
           </button>
 
           <div className="flex items-center gap-2">
-            <img 
-              src="https://i.imgur.com/hkRlTDp.png" 
-              alt="FastGem Logo" 
-              className="h-7 w-auto object-contain rounded-md shrink-0"
-              referrerPolicy="no-referrer"
-            />
-            <span className="font-bold text-sm tracking-tight text-white">FastGem</span>
+            <div className="bg-[#131b2e] px-2 py-1 rounded-md dark:bg-transparent dark:p-0">
+              <img 
+                src="https://i.imgur.com/hkRlTDp.png" 
+                alt="FastGem Logo" 
+                className="h-6 dark:h-7 w-auto object-contain rounded-md shrink-0"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+            <span className="font-bold text-sm tracking-tight text-[#0f172a] dark:text-white">FastGem</span>
           </div>
         </div>
       </header>
@@ -37,26 +39,26 @@ export const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({ isOpen
       {/* Page Content */}
       <main className="flex-1 max-w-4xl w-full mx-auto px-6 py-12 md:py-16">
         {/* Page Title & Subtitle */}
-        <div className="mb-10 pb-8 border-b border-[#2b3850]/60">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ff6b00]/10 border border-[#ff6b00]/20 text-[#ff6b00] text-xs font-mono font-semibold uppercase tracking-wider mb-4">
+        <div className="mb-10 pb-8 border-b border-[#bcc8da] dark:border-[#2b3850]/60">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#b45309]/10 dark:bg-[#ff6b00]/10 border border-[#b45309]/25 dark:border-[#ff6b00]/20 text-[#b45309] dark:text-[#ff6b00] text-xs font-mono font-semibold uppercase tracking-wider mb-4">
             <FileText className="w-3.5 h-3.5" /> Legal Agreement
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-3">
+          <h1 className="text-3xl md:text-4xl font-bold text-[#0f172a] dark:text-white tracking-tight mb-3">
             Terms of Service
           </h1>
-          <p className="text-base text-[#bacac5] mb-4">
+          <p className="text-base text-[#2d3c52] dark:text-[#bacac5] mb-4">
             The terms and conditions for using our service.
           </p>
-          <p className="text-xs font-mono text-[#ff6b00] bg-[#131b2e] px-3 py-1.5 rounded-md inline-block border border-[#2b3850]">
+          <p className="text-xs font-mono text-[#b45309] dark:text-[#ff6b00] bg-[#eaeff6] dark:bg-[#131b2e] px-3 py-1.5 rounded-md inline-block border border-[#bcc8da] dark:border-[#2b3850]">
             Last updated: 2026-05-21
           </p>
         </div>
 
         {/* Content Body */}
-        <div className="space-y-8 text-[#bacac5] leading-relaxed text-sm md:text-base">
+        <div className="space-y-8 text-[#2d3c52] dark:text-[#bacac5] leading-relaxed text-sm md:text-base [&_section]:bg-[#eaeff6] dark:[&_section]:bg-[#131b2e]/60 [&_section]:border-[#bcc8da] dark:[&_section]:border-[#2b3850]/60 [&_h2]:text-[#0f172a] dark:[&_h2]:text-white">
           {/* Acceptance of Terms */}
-          <section className="bg-[#131b2e]/60 border border-[#2b3850]/60 rounded-2xl p-6 md:p-8 space-y-3">
-            <h2 className="text-xl font-semibold text-white tracking-tight">
+          <section className="border rounded-2xl p-6 md:p-8 space-y-3">
+            <h2 className="text-xl font-semibold tracking-tight">
               Acceptance of Terms
             </h2>
             <p>

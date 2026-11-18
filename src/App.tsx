@@ -58,7 +58,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b1326] text-[#dae2fd] font-sans selection:bg-[#ff6b00]/30 selection:text-[#ff8c00] flex flex-col antialiased">
+    <div className="min-h-screen bg-[#dfe5ee] dark:bg-[#0b1326] text-[#0f172a] dark:text-[#dae2fd] font-sans selection:bg-[#3b82f6]/20 selection:text-[#1d4ed8] dark:selection:bg-[#ff6b00]/30 dark:selection:text-[#ff8c00] flex flex-col antialiased transition-colors duration-200">
       {/* Fixed Header */}
       <Header 
         onOpenStudio={handleGetStarted}

@@ -55,7 +55,7 @@ export const ContextView: React.FC<ContextViewProps> = ({
               className={`p-4 rounded-xl border transition-all cursor-pointer flex items-start gap-3.5 ${
                 promptMode === 'agent'
                   ? 'bg-amber-500/5 dark:bg-[#1e2a45] border-amber-500 dark:border-[#ff6b00] text-slate-900 dark:text-[#f1f5f9]'
-                  : 'bg-white dark:bg-[#0f172a] border-slate-200 dark:border-[#2b3850] hover:border-slate-300 dark:hover:border-[#3b82f6]/40 text-slate-700 dark:text-[#94a3b8]'
+                  : 'bg-[#dfe5ee] dark:bg-[#0f172a] border-[#bcc8da] dark:border-[#2b3850] hover:border-[#94a3b8] dark:hover:border-[#3b82f6]/40 text-[#2d3c52] dark:text-[#94a3b8]'
               }`}
             >
               <div className="mt-0.5 shrink-0">
@@ -88,7 +88,7 @@ export const ContextView: React.FC<ContextViewProps> = ({
               className={`p-4 rounded-xl border transition-all cursor-pointer flex items-start gap-3.5 ${
                 promptMode === 'chatbot'
                   ? 'bg-amber-500/5 dark:bg-[#1e2a45] border-amber-500 dark:border-[#ff6b00] text-slate-900 dark:text-[#f1f5f9]'
-                  : 'bg-white dark:bg-[#0f172a] border-slate-200 dark:border-[#2b3850] hover:border-slate-300 dark:hover:border-[#3b82f6]/40 text-slate-700 dark:text-[#94a3b8]'
+                  : 'bg-[#dfe5ee] dark:bg-[#0f172a] border-[#bcc8da] dark:border-[#2b3850] hover:border-[#94a3b8] dark:hover:border-[#3b82f6]/40 text-[#2d3c52] dark:text-[#94a3b8]'
               }`}
             >
               <div className="mt-0.5 shrink-0">
@@ -116,7 +116,7 @@ export const ContextView: React.FC<ContextViewProps> = ({
               className={`p-4 rounded-xl border transition-all cursor-pointer flex items-start gap-3.5 ${
                 promptMode === 'customize'
                   ? 'bg-amber-500/5 dark:bg-[#1e2a45] border-amber-500 dark:border-[#ff6b00] text-slate-900 dark:text-[#f1f5f9]'
-                  : 'bg-white dark:bg-[#0f172a] border-slate-200 dark:border-[#2b3850] hover:border-slate-300 dark:hover:border-[#3b82f6]/40 text-slate-700 dark:text-[#94a3b8]'
+                  : 'bg-[#dfe5ee] dark:bg-[#0f172a] border-[#bcc8da] dark:border-[#2b3850] hover:border-[#94a3b8] dark:hover:border-[#3b82f6]/40 text-[#2d3c52] dark:text-[#94a3b8]'
               }`}
             >
               <div className="mt-0.5 shrink-0">

@@ -21,29 +21,29 @@ export const ConsoleStudioSection: React.FC<ConsoleStudioSectionProps> = ({
   ];
 
   return (
-    <section className="w-full bg-[#060e20] py-24 border-y border-[#3c4a46]/20" id="console">
+    <section className="w-full bg-[#d5dde8] dark:bg-[#060e20] py-24 border-y border-[#bcc8da] dark:border-[#3c4a46]/20 transition-colors" id="console">
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
           {/* Console Section Card */}
-          <div className="bg-[#131b2e] border border-[#2b3850] rounded-2xl p-8 sm:p-10 flex flex-col justify-between">
+          <div className="bg-[#eaeff6] dark:bg-[#131b2e] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-8 sm:p-10 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2.5 mb-3">
-                <LayoutDashboard className="w-4 h-4 text-[#f59e0b]" />
+                <LayoutDashboard className="w-4 h-4 text-[#b45309] dark:text-[#f59e0b]" />
                 <span className="spectrum-gradient-text font-mono text-xs uppercase tracking-widest font-extrabold">
                   Console
                 </span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#dae2fd] tracking-tight mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#0f172a] dark:text-[#dae2fd] tracking-tight mb-4">
                 A console for the entire agent lifecycle.
               </h2>
-              <p className="text-[#bacac5] text-sm sm:text-base mb-6 leading-relaxed">
+              <p className="text-[#2d3c52] dark:text-[#bacac5] text-sm sm:text-base mb-6 leading-relaxed">
                 The FastGem console gives you one place to explore the system:
               </p>
 
               <ul className="space-y-3 mb-8">
                 {consoleCapabilities.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-[#dae2fd]">
-                    <Check className="w-4 h-4 text-[#10b981] shrink-0 mt-0.5" />
+                  <li key={item} className="flex items-start gap-3 text-sm text-[#0f172a] dark:text-[#dae2fd]">
+                    <Check className="w-4 h-4 text-[#047857] dark:text-[#10b981] shrink-0 mt-0.5" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -67,32 +67,32 @@ export const ConsoleStudioSection: React.FC<ConsoleStudioSectionProps> = ({
           </div>
 
           {/* Agent Studio Section Card */}
-          <div className="bg-[#131b2e] border border-[#2b3850] rounded-2xl p-8 sm:p-10 flex flex-col justify-between" id="agent-studio">
+          <div className="bg-[#eaeff6] dark:bg-[#131b2e] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-8 sm:p-10 flex flex-col justify-between" id="agent-studio">
             <div>
               <div className="flex items-center gap-2.5 mb-3">
-                <MessageSquare className="w-4 h-4 text-[#3b82f6]" />
+                <MessageSquare className="w-4 h-4 text-[#1d4ed8] dark:text-[#3b82f6]" />
                 <span className="spectrum-gradient-text font-mono text-xs uppercase tracking-widest font-extrabold">
                   Agent Studio
                 </span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#dae2fd] tracking-tight mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#0f172a] dark:text-[#dae2fd] tracking-tight mb-4">
                 Test your agents where you build them.
               </h2>
-              <p className="text-[#bacac5] text-sm sm:text-base leading-relaxed mb-6">
+              <p className="text-[#2d3c52] dark:text-[#bacac5] text-sm sm:text-base leading-relaxed mb-6">
                 Agent Studio is the interactive workspace for running prompts against your FastGem agents.
               </p>
-              <p className="text-[#94a3b8] text-sm sm:text-base leading-relaxed mb-8">
+              <p className="text-[#4b5b73] dark:text-[#94a3b8] text-sm sm:text-base leading-relaxed mb-8">
                 Select an agent, start a session, send a prompt, and see the runtime response in the same interface. Conversations remain associated with their session so you can continue testing without losing context.
               </p>
 
-              {/* Lightweight Session Preview */}
-              <div className="bg-[#090d16] border border-[#2b3850] rounded-xl p-4 font-mono text-xs space-y-2.5 mb-6">
+              {/* Lightweight Session Preview (intentionally dark terminal contrast in both themes) */}
+              <div className="bg-[#141c2f] dark:bg-[#090d16] border border-[#2b3850] rounded-xl p-4 font-mono text-xs space-y-2.5 mb-6">
                 <div className="flex items-center justify-between text-[#94a3b8] border-b border-[#2b3850]/80 pb-2">
                   <span>Agent: Research Assistant</span>
-                  <span className="text-[#10b981]">Session persisted</span>
+                  <span className="text-[#34d399]">Session persisted</span>
                 </div>
-                <div className="text-[#dae2fd]">
-                  <span className="text-[#f59e0b] mr-2">&gt;</span>
+                <div className="text-[#f1f5f9]">
+                  <span className="text-[#fbbf24] mr-2">&gt;</span>
                   Summarize our Q3 architecture notes and keep context for follow-ups.
                 </div>
                 <div className="text-[#94a3b8] pl-4">
@@ -101,7 +101,7 @@ export const ConsoleStudioSection: React.FC<ConsoleStudioSectionProps> = ({
               </div>
             </div>
 
-            <p className="text-xs text-[#94a3b8] font-mono border-t border-[#2b3850]/80 pt-4">
+            <p className="text-xs text-[#4b5b73] dark:text-[#94a3b8] font-mono border-t border-[#bcc8da] dark:border-[#2b3850]/80 pt-4">
               Agent Studio is connected to the FastGem runtime through the configured runtime URL.
             </p>
           </div>

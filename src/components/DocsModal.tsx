@@ -65,22 +65,22 @@ console.log(result);`
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="bg-[#0b1326] border border-[#2b3850] rounded-2xl w-full max-w-4xl max-h-[85vh] flex flex-col overflow-hidden shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 dark:bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="bg-[#dfe5ee] dark:bg-[#0b1326] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl w-full max-w-4xl max-h-[85vh] flex flex-col overflow-hidden shadow-2xl">
         {/* Header */}
-        <div className="h-16 bg-[#131b2e] border-b border-[#2b3850] px-6 flex items-center justify-between shrink-0">
+        <div className="h-16 bg-[#eaeff6] dark:bg-[#131b2e] border-b border-[#bcc8da] dark:border-[#2b3850] px-6 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#3b82f6]/15 border border-[#3b82f6]/30 flex items-center justify-center">
-              <BookOpen className="w-4 h-4 text-[#3b82f6]" />
+            <div className="w-8 h-8 rounded-lg bg-[#2563eb]/12 dark:bg-[#3b82f6]/15 border border-[#2563eb]/25 dark:border-[#3b82f6]/30 flex items-center justify-center">
+              <BookOpen className="w-4 h-4 text-[#1d4ed8] dark:text-[#3b82f6]" />
             </div>
-            <h2 className="text-lg font-bold text-[#dae2fd]">
+            <h2 className="text-lg font-bold text-[#0f172a] dark:text-[#dae2fd]">
               FastGem Runtime API Reference
             </h2>
           </div>
 
           <button 
             onClick={onClose}
-            className="text-[#bacac5] hover:text-[#dae2fd] p-2 rounded-lg hover:bg-[#171f33] transition-colors cursor-pointer"
+            className="text-[#4b5b73] dark:text-[#bacac5] hover:text-[#0f172a] dark:hover:text-[#dae2fd] p-2 rounded-lg hover:bg-[#dce3ed] dark:hover:bg-[#171f33] transition-colors cursor-pointer"
             aria-label="Close API Reference"
           >
             <X className="w-5 h-5" />
@@ -88,24 +88,26 @@ console.log(result);`
         </div>
 
         {/* Content Body */}
-        <div className="p-6 md:p-8 overflow-y-auto space-y-6 text-[#bacac5] text-sm">
+        <div className="p-6 md:p-8 overflow-y-auto space-y-6 text-[#2d3c52] dark:text-[#bacac5] text-sm">
           {/* Endpoints List */}
           <div>
-            <h3 className="font-bold text-[#dae2fd] text-base mb-3">
+            <h3 className="font-bold text-[#0f172a] dark:text-[#dae2fd] text-base mb-3">
               HTTP Endpoints
             </h3>
-            <div className="bg-[#131b2e] rounded-xl border border-[#2b3850] divide-y divide-[#2b3850]/60">
+            <div className="bg-[#eaeff6] dark:bg-[#131b2e] rounded-xl border border-[#bcc8da] dark:border-[#2b3850] divide-y divide-[#bcc8da]/70 dark:divide-[#2b3850]/60">
               {endpoints.map((ep) => (
                 <div key={`${ep.method}-${ep.path}`} className="px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-3">
                     <span className={`px-2 py-0.5 font-mono font-bold text-[11px] rounded ${
-                      ep.method === 'GET' ? 'bg-[#10b981]/15 text-[#10b981]' : 'bg-[#f59e0b]/15 text-[#f59e0b]'
+                      ep.method === 'GET'
+                        ? 'bg-[#047857]/12 dark:bg-[#10b981]/15 text-[#047857] dark:text-[#10b981]'
+                        : 'bg-[#b45309]/12 dark:bg-[#f59e0b]/15 text-[#b45309] dark:text-[#f59e0b]'
                     }`}>
                       {ep.method}
                     </span>
-                    <code className="font-mono text-xs sm:text-sm text-[#dae2fd]">{ep.path}</code>
+                    <code className="font-mono text-xs sm:text-sm text-[#0f172a] dark:text-[#dae2fd]">{ep.path}</code>
                   </div>
-                  <span className="text-xs text-[#94a3b8]">{ep.desc}</span>
+                  <span className="text-xs text-[#4b5b73] dark:text-[#94a3b8]">{ep.desc}</span>
                 </div>
               ))}
             </div>
@@ -118,7 +120,9 @@ console.log(result);`
                 <button
                   onClick={() => setActiveTab('curl')}
                   className={`px-3 py-1.5 rounded-lg font-mono text-xs uppercase transition-colors cursor-pointer ${
-                    activeTab === 'curl' ? 'bg-[#3b82f6] text-white font-bold' : 'bg-[#171f33] text-[#bacac5]'
+                    activeTab === 'curl'
+                      ? 'bg-[#2563eb] text-white font-bold'
+                      : 'bg-[#eaeff6] dark:bg-[#171f33] text-[#2d3c52] dark:text-[#bacac5] border border-[#bcc8da] dark:border-transparent'
                   }`}
                 >
                   cURL
@@ -126,7 +130,9 @@ console.log(result);`
                 <button
                   onClick={() => setActiveTab('ts')}
                   className={`px-3 py-1.5 rounded-lg font-mono text-xs uppercase transition-colors cursor-pointer ${
-                    activeTab === 'ts' ? 'bg-[#3b82f6] text-white font-bold' : 'bg-[#171f33] text-[#bacac5]'
+                    activeTab === 'ts'
+                      ? 'bg-[#2563eb] text-white font-bold'
+                      : 'bg-[#eaeff6] dark:bg-[#171f33] text-[#2d3c52] dark:text-[#bacac5] border border-[#bcc8da] dark:border-transparent'
                   }`}
                 >
                   TypeScript (fetch)
@@ -135,42 +141,42 @@ console.log(result);`
 
               <button
                 onClick={handleCopy}
-                className="flex items-center gap-1.5 font-mono text-xs text-[#f59e0b] hover:underline cursor-pointer"
+                className="flex items-center gap-1.5 font-mono text-xs text-[#b45309] dark:text-[#f59e0b] hover:underline cursor-pointer"
               >
-                {copied ? <Check className="w-3.5 h-3.5 text-[#10b981]" /> : <Copy className="w-3.5 h-3.5" />}
+                {copied ? <Check className="w-3.5 h-3.5 text-[#047857] dark:text-[#10b981]" /> : <Copy className="w-3.5 h-3.5" />}
                 {copied ? 'Copied' : 'Copy Code'}
               </button>
             </div>
 
-            <pre className="p-4 bg-[#060e20] rounded-xl border border-[#2b3850] font-mono text-xs text-[#dae2fd] overflow-x-auto whitespace-pre leading-relaxed">
+            <pre className="p-4 bg-[#141c2f] dark:bg-[#060e20] rounded-xl border border-[#2b3850] font-mono text-xs text-[#e2e8f0] overflow-x-auto whitespace-pre leading-relaxed">
               {codeSnippets[activeTab]}
             </pre>
           </div>
 
           {/* Environment Variables Specs */}
           <div className="space-y-3">
-            <h3 className="font-bold text-[#dae2fd] text-base flex items-center gap-2">
-              <Shield className="w-4 h-4 text-[#f59e0b]" /> Configuration Environment Variables
+            <h3 className="font-bold text-[#0f172a] dark:text-[#dae2fd] text-base flex items-center gap-2">
+              <Shield className="w-4 h-4 text-[#b45309] dark:text-[#f59e0b]" /> Configuration Environment Variables
             </h3>
-            <div className="bg-[#131b2e] rounded-xl border border-[#2b3850] p-4 space-y-3 font-mono text-xs">
-              <div className="flex flex-col sm:flex-row sm:justify-between gap-1 border-b border-[#2b3850]/60 pb-2">
-                <span className="text-[#f59e0b]">GEMINI_API_KEY</span>
-                <span className="text-[#bacac5]">Google Gemini API key used by the runtime</span>
+            <div className="bg-[#eaeff6] dark:bg-[#131b2e] rounded-xl border border-[#bcc8da] dark:border-[#2b3850] p-4 space-y-3 font-mono text-xs">
+              <div className="flex flex-col sm:flex-row sm:justify-between gap-1 border-b border-[#bcc8da]/70 dark:border-[#2b3850]/60 pb-2">
+                <span className="text-[#b45309] dark:text-[#f59e0b] font-semibold">GEMINI_API_KEY</span>
+                <span className="text-[#2d3c52] dark:text-[#bacac5]">Google Gemini API key used by the runtime</span>
               </div>
-              <div className="flex flex-col sm:flex-row sm:justify-between gap-1 border-b border-[#2b3850]/60 pb-2">
-                <span className="text-[#f59e0b]">FASTGEM_MODEL</span>
-                <span className="text-[#bacac5]">Default Gemini model (currently Gemini 2.5 Flash)</span>
+              <div className="flex flex-col sm:flex-row sm:justify-between gap-1 border-b border-[#bcc8da]/70 dark:border-[#2b3850]/60 pb-2">
+                <span className="text-[#b45309] dark:text-[#f59e0b] font-semibold">FASTGEM_MODEL</span>
+                <span className="text-[#2d3c52] dark:text-[#bacac5]">Default Gemini model configured in runtime</span>
               </div>
               <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
-                <span className="text-[#f59e0b]">VITE_FASTGEM_RUNTIME_URL</span>
-                <span className="text-[#bacac5]">Runtime URL connected to the React console (e.g. http://localhost:8000)</span>
+                <span className="text-[#b45309] dark:text-[#f59e0b] font-semibold">VITE_FASTGEM_RUNTIME_URL</span>
+                <span className="text-[#2d3c52] dark:text-[#bacac5]">Runtime URL connected to the React console (e.g. http://localhost:8000)</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="p-4 bg-[#131b2e] border-t border-[#2b3850] flex justify-end">
+        <div className="p-4 bg-[#eaeff6] dark:bg-[#131b2e] border-t border-[#bcc8da] dark:border-[#2b3850] flex justify-end">
           <button
             onClick={onClose}
             className="px-6 py-2.5 btn-spectrum text-white font-mono text-xs font-bold uppercase rounded-xl transition-all cursor-pointer shadow-md"

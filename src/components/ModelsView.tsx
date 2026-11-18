@@ -88,7 +88,7 @@ export const ModelsView: React.FC<ModelsViewProps> = ({
         <div className="flex items-center gap-3 shrink-0">
           <button
             onClick={() => setIsAddModalOpen(true)}
-            className="px-4 py-2 bg-white dark:bg-[#18233a] hover:bg-slate-50 dark:hover:bg-[#202d4a] text-slate-800 dark:text-[#f1f5f9] text-xs sm:text-sm font-medium rounded-xl border border-slate-200 dark:border-[#2b3850] shadow-xs transition-colors flex items-center gap-2 cursor-pointer"
+            className="px-4 py-2 bg-[#dfe5ee] dark:bg-[#18233a] hover:bg-[#cdd7e5] dark:hover:bg-[#202d4a] text-[#0f172a] dark:text-[#f1f5f9] text-xs sm:text-sm font-medium rounded-xl border border-[#bcc8da] dark:border-[#2b3850] shadow-xs transition-colors flex items-center gap-2 cursor-pointer"
           >
             <Plus className="w-4 h-4 text-[#ea580c] dark:text-[#ff8c00]" />
             <span>Add Provider</span>
@@ -108,7 +108,7 @@ export const ModelsView: React.FC<ModelsViewProps> = ({
 
       <div className="space-y-6">
         {/* ------------ CARD 1: SHARE MODEL CONFIG ------------ */}
-        <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-[#2b3850] rounded-2xl p-6 flex items-start sm:items-center justify-between gap-4 shadow-xs">
+        <div className="bg-[#dfe5ee] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 flex items-start sm:items-center justify-between gap-4 shadow-xs">
           <div className="flex items-start gap-4">
             <div className="p-2.5 rounded-xl bg-orange-50 dark:bg-[#ff6b00]/10 border border-orange-200/60 dark:border-[#ff6b00]/20 shrink-0 text-[#ea580c] dark:text-[#ff8c00]">
               <Share2 className="w-5 h-5" />
@@ -139,7 +139,7 @@ export const ModelsView: React.FC<ModelsViewProps> = ({
         </div>
 
         {/* ------------ CARD 2: ACTIVE MODEL ------------ */}
-        <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-[#2b3850] rounded-2xl p-6 space-y-4 shadow-xs">
+        <div className="bg-[#dfe5ee] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 space-y-4 shadow-xs">
           <div className="flex items-center gap-3">
             <div className="p-2.5 rounded-xl bg-orange-50 dark:bg-[#ff6b00]/10 border border-orange-200/60 dark:border-[#ff6b00]/20 shrink-0 text-[#ea580c] dark:text-[#ff8c00]">
               <Cpu className="w-5 h-5" />
@@ -158,14 +158,14 @@ export const ModelsView: React.FC<ModelsViewProps> = ({
             <button
               type="button"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="w-full bg-slate-50 dark:bg-[#131d33] border border-slate-200 dark:border-[#2b3850] rounded-xl px-4 py-3 text-xs sm:text-sm font-mono text-slate-800 dark:text-[#f1f5f9] flex items-center justify-between hover:border-slate-300 dark:hover:border-[#3b82f6]/40 transition-colors cursor-pointer"
+              className="w-full bg-[#dce3ed] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl px-4 py-3 text-xs sm:text-sm font-mono text-[#0f172a] dark:text-[#f1f5f9] flex items-center justify-between hover:border-[#94a3b8] dark:hover:border-[#3b82f6]/40 transition-colors cursor-pointer"
             >
               <span>{activeModel}</span>
-              <ChevronDown className="w-4 h-4 text-slate-400 dark:text-[#64748b]" />
+              <ChevronDown className="w-4 h-4 text-[#4b5b73] dark:text-[#64748b]" />
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-[#131d33] border border-slate-200 dark:border-[#2b3850] rounded-xl shadow-xl z-20 overflow-hidden py-1">
+              <div className="absolute top-full left-0 right-0 mt-1 bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl shadow-xl z-20 overflow-hidden py-1">
                 {modelOptions.map((opt) => (
                   <button
                     key={opt}
@@ -189,7 +189,7 @@ export const ModelsView: React.FC<ModelsViewProps> = ({
         </div>
 
         {/* ------------ CARD 3: PROVIDERS TABLE ------------ */}
-        <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-[#2b3850] rounded-2xl overflow-hidden shadow-xs">
+        <div className="bg-[#dfe5ee] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl overflow-hidden shadow-xs">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs sm:text-sm">
               <thead>
@@ -254,7 +254,7 @@ export const ModelsView: React.FC<ModelsViewProps> = ({
       {/* ------------ ADD PROVIDER MODAL ------------ */}
       {isAddModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150">
-          <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-[#2b3850] rounded-2xl p-6 sm:p-8 max-w-md w-full space-y-6 shadow-2xl">
+          <div className="bg-[#dfe5ee] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 sm:p-8 max-w-md w-full space-y-6 shadow-2xl">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold text-slate-900 dark:text-[#f1f5f9]">Add Provider</h3>
               <button
@@ -275,7 +275,7 @@ export const ModelsView: React.FC<ModelsViewProps> = ({
                   placeholder="e.g. custom-ollama, openai, groq"
                   value={newProviderName}
                   onChange={(e) => setNewProviderName(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-[#131d33] border border-slate-200 dark:border-[#2b3850] rounded-xl px-3.5 py-2 text-xs sm:text-sm text-slate-800 dark:text-[#f1f5f9] focus:outline-none focus:border-amber-500 dark:focus:border-[#ff6b00]"
+                  className="w-full bg-[#dce3ed] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl px-3.5 py-2 text-xs sm:text-sm text-slate-800 dark:text-[#f1f5f9] focus:outline-none focus:border-amber-500 dark:focus:border-[#ff6b00]"
                   required
                 />
               </div>
@@ -289,7 +289,7 @@ export const ModelsView: React.FC<ModelsViewProps> = ({
                   placeholder="http://localhost:11434/v1"
                   value={newApiBase}
                   onChange={(e) => setNewApiBase(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-[#131d33] border border-slate-200 dark:border-[#2b3850] rounded-xl px-3.5 py-2 text-xs sm:text-sm text-slate-800 dark:text-[#f1f5f9] focus:outline-none focus:border-amber-500 dark:focus:border-[#ff6b00]"
+                  className="w-full bg-[#dce3ed] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl px-3.5 py-2 text-xs sm:text-sm text-slate-800 dark:text-[#f1f5f9] focus:outline-none focus:border-amber-500 dark:focus:border-[#ff6b00]"
                 />
               </div>
 
@@ -302,7 +302,7 @@ export const ModelsView: React.FC<ModelsViewProps> = ({
                   placeholder="sk-..."
                   value={newApiKey}
                   onChange={(e) => setNewApiKey(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-[#131d33] border border-slate-200 dark:border-[#2b3850] rounded-xl px-3.5 py-2 text-xs sm:text-sm text-slate-800 dark:text-[#f1f5f9] focus:outline-none focus:border-amber-500 dark:focus:border-[#ff6b00]"
+                  className="w-full bg-[#dce3ed] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl px-3.5 py-2 text-xs sm:text-sm text-slate-800 dark:text-[#f1f5f9] focus:outline-none focus:border-amber-500 dark:focus:border-[#ff6b00]"
                 />
               </div>
 

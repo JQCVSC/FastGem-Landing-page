@@ -9,6 +9,7 @@ import { TokenUsageView } from './TokenUsageView';
 import { SchedulerView } from './SchedulerView';
 import { AGENT_PRESETS } from '../data/mockData';
 import { AgentPreset } from '../types';
+import { useTheme } from '../context/ThemeContext';
 import { 
   LayoutDashboard, 
   Bot, 
@@ -33,10 +34,11 @@ import {
   Pencil,
   Radio,
   User,
-  Globe,
   Server,
   Coins,
-  Clock
+  Clock,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 interface FastGemDashboardProps {
@@ -52,6 +54,7 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
   onClose,
   onOpenStudio
 }) => {
+  const { theme, toggleTheme } = useTheme();
   const [activeNav, setActiveNav] = useState<'overview' | 'agents' | 'models' | 'apikeys' | 'settings' | 'account' | 'general' | 'channels' | 'mcp' | 'skills' | 'tokenusage' | 'scheduler'>('overview');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [agents, setAgents] = useState<Array<{ id: string; name: string; model: string; status: 'active' | 'idle' }>>([
@@ -237,24 +240,24 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-[120] bg-[#090d16] text-[#f1f5f9] flex font-sans antialiased overflow-hidden animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-[120] bg-[#dfe5ee] dark:bg-[#090d16] text-[#0f172a] dark:text-[#f1f5f9] flex font-sans antialiased overflow-hidden animate-in fade-in duration-200 transition-colors">
       {/* Sidebar */}
       <aside className={`${
         sidebarCollapsed ? 'w-16' : 'w-60'
-      } bg-[#0f172a] border-r border-[#2b3850] flex flex-col justify-between transition-all duration-300 shrink-0 select-none`}>
+      } bg-[#d5dde8] dark:bg-[#0f172a] border-r border-[#bcc8da] dark:border-[#2b3850] flex flex-col justify-between transition-all duration-300 shrink-0 select-none`}>
         {/* Top Header / Branding */}
         <div>
-          <div className="p-4 border-b border-[#2b3850]/80 flex items-center justify-between">
-            <div className="flex items-center gap-2.5 overflow-hidden">
+          <div className="p-4 border-b border-[#bcc8da] dark:border-[#2b3850]/80 flex items-center justify-between">
+            <div className="flex items-center gap-2.5 overflow-hidden bg-[#131b2e] px-2 py-1 rounded-lg dark:bg-transparent dark:p-0">
               <img 
                 src="https://i.imgur.com/hkRlTDp.png" 
                 alt="FastGem Logo" 
-                className="h-7 w-auto object-contain rounded-md shrink-0"
+                className="h-6 dark:h-7 w-auto object-contain rounded-md shrink-0"
                 referrerPolicy="no-referrer"
               />
             </div>
             {!sidebarCollapsed && (
-              <button className="text-[#94a3b8] hover:text-[#f1f5f9] transition-colors p-1">
+              <button className="text-[#4b5b73] dark:text-[#94a3b8] hover:text-[#0f172a] dark:hover:text-[#f1f5f9] transition-colors p-1">
                 <ChevronsUpDown className="w-4 h-4" />
               </button>
             )}
@@ -268,11 +271,11 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
                 onClick={() => setActiveNav('overview')}
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
                   activeNav === 'overview'
-                    ? 'bg-[#1e2a45] text-[#f59e0b] shadow-sm font-semibold border border-[#a855f7]/30'
-                    : 'text-[#94a3b8] hover:text-[#f1f5f9] hover:bg-[#131d33]'
+                    ? 'bg-[#eaeff6] dark:bg-[#1e2a45] text-[#b45309] dark:text-[#f59e0b] shadow-xs font-semibold border border-[#7e22ce]/30 dark:border-[#a855f7]/30'
+                    : 'text-[#2d3c52] dark:text-[#94a3b8] hover:text-[#0f172a] dark:hover:text-[#f1f5f9] hover:bg-[#cdd7e5] dark:hover:bg-[#131d33]'
                 }`}
               >
-                <LayoutDashboard className="w-4 h-4 shrink-0 text-[#f59e0b]" />
+                <LayoutDashboard className="w-4 h-4 shrink-0 text-[#b45309] dark:text-[#f59e0b]" />
                 {!sidebarCollapsed && <span>Overview</span>}
               </button>
             </div>
@@ -289,11 +292,11 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
                   onClick={() => setActiveNav('agents')}
                   className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
                     activeNav === 'agents'
-                      ? 'bg-[#1e2a45] text-[#f59e0b] shadow-sm font-semibold border border-[#a855f7]/30'
-                      : 'text-[#94a3b8] hover:text-[#f1f5f9] hover:bg-[#131d33]'
+                      ? 'bg-[#eaeff6] dark:bg-[#1e2a45] text-[#b45309] dark:text-[#f59e0b] shadow-xs font-semibold border border-[#7e22ce]/30 dark:border-[#a855f7]/30'
+                      : 'text-[#2d3c52] dark:text-[#94a3b8] hover:text-[#0f172a] dark:hover:text-[#f1f5f9] hover:bg-[#cdd7e5] dark:hover:bg-[#131d33]'
                   }`}
                 >
-                  <Bot className="w-4 h-4 shrink-0 text-[#a855f7]" />
+                  <Bot className="w-4 h-4 shrink-0 text-[#7e22ce] dark:text-[#a855f7]" />
                   {!sidebarCollapsed && <span>Agents</span>}
                 </button>
 
@@ -301,11 +304,11 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
                   onClick={() => setActiveNav('models')}
                   className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
                     activeNav === 'models'
-                      ? 'bg-[#1e2a45] text-[#f59e0b] shadow-sm font-semibold border border-[#a855f7]/30'
-                      : 'text-[#94a3b8] hover:text-[#f1f5f9] hover:bg-[#131d33]'
+                      ? 'bg-[#eaeff6] dark:bg-[#1e2a45] text-[#b45309] dark:text-[#f59e0b] shadow-xs font-semibold border border-[#7e22ce]/30 dark:border-[#a855f7]/30'
+                      : 'text-[#2d3c52] dark:text-[#94a3b8] hover:text-[#0f172a] dark:hover:text-[#f1f5f9] hover:bg-[#cdd7e5] dark:hover:bg-[#131d33]'
                   }`}
                 >
-                  <Cpu className="w-4 h-4 shrink-0 text-[#3b82f6]" />
+                  <Cpu className="w-4 h-4 shrink-0 text-[#1d4ed8] dark:text-[#3b82f6]" />
                   {!sidebarCollapsed && <span>Models</span>}
                 </button>
               </div>
@@ -314,7 +317,7 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
             {/* User Section */}
             <div>
               {!sidebarCollapsed && (
-                <div className="px-3 mb-2 text-[10px] font-mono font-extrabold uppercase tracking-widest text-[#64748b]">
+                <div className="px-3 mb-2 text-[10px] font-mono font-extrabold uppercase tracking-widest text-[#4b5b73] dark:text-[#64748b]">
                   Platform
                 </div>
               )}
@@ -323,35 +326,23 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
                   onClick={() => setActiveNav('account')}
                   className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
                     activeNav === 'account'
-                      ? 'bg-[#1e2a45] text-[#f59e0b] shadow-sm font-semibold border border-[#a855f7]/30'
-                      : 'text-[#94a3b8] hover:text-[#f1f5f9] hover:bg-[#131d33]'
+                      ? 'bg-[#eaeff6] dark:bg-[#1e2a45] text-[#b45309] dark:text-[#f59e0b] shadow-xs font-semibold border border-[#7e22ce]/30 dark:border-[#a855f7]/30'
+                      : 'text-[#2d3c52] dark:text-[#94a3b8] hover:text-[#0f172a] dark:hover:text-[#f1f5f9] hover:bg-[#cdd7e5] dark:hover:bg-[#131d33]'
                   }`}
                 >
-                  <User className="w-4 h-4 shrink-0 text-[#f59e0b]" />
+                  <User className="w-4 h-4 shrink-0 text-[#b45309] dark:text-[#f59e0b]" />
                   {!sidebarCollapsed && <span>Account</span>}
-                </button>
-
-                <button
-                  onClick={() => setActiveNav('general')}
-                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
-                    activeNav === 'general'
-                      ? 'bg-[#1e2a45] text-[#f59e0b] shadow-sm font-semibold border border-[#a855f7]/30'
-                      : 'text-[#94a3b8] hover:text-[#f1f5f9] hover:bg-[#131d33]'
-                  }`}
-                >
-                  <Globe className="w-4 h-4 shrink-0 text-[#38bdf8]" />
-                  {!sidebarCollapsed && <span>General</span>}
                 </button>
 
                 <button
                   onClick={() => setActiveNav('apikeys')}
                   className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
                     activeNav === 'apikeys'
-                      ? 'bg-[#1e2a45] text-[#f59e0b] shadow-sm font-semibold border border-[#a855f7]/30'
-                      : 'text-[#94a3b8] hover:text-[#f1f5f9] hover:bg-[#131d33]'
+                      ? 'bg-[#eaeff6] dark:bg-[#1e2a45] text-[#b45309] dark:text-[#f59e0b] shadow-xs font-semibold border border-[#7e22ce]/30 dark:border-[#a855f7]/30'
+                      : 'text-[#2d3c52] dark:text-[#94a3b8] hover:text-[#0f172a] dark:hover:text-[#f1f5f9] hover:bg-[#cdd7e5] dark:hover:bg-[#131d33]'
                   }`}
                 >
-                  <KeyRound className="w-4 h-4 shrink-0 text-[#10b981]" />
+                  <KeyRound className="w-4 h-4 shrink-0 text-[#047857] dark:text-[#10b981]" />
                   {!sidebarCollapsed && <span>API Keys</span>}
                 </button>
               </div>
@@ -360,16 +351,16 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
         </div>
 
         {/* Sidebar Bottom: Settings & User Info */}
-        <div className="p-3 border-t border-[#2b3850]/80 space-y-2">
+        <div className="p-3 border-t border-[#bcc8da] dark:border-[#2b3850]/80 space-y-2">
           <button
             onClick={() => setActiveNav('settings')}
             className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
               activeNav === 'settings'
-                ? 'bg-[#1e2a45] text-[#f59e0b] shadow-sm font-semibold border border-[#a855f7]/30'
-                : 'text-[#94a3b8] hover:text-[#f1f5f9] hover:bg-[#131d33]'
+                ? 'bg-[#eaeff6] dark:bg-[#1e2a45] text-[#b45309] dark:text-[#f59e0b] shadow-xs font-semibold border border-[#7e22ce]/30 dark:border-[#a855f7]/30'
+                : 'text-[#2d3c52] dark:text-[#94a3b8] hover:text-[#0f172a] dark:hover:text-[#f1f5f9] hover:bg-[#cdd7e5] dark:hover:bg-[#131d33]'
             }`}
           >
-            <Settings className="w-4 h-4 shrink-0 text-[#94a3b8]" />
+            <Settings className="w-4 h-4 shrink-0 text-[#4b5b73] dark:text-[#94a3b8]" />
             {!sidebarCollapsed && <span>Settings</span>}
           </button>
 
@@ -377,18 +368,18 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
           <div className="pt-2">
             <div 
               onClick={() => setActiveNav('account')}
-              className={`flex items-center justify-between p-2 rounded-xl hover:bg-[#131d33] transition-colors cursor-pointer group ${
-                activeNav === 'account' ? 'bg-[#1e2a45] border border-[#a855f7]/30' : ''
+              className={`flex items-center justify-between p-2 rounded-xl hover:bg-[#cdd7e5] dark:hover:bg-[#131d33] transition-colors cursor-pointer group ${
+                activeNav === 'account' ? 'bg-[#eaeff6] dark:bg-[#1e2a45] border border-[#7e22ce]/30 dark:border-[#a855f7]/30' : ''
               }`}
             >
               <div className="flex items-center gap-2.5 overflow-hidden">
-                <div className="w-8 h-8 rounded-lg spectrum-badge text-[#f1f5f9] font-bold text-xs flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg spectrum-badge text-[#0f172a] dark:text-[#f1f5f9] font-bold text-xs flex items-center justify-center shrink-0">
                   {userInitials}
                 </div>
                 {!sidebarCollapsed && (
                   <div className="flex flex-col text-left overflow-hidden">
-                    <span className="text-xs font-semibold text-[#f1f5f9] truncate">{displayUser}</span>
-                    <span className="text-[10px] text-[#94a3b8] truncate">Developer</span>
+                    <span className="text-xs font-semibold text-[#0f172a] dark:text-[#f1f5f9] truncate">{displayUser}</span>
+                    <span className="text-[10px] text-[#4b5b73] dark:text-[#94a3b8] truncate">Developer</span>
                   </div>
                 )}
               </div>
@@ -399,7 +390,7 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
                     onClose();
                   }}
                   title="Return to Landing Page"
-                  className="text-[#94a3b8] hover:text-[#ef4444] transition-colors p-1"
+                  className="text-[#4b5b73] dark:text-[#94a3b8] hover:text-[#dc2626] dark:hover:text-[#ef4444] transition-colors p-1"
                 >
                   <LogOut className="w-3.5 h-3.5" />
                 </button>
@@ -410,24 +401,35 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 flex flex-col overflow-y-auto bg-[#090d16]">
+      <main className="flex-1 flex flex-col overflow-y-auto bg-[#dfe5ee] dark:bg-[#090d16]">
         {/* Top Navbar */}
-        <header className="h-14 px-6 border-b border-[#2b3850] flex items-center justify-between shrink-0 bg-[#0f172a]">
+        <header className="h-14 px-6 border-b border-[#bcc8da] dark:border-[#2b3850] flex items-center justify-between shrink-0 bg-[#d5dde8] dark:bg-[#0f172a]">
           <div className="flex items-center gap-4">
             <button 
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-              className="text-[#94a3b8] hover:text-[#f1f5f9] transition-colors p-1.5 rounded-lg hover:bg-[#131d33]"
+              className="text-[#4b5b73] dark:text-[#94a3b8] hover:text-[#0f172a] dark:hover:text-[#f1f5f9] transition-colors p-1.5 rounded-lg hover:bg-[#cdd7e5] dark:hover:bg-[#131d33] cursor-pointer"
             >
               <PanelLeft className="w-4 h-4" />
             </button>
-            <span className="text-xs text-[#94a3b8] font-mono flex items-center gap-2">
-              Gateway: <span className="text-[#10b981] font-semibold flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>Connected</span>
+            <span className="text-xs text-[#4b5b73] dark:text-[#94a3b8] font-mono flex items-center gap-2">
+              Gateway: <span className="text-[#047857] dark:text-[#10b981] font-semibold">Connected</span>
             </span>
           </div>
 
           <div className="flex items-center gap-3">
+            <button
+              onClick={toggleTheme}
+              title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              className="p-2 rounded-xl bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] hover:bg-[#cdd7e5] dark:hover:bg-[#1e2a45] transition-colors cursor-pointer"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-400" />
+              ) : (
+                <Moon className="w-4 h-4 text-[#4f46e5]" />
+              )}
+            </button>
             <div className="spectrum-badge px-3 py-1 rounded-full text-xs font-mono font-bold">
-              <span className="spectrum-gradient-text">Gemini 3.6 Engine</span>
+              <span className="spectrum-gradient-text">Gemini Runtime</span>
             </div>
           </div>
         </header>
@@ -438,65 +440,65 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
             <div className="space-y-6 animate-in fade-in duration-150">
               {/* Header Titles */}
               <div>
-                <h1 className="text-3xl font-semibold text-[#f1f5f9] tracking-tight">Dashboard</h1>
-                <p className="text-sm text-[#94a3b8] mt-1">Monitor your FastGem gateway runtime</p>
+                <h1 className="text-3xl font-semibold text-[#0f172a] dark:text-[#f1f5f9] tracking-tight">Dashboard</h1>
+                <p className="text-sm text-[#4b5b73] dark:text-[#94a3b8] mt-1">Monitor your FastGem gateway runtime</p>
               </div>
 
               {/* Stats Grid */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 {/* Agents Card */}
-                <div className="bg-[#131d33] border border-[#2b3850] p-6 rounded-2xl flex flex-col justify-between shadow-lg hover:border-[#a855f7]/50 transition-colors">
+                <div className="bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] p-6 rounded-2xl flex flex-col justify-between shadow-sm dark:shadow-lg hover:border-[#7e22ce]/50 dark:hover:border-[#a855f7]/50 transition-colors">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-[#94a3b8] font-medium">Agents</span>
-                    <div className="w-9 h-9 rounded-xl bg-[#a855f7]/15 text-[#a855f7] flex items-center justify-center border border-[#a855f7]/30">
+                    <span className="text-sm text-[#4b5b73] dark:text-[#94a3b8] font-medium">Agents</span>
+                    <div className="w-9 h-9 rounded-xl bg-[#7e22ce]/12 dark:bg-[#a855f7]/15 text-[#7e22ce] dark:text-[#a855f7] flex items-center justify-center border border-[#7e22ce]/25 dark:border-[#a855f7]/30">
                       <Bot className="w-5 h-5" />
                     </div>
                   </div>
 
                   <div className="mt-4">
-                    <div className="text-4xl font-semibold text-[#f1f5f9]">{agents.length}</div>
-                    <div className="text-xs text-[#94a3b8] mt-1.5">Active runtime agents</div>
+                    <div className="text-4xl font-semibold text-[#0f172a] dark:text-[#f1f5f9] tabular-nums">{agents.length}</div>
+                    <div className="text-xs text-[#4b5b73] dark:text-[#94a3b8] mt-1.5">Active runtime agents</div>
                   </div>
                 </div>
 
                 {/* Gateway Models Card */}
-                <div className="bg-[#131d33] border border-[#2b3850] p-6 rounded-2xl flex flex-col justify-between shadow-lg hover:border-[#3b82f6]/50 transition-colors">
+                <div className="bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] p-6 rounded-2xl flex flex-col justify-between shadow-sm dark:shadow-lg hover:border-[#1d4ed8]/50 dark:hover:border-[#3b82f6]/50 transition-colors">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-[#94a3b8] font-medium">Models Configured</span>
-                    <div className="w-9 h-9 rounded-xl bg-[#3b82f6]/15 text-[#3b82f6] flex items-center justify-center border border-[#3b82f6]/30">
+                    <span className="text-sm text-[#4b5b73] dark:text-[#94a3b8] font-medium">Models Configured</span>
+                    <div className="w-9 h-9 rounded-xl bg-[#1d4ed8]/12 dark:bg-[#3b82f6]/15 text-[#1d4ed8] dark:text-[#3b82f6] flex items-center justify-center border border-[#1d4ed8]/25 dark:border-[#3b82f6]/30">
                       <Cpu className="w-5 h-5" />
                     </div>
                   </div>
 
                   <div className="mt-4">
-                    <div className="text-4xl font-semibold text-[#f1f5f9]">3</div>
-                    <div className="text-xs text-[#94a3b8] mt-1.5">Gemini 3.6 Flash & 3.1 Pro</div>
+                    <div className="text-4xl font-semibold text-[#0f172a] dark:text-[#f1f5f9] tabular-nums">3</div>
+                    <div className="text-xs text-[#4b5b73] dark:text-[#94a3b8] mt-1.5">Google Gemini Models</div>
                   </div>
                 </div>
 
                 {/* API Keys Card */}
-                <div className="bg-[#131d33] border border-[#2b3850] p-6 rounded-2xl flex flex-col justify-between shadow-lg hover:border-[#10b981]/50 transition-colors">
+                <div className="bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] p-6 rounded-2xl flex flex-col justify-between shadow-sm dark:shadow-lg hover:border-[#047857]/50 dark:hover:border-[#10b981]/50 transition-colors">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-[#94a3b8] font-medium">API Keys</span>
-                    <div className="w-9 h-9 rounded-xl bg-[#10b981]/15 text-[#10b981] flex items-center justify-center border border-[#10b981]/30">
+                    <span className="text-sm text-[#4b5b73] dark:text-[#94a3b8] font-medium">API Keys</span>
+                    <div className="w-9 h-9 rounded-xl bg-[#047857]/12 dark:bg-[#10b981]/15 text-[#047857] dark:text-[#10b981] flex items-center justify-center border border-[#047857]/25 dark:border-[#10b981]/30">
                       <KeyRound className="w-5 h-5" />
                     </div>
                   </div>
 
                   <div className="mt-4">
-                    <div className="text-4xl font-semibold text-[#f1f5f9]">{apiKeys.length}</div>
-                    <div className="text-xs text-[#94a3b8] mt-1.5">Active bearer tokens</div>
+                    <div className="text-4xl font-semibold text-[#0f172a] dark:text-[#f1f5f9] tabular-nums">{apiKeys.length}</div>
+                    <div className="text-xs text-[#4b5b73] dark:text-[#94a3b8] mt-1.5">Active bearer tokens</div>
                   </div>
                 </div>
               </div>
 
               {/* Live Gateway Activity Section */}
-              <div className="mt-8 bg-[#131d33] border border-[#2b3850] rounded-2xl p-6">
+              <div className="mt-8 bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-base font-semibold text-[#f1f5f9]">Active FastGem Agents</h3>
+                  <h3 className="text-base font-semibold text-[#0f172a] dark:text-[#f1f5f9]">Active FastGem Agents</h3>
                   <button 
                     onClick={() => onOpenStudio()}
-                    className="text-xs text-[#f59e0b] hover:underline flex items-center gap-1 cursor-pointer font-mono font-semibold"
+                    className="text-xs text-[#b45309] dark:text-[#f59e0b] hover:underline flex items-center gap-1 cursor-pointer font-mono font-semibold"
                   >
                     Launch Agent View →
                   </button>
@@ -504,14 +506,14 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
 
                 <div className="space-y-3">
                   {agents.map((agent) => (
-                    <div key={agent.id} className="p-4 bg-[#090d16] border border-[#2b3850] rounded-xl flex items-center justify-between">
+                    <div key={agent.id} className="p-4 bg-[#dce3ed] dark:bg-[#090d16] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-[#a855f7]/15 text-[#a855f7] border border-[#a855f7]/30 flex items-center justify-center font-bold text-xs">
+                        <div className="w-8 h-8 rounded-lg bg-[#7e22ce]/12 dark:bg-[#a855f7]/15 text-[#7e22ce] dark:text-[#a855f7] border border-[#7e22ce]/25 dark:border-[#a855f7]/30 flex items-center justify-center font-bold text-xs">
                           <Bot className="w-4 h-4" />
                         </div>
                         <div>
-                          <div className="text-sm font-semibold text-[#f1f5f9]">{agent.name}</div>
-                          <div className="text-xs text-[#94a3b8] mt-0.5">{agent.model}</div>
+                          <div className="text-sm font-semibold text-[#0f172a] dark:text-[#f1f5f9]">{agent.name}</div>
+                          <div className="text-xs text-[#4b5b73] dark:text-[#94a3b8] mt-0.5">{agent.model}</div>
                         </div>
                       </div>
 
@@ -523,7 +525,7 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
                           }}
                           className="px-3.5 py-1.5 rounded-lg text-xs font-mono btn-spectrum-outline flex items-center gap-1.5 transition-colors cursor-pointer"
                         >
-                          <MessageSquare className="w-3.5 h-3.5 text-[#a855f7]" />
+                          <MessageSquare className="w-3.5 h-3.5 text-[#7e22ce] dark:text-[#a855f7]" />
                           Launch Agent View
                         </button>
                       </div>
@@ -538,8 +540,8 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
             <div className="space-y-6 animate-in fade-in duration-150">
               <div className="flex items-center justify-between">
                 <div>
-                  <h1 className="text-3xl font-semibold text-[#f1f5f9] tracking-tight">Agents</h1>
-                  <p className="text-sm text-[#94a3b8] mt-1">Manage SOUL.md agent runtime instances</p>
+                  <h1 className="text-3xl font-semibold text-[#0f172a] dark:text-[#f1f5f9] tracking-tight">Agents</h1>
+                  <p className="text-sm text-[#4b5b73] dark:text-[#94a3b8] mt-1">Manage SOUL.md agent runtime instances</p>
                 </div>
                 <button
                   onClick={() => setIsCreateModalOpen(true)}
@@ -551,23 +553,23 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {agents.map((agent) => (
-                  <div key={agent.id} className="p-5 bg-[#131d33] border border-[#2b3850] rounded-2xl space-y-3">
+                  <div key={agent.id} className="p-5 bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-mono font-bold spectrum-badge px-2.5 py-1 rounded-md">
                         <span className="spectrum-gradient-text">{agent.model}</span>
                       </span>
-                      <span className="text-[10px] text-[#10b981] font-bold tracking-wider">ACTIVE</span>
+                      <span className="text-[10px] text-[#047857] dark:text-[#10b981] font-bold tracking-wider">ACTIVE</span>
                     </div>
-                    <h3 className="text-base font-bold text-[#f1f5f9]">{agent.name}</h3>
-                    <p className="text-xs text-[#94a3b8]">SOUL.md system rules loaded. Gemini 3 context memory enabled.</p>
+                    <h3 className="text-base font-bold text-[#0f172a] dark:text-[#f1f5f9]">{agent.name}</h3>
+                    <p className="text-xs text-[#4b5b73] dark:text-[#94a3b8]">SOUL.md system rules loaded. Persistent session memory enabled.</p>
                     <button
                       onClick={() => {
                         const preset = AGENT_PRESETS.find(p => p.name.toLowerCase().includes(agent.name.toLowerCase())) || AGENT_PRESETS[0];
                         onOpenStudio(preset);
                       }}
-                      className="w-full mt-2 py-2.5 btn-spectrum-outline font-mono text-xs font-bold rounded-xl transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-sm"
+                      className="w-full mt-2 py-2.5 btn-spectrum-outline font-mono text-xs font-bold rounded-xl transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-xs"
                     >
-                      <MessageSquare className="w-3.5 h-3.5 text-[#a855f7]" />
+                      <MessageSquare className="w-3.5 h-3.5 text-[#7e22ce] dark:text-[#a855f7]" />
                       Launch Agent View
                     </button>
                   </div>
@@ -577,43 +579,37 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
           )}
 
           {activeNav === 'models' && (
-            <div className="bg-[#131d33] border border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-sm animate-in fade-in duration-150 text-[#f1f5f9]">
+            <div className="bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-sm animate-in fade-in duration-150 text-[#0f172a] dark:text-[#f1f5f9]">
               <ModelsView agentName="Tester" />
             </div>
           )}
 
           {activeNav === 'channels' && (
-            <div className="bg-[#131d33] border border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-sm animate-in fade-in duration-150 text-[#f1f5f9]">
+            <div className="bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-sm animate-in fade-in duration-150 text-[#0f172a] dark:text-[#f1f5f9]">
               <ChannelsView agentName="Tester" />
             </div>
           )}
 
-          {activeNav === 'account' && (
-            <div className="bg-[#131d33] border border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-sm animate-in fade-in duration-150 text-[#f1f5f9]">
-              <AccountView userEmail="jeremycodjoe@gmail.com" />
-            </div>
-          )}
-
           {activeNav === 'mcp' && (
-            <div className="bg-[#131d33] border border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-sm animate-in fade-in duration-150 text-[#f1f5f9]">
+            <div className="bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-sm animate-in fade-in duration-150 text-[#0f172a] dark:text-[#f1f5f9]">
               <McpView agentName="Tester" />
             </div>
           )}
 
           {activeNav === 'skills' && (
-            <div className="bg-[#131d33] border border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-sm animate-in fade-in duration-150 text-[#f1f5f9]">
+            <div className="bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-sm animate-in fade-in duration-150 text-[#0f172a] dark:text-[#f1f5f9]">
               <SkillsView agentName="Tester" />
             </div>
           )}
 
           {activeNav === 'tokenusage' && (
-            <div className="bg-[#131d33] border border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-sm animate-in fade-in duration-150 text-[#f1f5f9]">
+            <div className="bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-sm animate-in fade-in duration-150 text-[#0f172a] dark:text-[#f1f5f9]">
               <TokenUsageView agentName="Tester" />
             </div>
           )}
 
           {activeNav === 'scheduler' && (
-            <div className="bg-[#131d33] border border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-sm animate-in fade-in duration-150 text-[#f1f5f9]">
+            <div className="bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-6 sm:p-8 shadow-sm animate-in fade-in duration-150 text-[#0f172a] dark:text-[#f1f5f9]">
               <SchedulerView agentName="Tester" />
             </div>
           )}
@@ -622,8 +618,8 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
             <div className="space-y-6 animate-in fade-in duration-150">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <h1 className="text-2xl sm:text-3xl font-semibold text-[#f1f5f9] tracking-tight">API Keys</h1>
-                  <p className="text-sm text-[#94a3b8] mt-1.5">
+                  <h1 className="text-2xl sm:text-3xl font-semibold text-[#0f172a] dark:text-[#f1f5f9] tracking-tight">API Keys</h1>
+                  <p className="text-sm text-[#4b5b73] dark:text-[#94a3b8] mt-1.5">
                     Issue programmatic credentials. Each key is scoped to a subset of your agents.
                   </p>
                 </div>
@@ -636,43 +632,43 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
               </div>
 
               {apiKeys.length === 0 ? (
-                <div className="bg-[#131d33] border border-[#2b3850] rounded-2xl p-12 sm:p-20 flex flex-col items-center justify-center text-center shadow-sm min-h-[380px]">
-                  <div className="w-14 h-14 bg-[#10b981]/15 border border-[#10b981]/30 rounded-2xl flex items-center justify-center mb-4 text-[#10b981]">
+                <div className="bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-12 sm:p-20 flex flex-col items-center justify-center text-center shadow-sm min-h-[380px]">
+                  <div className="w-14 h-14 bg-[#047857]/12 dark:bg-[#10b981]/15 border border-[#047857]/25 dark:border-[#10b981]/30 rounded-2xl flex items-center justify-center mb-4 text-[#047857] dark:text-[#10b981]">
                     <Key className="w-6 h-6 stroke-[1.8]" />
                   </div>
-                  <h3 className="text-base font-semibold text-[#f1f5f9] mb-1">
+                  <h3 className="text-base font-semibold text-[#0f172a] dark:text-[#f1f5f9] mb-1">
                     No API keys yet
                   </h3>
-                  <p className="text-sm text-[#94a3b8] mb-6 max-w-sm">
+                  <p className="text-sm text-[#4b5b73] dark:text-[#94a3b8] mb-6 max-w-sm">
                     Issue one to let an external client call your agents
                   </p>
                   <button
                     onClick={handleOpenApiKeyModal}
-                    className="px-4 py-2 bg-[#1e2a45] border border-[#2b3850] rounded-xl text-xs font-medium text-[#f1f5f9] hover:bg-[#283656] transition-colors cursor-pointer flex items-center gap-1.5 shadow-sm"
+                    className="px-4 py-2 bg-[#dce3ed] dark:bg-[#1e2a45] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl text-xs font-medium text-[#0f172a] dark:text-[#f1f5f9] hover:bg-[#cdd7e5] dark:hover:bg-[#283656] transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs"
                   >
                     <Plus className="w-3.5 h-3.5" /> Add API Key
                   </button>
                 </div>
               ) : (
-                <div className="bg-[#131d33] border border-[#2b3850] rounded-2xl p-5 space-y-3 shadow-sm">
+                <div className="bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl p-5 space-y-3 shadow-sm">
                   {apiKeys.map((k) => (
-                    <div key={k.id} className="p-4 bg-[#090d16] border border-[#2b3850] rounded-xl flex items-center justify-between">
+                    <div key={k.id} className="p-4 bg-[#dce3ed] dark:bg-[#090d16] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl flex items-center justify-between">
                       <div>
-                        <div className="text-sm font-medium text-[#f1f5f9]">{k.name}</div>
-                        <div className="text-xs font-mono text-[#94a3b8] mt-1">{k.key}</div>
+                        <div className="text-sm font-medium text-[#0f172a] dark:text-[#f1f5f9]">{k.name}</div>
+                        <div className="text-xs font-mono text-[#4b5b73] dark:text-[#94a3b8] mt-1">{k.key}</div>
                       </div>
                       <div className="flex items-center gap-2">
                         <button 
                           onClick={() => handleCopyKey(k.key)}
                           title="Copy Key"
-                          className="p-2 text-[#94a3b8] hover:text-[#f59e0b] bg-[#1e2a45] rounded-lg transition-colors cursor-pointer"
+                          className="p-2 text-[#4b5b73] dark:text-[#94a3b8] hover:text-[#b45309] dark:hover:text-[#f59e0b] bg-[#eaeff6] dark:bg-[#1e2a45] rounded-lg transition-colors cursor-pointer"
                         >
-                          {copiedKey === k.key ? <Check className="w-4 h-4 text-[#10b981]" /> : <Copy className="w-4 h-4" />}
+                          {copiedKey === k.key ? <Check className="w-4 h-4 text-[#047857] dark:text-[#10b981]" /> : <Copy className="w-4 h-4" />}
                         </button>
                         <button
                           onClick={() => handleDeleteApiKey(k.id)}
                           title="Delete Key"
-                          className="p-2 text-[#94a3b8] hover:text-[#ef4444] bg-[#1e2a45] rounded-lg transition-colors cursor-pointer"
+                          className="p-2 text-[#4b5b73] dark:text-[#94a3b8] hover:text-[#dc2626] dark:hover:text-[#ef4444] bg-[#eaeff6] dark:bg-[#1e2a45] rounded-lg transition-colors cursor-pointer"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -687,32 +683,32 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
           {activeNav === 'settings' && (
             <div className="space-y-6 animate-in fade-in duration-150">
               <div>
-                <h1 className="text-3xl font-semibold text-[#f1f5f9] tracking-tight">Settings</h1>
-                <p className="text-sm text-[#94a3b8] mt-1">Gateway and local storage configuration</p>
+                <h1 className="text-3xl font-semibold text-[#0f172a] dark:text-[#f1f5f9] tracking-tight">Settings</h1>
+                <p className="text-sm text-[#4b5b73] dark:text-[#94a3b8] mt-1">Gateway and local storage configuration</p>
               </div>
 
-              <div className="p-6 bg-[#131d33] border border-[#2b3850] rounded-2xl space-y-4 max-w-xl">
+              <div className="p-6 bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl space-y-4 max-w-xl">
                 <div>
-                  <label className="text-xs font-medium text-[#94a3b8] block mb-1">Gateway Host</label>
+                  <label className="text-xs font-medium text-[#4b5b73] dark:text-[#94a3b8] block mb-1">Gateway Host</label>
                   <input 
                     type="text" 
                     readOnly 
                     value="http://localhost:8000" 
-                    className="w-full bg-[#090d16] border border-[#2b3850] p-3 rounded-xl text-xs text-[#f1f5f9] font-mono"
+                    className="w-full bg-[#dce3ed] dark:bg-[#090d16] border border-[#bcc8da] dark:border-[#2b3850] p-3 rounded-xl text-xs text-[#0f172a] dark:text-[#f1f5f9] font-mono"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-medium text-[#94a3b8] block mb-1">Persistence Engine</label>
+                  <label className="text-xs font-medium text-[#4b5b73] dark:text-[#94a3b8] block mb-1">Persistence Engine</label>
                   <input 
                     type="text" 
                     readOnly 
-                    value="SQLite / Gemini 3.6 Hybrid Sync" 
-                    className="w-full bg-[#090d16] border border-[#2b3850] p-3 rounded-xl text-xs text-[#f1f5f9] font-mono"
+                    value="Local JSON Persistence" 
+                    className="w-full bg-[#dce3ed] dark:bg-[#090d16] border border-[#bcc8da] dark:border-[#2b3850] p-3 rounded-xl text-xs text-[#0f172a] dark:text-[#f1f5f9] font-mono"
                   />
                 </div>
                 <button 
                   onClick={onClose}
-                  className="px-4 py-2 bg-[#1e2a45] text-[#ef4444] border border-[#ef4444]/40 rounded-xl text-xs font-medium hover:bg-[#ef4444]/10 transition-colors cursor-pointer"
+                  className="px-4 py-2 bg-[#dce3ed] dark:bg-[#1e2a45] text-[#dc2626] dark:text-[#ef4444] border border-[#dc2626]/35 dark:border-[#ef4444]/40 rounded-xl text-xs font-medium hover:bg-[#dc2626]/10 dark:hover:bg-[#ef4444]/10 transition-colors cursor-pointer"
                 >
                   Sign Out & Exit Dashboard
                 </button>
@@ -736,20 +732,20 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
 
       {/* Add API Key Pop up Modal */}
       {isApiKeyModalOpen && (
-        <div className="fixed inset-0 z-[160] flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-150">
-          <div className="bg-[#131d33] border border-[#2b3850] rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden animate-in zoom-in-95 duration-150 text-[#f1f5f9]">
+        <div className="fixed inset-0 z-[160] flex items-center justify-center p-4 bg-black/60 dark:bg-black/75 backdrop-blur-sm animate-in fade-in duration-150">
+          <div className="bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden animate-in zoom-in-95 duration-150 text-[#0f172a] dark:text-[#f1f5f9]">
             {/* Header */}
-            <div className="p-6 pb-4 flex items-start justify-between border-b border-[#2b3850] bg-[#0f172a]">
+            <div className="p-6 pb-4 flex items-start justify-between border-b border-[#bcc8da] dark:border-[#2b3850] bg-[#d5dde8] dark:bg-[#0f172a]">
               <div>
-                <h2 className="text-xl font-bold text-[#f1f5f9]">Add API Key</h2>
-                <p className="text-sm text-[#94a3b8] mt-1">
+                <h2 className="text-xl font-bold text-[#0f172a] dark:text-[#f1f5f9]">Add API Key</h2>
+                <p className="text-sm text-[#4b5b73] dark:text-[#94a3b8] mt-1">
                   Issue a new bearer token scoped to a subset of your agents.
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setIsApiKeyModalOpen(false)}
-                className="text-[#94a3b8] hover:text-white transition-colors p-1 rounded-lg cursor-pointer"
+                className="text-[#4b5b73] dark:text-[#94a3b8] hover:text-[#0f172a] dark:hover:text-white transition-colors p-1 rounded-lg cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -758,7 +754,7 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
             {/* Form Fields */}
             <div className="p-6 space-y-5">
               <div>
-                <label className="block text-sm font-semibold text-[#f1f5f9] mb-1.5">
+                <label className="block text-sm font-semibold text-[#0f172a] dark:text-[#f1f5f9] mb-1.5">
                   Name
                 </label>
                 <input
@@ -766,12 +762,12 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
                   value={newKeyName}
                   onChange={(e) => setNewKeyName(e.target.value)}
                   placeholder="e.g. thinkany-web"
-                  className="w-full px-4 py-2.5 bg-[#090d16] border border-[#2b3850] rounded-xl text-sm text-[#f1f5f9] placeholder-[#64748b] focus:outline-none focus:border-[#a855f7] transition-all"
+                  className="w-full px-4 py-2.5 bg-[#dce3ed] dark:bg-[#090d16] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl text-sm text-[#0f172a] dark:text-[#f1f5f9] placeholder-[#64748b] focus:outline-none focus:border-[#7e22ce] dark:focus:border-[#a855f7] transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-[#f1f5f9] mb-1.5">
+                <label className="block text-sm font-semibold text-[#0f172a] dark:text-[#f1f5f9] mb-1.5">
                   API Key / Secret Token (Optional)
                 </label>
                 <input
@@ -779,12 +775,12 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
                   value={newKeyValue}
                   onChange={(e) => setNewKeyValue(e.target.value)}
                   placeholder="e.g. AIzaSy... or custom key (leave blank to auto-generate)"
-                  className="w-full px-4 py-2.5 bg-[#090d16] border border-[#2b3850] rounded-xl text-sm text-[#f1f5f9] placeholder-[#64748b] focus:outline-none focus:border-[#a855f7] transition-all font-mono"
+                  className="w-full px-4 py-2.5 bg-[#dce3ed] dark:bg-[#090d16] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl text-sm text-[#0f172a] dark:text-[#f1f5f9] placeholder-[#64748b] focus:outline-none focus:border-[#7e22ce] dark:focus:border-[#a855f7] transition-all font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-[#f1f5f9] mb-2">
+                <label className="block text-sm font-semibold text-[#0f172a] dark:text-[#f1f5f9] mb-2">
                   Type
                 </label>
                 <div className="space-y-3">
@@ -792,14 +788,14 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
                     onClick={() => setNewKeyType('User')}
                     className={`p-4 rounded-xl border transition-all cursor-pointer ${
                       newKeyType === 'User'
-                        ? 'bg-[#1e2a45] border-[#a855f7] shadow-sm'
-                        : 'bg-[#090d16] border-[#2b3850] hover:border-[#3b82f6]'
+                        ? 'bg-[#dce3ed] dark:bg-[#1e2a45] border-[#7e22ce] dark:border-[#a855f7] shadow-xs'
+                        : 'bg-[#dfe5ee] dark:bg-[#090d16] border-[#bcc8da] dark:border-[#2b3850] hover:border-[#1d4ed8] dark:hover:border-[#3b82f6]'
                     }`}
                   >
-                    <div className="text-sm font-semibold text-[#f1f5f9]">
+                    <div className="text-sm font-semibold text-[#0f172a] dark:text-[#f1f5f9]">
                       User
                     </div>
-                    <p className="text-xs text-[#94a3b8] mt-1">
+                    <p className="text-xs text-[#4b5b73] dark:text-[#94a3b8] mt-1">
                       Access all your agents (auto-includes future ones). Can create new agents.
                     </p>
                   </div>
@@ -808,14 +804,14 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
                     onClick={() => setNewKeyType('Agent')}
                     className={`p-4 rounded-xl border transition-all cursor-pointer ${
                       newKeyType === 'Agent'
-                        ? 'bg-[#1e2a45] border-[#a855f7] shadow-sm'
-                        : 'bg-[#090d16] border-[#2b3850] hover:border-[#3b82f6]'
+                        ? 'bg-[#dce3ed] dark:bg-[#1e2a45] border-[#7e22ce] dark:border-[#a855f7] shadow-xs'
+                        : 'bg-[#dfe5ee] dark:bg-[#090d16] border-[#bcc8da] dark:border-[#2b3850] hover:border-[#1d4ed8] dark:hover:border-[#3b82f6]'
                     }`}
                   >
-                    <div className="text-sm font-semibold text-[#f1f5f9]">
+                    <div className="text-sm font-semibold text-[#0f172a] dark:text-[#f1f5f9]">
                       Agent
                     </div>
-                    <p className="text-xs text-[#94a3b8] mt-1">
+                    <p className="text-xs text-[#4b5b73] dark:text-[#94a3b8] mt-1">
                       Locked to specific agents. Cannot create new ones.
                     </p>
                   </div>
@@ -824,11 +820,11 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
             </div>
 
             {/* Footer */}
-            <div className="px-6 py-4 bg-[#0f172a] border-t border-[#2b3850] flex items-center justify-end gap-3">
+            <div className="px-6 py-4 bg-[#d5dde8] dark:bg-[#0f172a] border-t border-[#bcc8da] dark:border-[#2b3850] flex items-center justify-end gap-3">
               <button
                 type="button"
                 onClick={() => setIsApiKeyModalOpen(false)}
-                className="px-5 py-2.5 bg-[#1e2a45] hover:bg-[#283656] border border-[#2b3850] rounded-xl text-xs font-semibold text-[#f1f5f9] transition-colors cursor-pointer"
+                className="px-5 py-2.5 bg-[#eaeff6] hover:bg-[#cdd7e5] dark:bg-[#1e2a45] dark:hover:bg-[#283656] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl text-xs font-semibold text-[#0f172a] dark:text-[#f1f5f9] transition-colors cursor-pointer"
               >
                 Cancel
               </button>
@@ -847,20 +843,20 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
       {/* Add / Edit Provider Pop up Modal */}
       {isAddProviderOpen && (
         <div className="fixed inset-0 z-[160] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-150">
-          <div className="bg-white dark:bg-[#131b2e] border border-slate-200 dark:border-[#2b3850] rounded-2xl max-w-md w-full shadow-2xl overflow-hidden animate-in zoom-in-95 duration-150">
+          <div className="bg-[#eaeff6] dark:bg-[#131b2e] border border-[#bcc8da] dark:border-[#2b3850] rounded-2xl max-w-md w-full shadow-2xl overflow-hidden animate-in zoom-in-95 duration-150">
             <div className="p-6 pb-4 flex items-start justify-between">
               <div>
-                <h2 className="text-xl font-normal text-slate-900 dark:text-[#dae2fd]">
+                <h2 className="text-xl font-normal text-[#0f172a] dark:text-[#dae2fd]">
                   {editingProviderId ? 'Edit Provider' : 'Add Provider'}
                 </h2>
-                <p className="text-sm text-slate-500 dark:text-[#bacac5] mt-1">
+                <p className="text-sm text-[#4b5b73] dark:text-[#bacac5] mt-1">
                   Configure an LLM provider endpoint and authentication key.
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setIsAddProviderOpen(false)}
-                className="text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors p-1 rounded-lg cursor-pointer"
+                className="text-[#4b5b73] hover:text-[#0f172a] dark:text-slate-400 dark:hover:text-white transition-colors p-1 rounded-lg cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -868,46 +864,46 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
 
             <div className="px-6 space-y-4 pb-6">
               <div>
-                <label className="block text-sm font-medium text-slate-800 dark:text-slate-200 mb-1.5">
+                <label className="block text-sm font-medium text-[#0f172a] dark:text-slate-200 mb-1.5">
                   Provider Name
                 </label>
                 <input
                   type="text"
                   value={provNameInput}
                   onChange={(e) => setProvNameInput(e.target.value)}
-                  placeholder="e.g. clawrouter"
-                  className="w-full px-4 py-2.5 bg-white dark:bg-[#0b1326] border border-slate-300 dark:border-[#2b3850] rounded-xl text-sm text-slate-900 dark:text-[#dae2fd] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#ff6b00]/40 transition-all"
+                  placeholder="e.g. google-gemini"
+                  className="w-full px-4 py-2.5 bg-[#dce3ed] dark:bg-[#0b1326] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl text-sm text-[#0f172a] dark:text-[#dae2fd] placeholder-[#64748b] dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#ea580c]/40 dark:focus:ring-[#ff6b00]/40 transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-800 dark:text-slate-200 mb-1.5">
+                <label className="block text-sm font-medium text-[#0f172a] dark:text-slate-200 mb-1.5">
                   API Base URL
                 </label>
                 <input
                   type="text"
                   value={provBaseInput}
                   onChange={(e) => setProvBaseInput(e.target.value)}
-                  placeholder="e.g. http://clawrouter-api-svc.workany:3000"
-                  className="w-full px-4 py-2.5 bg-white dark:bg-[#0b1326] border border-slate-300 dark:border-[#2b3850] rounded-xl text-sm font-mono text-slate-900 dark:text-[#dae2fd] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#ff6b00]/40 transition-all"
+                  placeholder="e.g. https://generativelanguage.googleapis.com"
+                  className="w-full px-4 py-2.5 bg-[#dce3ed] dark:bg-[#0b1326] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl text-sm font-mono text-[#0f172a] dark:text-[#dae2fd] placeholder-[#64748b] dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#ea580c]/40 dark:focus:ring-[#ff6b00]/40 transition-all"
                 />
               </div>
 
               <div className="grid grid-cols-3 gap-3">
                 <div className="col-span-2">
-                  <label className="block text-sm font-medium text-slate-800 dark:text-slate-200 mb-1.5">
+                  <label className="block text-sm font-medium text-[#0f172a] dark:text-slate-200 mb-1.5">
                     API Key / Secret
                   </label>
                   <input
                     type="text"
                     value={provKeyInput}
                     onChange={(e) => setProvKeyInput(e.target.value)}
-                    placeholder="e.g. sk-h****oXhP"
-                    className="w-full px-4 py-2.5 bg-white dark:bg-[#0b1326] border border-slate-300 dark:border-[#2b3850] rounded-xl text-sm font-mono text-slate-900 dark:text-[#dae2fd] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#ff6b00]/40 transition-all"
+                    placeholder="e.g. AIza****oXhP"
+                    className="w-full px-4 py-2.5 bg-[#dce3ed] dark:bg-[#0b1326] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl text-sm font-mono text-[#0f172a] dark:text-[#dae2fd] placeholder-[#64748b] dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#ea580c]/40 dark:focus:ring-[#ff6b00]/40 transition-all"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-800 dark:text-slate-200 mb-1.5">
+                  <label className="block text-sm font-medium text-[#0f172a] dark:text-slate-200 mb-1.5">
                     Models
                   </label>
                   <input
@@ -916,24 +912,24 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
                     max="99"
                     value={provModelsCountInput}
                     onChange={(e) => setProvModelsCountInput(parseInt(e.target.value) || 1)}
-                    className="w-full px-4 py-2.5 bg-white dark:bg-[#0b1326] border border-slate-300 dark:border-[#2b3850] rounded-xl text-sm font-mono text-slate-900 dark:text-[#dae2fd] focus:outline-none focus:ring-2 focus:ring-[#ff6b00]/40 transition-all"
+                    className="w-full px-4 py-2.5 bg-[#dce3ed] dark:bg-[#0b1326] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl text-sm font-mono text-[#0f172a] dark:text-[#dae2fd] focus:outline-none focus:ring-2 focus:ring-[#ea580c]/40 dark:focus:ring-[#ff6b00]/40 transition-all"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="px-6 py-4 bg-slate-50 dark:bg-[#0b1326]/60 border-t border-slate-200/80 dark:border-[#2b3850] flex items-center justify-end gap-3">
+            <div className="px-6 py-4 bg-[#d5dde8] dark:bg-[#0b1326]/60 border-t border-[#bcc8da] dark:border-[#2b3850] flex items-center justify-end gap-3">
               <button
                 type="button"
                 onClick={() => setIsAddProviderOpen(false)}
-                className="px-5 py-2 bg-white dark:bg-[#1e2a45] border border-slate-200 dark:border-[#2b3850] rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-[#283656] transition-colors cursor-pointer shadow-sm"
+                className="px-5 py-2 bg-[#eaeff6] dark:bg-[#1e2a45] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl text-sm font-medium text-[#0f172a] dark:text-slate-200 hover:bg-[#cdd7e5] dark:hover:bg-[#283656] transition-colors cursor-pointer shadow-sm"
               >
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={handleSaveProvider}
-                className="px-5 py-2 bg-[#ff6b00] hover:bg-[#ea580c] text-white font-semibold text-sm rounded-xl transition-all shadow-sm cursor-pointer"
+                className="px-5 py-2 bg-[#ea580c] hover:bg-[#c2410c] dark:bg-[#ff6b00] dark:hover:bg-[#ea580c] text-white font-semibold text-sm rounded-xl transition-all shadow-sm cursor-pointer"
               >
                 {editingProviderId ? 'Save changes' : 'Add provider'}
               </button>

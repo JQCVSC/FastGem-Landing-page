@@ -33,19 +33,19 @@ export const Header: React.FC<HeaderProps> = ({ onOpenStudio, onOpenDocs }) => {
   return (
     <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
       scrolled 
-        ? 'bg-black/95 backdrop-blur-xl border-b border-[#2b3850]/50 shadow-[0_4px_20px_rgba(0,0,0,0.8)]' 
-        : 'bg-black/90 backdrop-blur-xl border-b border-[#2b3850]/30 shadow-[0_1px_8px_rgba(0,0,0,0.5)]'
+        ? 'bg-[#d5dde8]/95 dark:bg-black/95 backdrop-blur-xl border-b border-[#bcc8da] dark:border-[#2b3850]/50 shadow-sm dark:shadow-[0_4px_20px_rgba(0,0,0,0.8)]' 
+        : 'bg-[#d5dde8]/90 dark:bg-black/90 backdrop-blur-xl border-b border-[#bcc8da]/70 dark:border-[#2b3850]/30 shadow-xs dark:shadow-[0_1px_8px_rgba(0,0,0,0.5)]'
     }`}>
       <div className="h-20 max-w-[1200px] mx-auto px-6 flex items-center justify-between gap-8">
         {/* Logo */}
         <div 
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="flex items-center cursor-pointer group shrink-0"
+          className="flex items-center cursor-pointer group shrink-0 bg-[#131b2e] px-2.5 py-1.5 rounded-xl dark:bg-transparent dark:p-0 transition-colors"
         >
           <img 
             src="https://i.imgur.com/hkRlTDp.png" 
             alt="FastGem Logo" 
-            className="h-10 w-auto object-contain rounded-lg"
+            className="h-8 dark:h-10 w-auto object-contain rounded-lg"
             referrerPolicy="no-referrer"
           />
         </div>
@@ -55,7 +55,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenStudio, onOpenDocs }) => {
           <button 
             onClick={() => scrollToSection('features')}
             className={`font-mono text-xs uppercase tracking-wider transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-              activeTab === 'features' ? 'spectrum-gradient-text font-bold' : 'text-[#bacac5] hover:text-[#dae2fd]'
+              activeTab === 'features' ? 'spectrum-gradient-text font-bold' : 'text-[#2d3c52] hover:text-[#0f172a] dark:text-[#bacac5] dark:hover:text-[#dae2fd]'
             }`}
           >
             Features
@@ -63,7 +63,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenStudio, onOpenDocs }) => {
           <button 
             onClick={() => scrollToSection('how-it-works')}
             className={`font-mono text-xs uppercase tracking-wider transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-              activeTab === 'how-it-works' ? 'spectrum-gradient-text font-bold' : 'text-[#bacac5] hover:text-[#dae2fd]'
+              activeTab === 'how-it-works' ? 'spectrum-gradient-text font-bold' : 'text-[#2d3c52] hover:text-[#0f172a] dark:text-[#bacac5] dark:hover:text-[#dae2fd]'
             }`}
           >
             How It Works
@@ -71,7 +71,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenStudio, onOpenDocs }) => {
           <button 
             onClick={() => scrollToSection('quick-start')}
             className={`font-mono text-xs uppercase tracking-wider transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-              activeTab === 'quick-start' ? 'spectrum-gradient-text font-bold' : 'text-[#bacac5] hover:text-[#dae2fd]'
+              activeTab === 'quick-start' ? 'spectrum-gradient-text font-bold' : 'text-[#2d3c52] hover:text-[#0f172a] dark:text-[#bacac5] dark:hover:text-[#dae2fd]'
             }`}
           >
             Quick Start
@@ -79,7 +79,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenStudio, onOpenDocs }) => {
           <button 
             onClick={() => scrollToSection('runtime-api')}
             className={`font-mono text-xs uppercase tracking-wider transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-              activeTab === 'runtime-api' ? 'spectrum-gradient-text font-bold' : 'text-[#bacac5] hover:text-[#dae2fd]'
+              activeTab === 'runtime-api' ? 'spectrum-gradient-text font-bold' : 'text-[#2d3c52] hover:text-[#0f172a] dark:text-[#bacac5] dark:hover:text-[#dae2fd]'
             }`}
           >
             Runtime
@@ -88,7 +88,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenStudio, onOpenDocs }) => {
             href="https://github.com/JQCVSC/FastGem" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="font-mono text-xs text-[#bacac5] hover:text-[#dae2fd] transition-colors uppercase tracking-wider whitespace-nowrap shrink-0"
+            className="font-mono text-xs text-[#2d3c52] hover:text-[#0f172a] dark:text-[#bacac5] dark:hover:text-[#dae2fd] transition-colors uppercase tracking-wider whitespace-nowrap shrink-0"
           >
             GitHub
           </a>
@@ -100,26 +100,26 @@ export const Header: React.FC<HeaderProps> = ({ onOpenStudio, onOpenDocs }) => {
           <button
             onClick={toggleTheme}
             title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            className="p-2 rounded-xl bg-[#131d33] border border-[#2b3850] text-[#f59e0b] hover:bg-[#1e2a45] transition-all cursor-pointer flex items-center justify-center shadow-sm"
+            className="p-2 rounded-xl bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] text-[#b45309] dark:text-[#f59e0b] hover:bg-[#dce3ed] dark:hover:bg-[#1e2a45] transition-all cursor-pointer flex items-center justify-center shadow-xs"
           >
             {theme === 'dark' ? (
               <Sun className="w-4 h-4 text-amber-400 animate-in fade-in zoom-in duration-200" />
             ) : (
-              <Moon className="w-4 h-4 text-purple-400 animate-in fade-in zoom-in duration-200" />
+              <Moon className="w-4 h-4 text-[#4f46e5] animate-in fade-in zoom-in duration-200" />
             )}
           </button>
 
           <button 
             onClick={onOpenDocs}
             title="Read the Runtime API"
-            className="hidden md:flex text-[#bacac5] hover:text-[#3b82f6] transition-colors items-center justify-center p-2 rounded-lg hover:bg-[#171f33] cursor-pointer"
+            className="hidden md:flex text-[#2d3c52] dark:text-[#bacac5] hover:text-[#1d4ed8] dark:hover:text-[#3b82f6] transition-colors items-center justify-center p-2 rounded-lg hover:bg-[#eaeff6] dark:hover:bg-[#171f33] cursor-pointer"
           >
             <Code className="w-5 h-5" />
           </button>
 
           <button 
             onClick={onOpenStudio}
-            className="px-5 py-2.5 bg-gradient-to-r from-[#ef4444] via-[#f59e0b] via-[#10b981] via-[#3b82f6] to-[#a855f7] text-white font-mono text-xs font-extrabold uppercase tracking-wider rounded-lg hover:opacity-95 hover:scale-[1.02] transition-all shadow-[0_0_20px_rgba(239,68,68,0.3)] hover:shadow-[0_0_30px_rgba(168,85,247,0.45)] flex items-center gap-2 cursor-pointer whitespace-nowrap shrink-0"
+            className="px-5 py-2.5 btn-spectrum text-white font-mono text-xs font-extrabold uppercase tracking-wider rounded-lg flex items-center gap-2 cursor-pointer whitespace-nowrap shrink-0"
           >
             Open Console
           </button>
@@ -127,7 +127,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenStudio, onOpenDocs }) => {
           {/* Mobile Menu Button */}
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden text-[#bacac5] hover:text-[#dae2fd] p-2"
+            className="lg:hidden text-[#2d3c52] dark:text-[#bacac5] hover:text-[#0f172a] dark:hover:text-[#dae2fd] p-2 cursor-pointer"
             aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -137,38 +137,38 @@ export const Header: React.FC<HeaderProps> = ({ onOpenStudio, onOpenDocs }) => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#060e20] border-b border-[#3c4a46]/30 px-6 py-6 flex flex-col gap-4 animate-in slide-in-from-top-2">
-          <div className="flex items-center justify-between py-2 border-b border-[#3c4a46]/20">
-            <span className="font-mono text-xs text-[#bacac5] uppercase">Appearance</span>
+        <div className="lg:hidden bg-[#dfe5ee] dark:bg-[#060e20] border-b border-[#bcc8da] dark:border-[#3c4a46]/30 px-6 py-6 flex flex-col gap-4 animate-in slide-in-from-top-2">
+          <div className="flex items-center justify-between py-2 border-b border-[#bcc8da] dark:border-[#3c4a46]/20">
+            <span className="font-mono text-xs text-[#4b5b73] dark:text-[#bacac5] uppercase">Appearance</span>
             <button
               onClick={toggleTheme}
-              className="flex items-center gap-2 px-3 py-1.5 bg-[#131d33] border border-[#2b3850] rounded-lg text-xs font-mono text-[#ff6b00]"
+              className="flex items-center gap-2 px-3 py-1.5 bg-[#eaeff6] dark:bg-[#131d33] border border-[#bcc8da] dark:border-[#2b3850] rounded-lg text-xs font-mono text-[#0f172a] dark:text-[#f59e0b]"
             >
-              {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-[#ea580c]" />}
+              {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-[#4f46e5]" />}
               <span>{theme === 'dark' ? 'Light Theme' : 'Dark Theme'}</span>
             </button>
           </div>
           <button 
             onClick={() => scrollToSection('features')}
-            className="text-left font-mono text-sm uppercase text-[#bacac5] hover:text-[#ff6b00] py-2 border-b border-[#3c4a46]/20"
+            className="text-left font-mono text-sm uppercase text-[#2d3c52] dark:text-[#bacac5] hover:text-[#1d4ed8] dark:hover:text-[#ff6b00] py-2 border-b border-[#bcc8da] dark:border-[#3c4a46]/20"
           >
             Features
           </button>
           <button 
             onClick={() => scrollToSection('how-it-works')}
-            className="text-left font-mono text-sm uppercase text-[#bacac5] hover:text-[#ff6b00] py-2 border-b border-[#3c4a46]/20"
+            className="text-left font-mono text-sm uppercase text-[#2d3c52] dark:text-[#bacac5] hover:text-[#1d4ed8] dark:hover:text-[#ff6b00] py-2 border-b border-[#bcc8da] dark:border-[#3c4a46]/20"
           >
             How It Works
           </button>
           <button 
             onClick={() => scrollToSection('quick-start')}
-            className="text-left font-mono text-sm uppercase text-[#bacac5] hover:text-[#ff6b00] py-2 border-b border-[#3c4a46]/20"
+            className="text-left font-mono text-sm uppercase text-[#2d3c52] dark:text-[#bacac5] hover:text-[#1d4ed8] dark:hover:text-[#ff6b00] py-2 border-b border-[#bcc8da] dark:border-[#3c4a46]/20"
           >
             Quick Start
           </button>
           <button 
             onClick={() => scrollToSection('runtime-api')}
-            className="text-left font-mono text-sm uppercase text-[#bacac5] hover:text-[#ff6b00] py-2 border-b border-[#3c4a46]/20"
+            className="text-left font-mono text-sm uppercase text-[#2d3c52] dark:text-[#bacac5] hover:text-[#1d4ed8] dark:hover:text-[#ff6b00] py-2 border-b border-[#bcc8da] dark:border-[#3c4a46]/20"
           >
             Runtime
           </button>
@@ -176,19 +176,19 @@ export const Header: React.FC<HeaderProps> = ({ onOpenStudio, onOpenDocs }) => {
             href="https://github.com/JQCVSC/FastGem"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-left font-mono text-sm uppercase text-[#bacac5] hover:text-[#ff6b00] py-2 border-b border-[#3c4a46]/20"
+            className="text-left font-mono text-sm uppercase text-[#2d3c52] dark:text-[#bacac5] hover:text-[#1d4ed8] dark:hover:text-[#ff6b00] py-2 border-b border-[#bcc8da] dark:border-[#3c4a46]/20"
           >
             GitHub
           </a>
           <button 
             onClick={() => { setMobileMenuOpen(false); onOpenDocs(); }}
-            className="text-left font-mono text-sm uppercase text-[#ff6b00] py-2 flex items-center gap-2"
+            className="text-left font-mono text-sm uppercase text-[#1d4ed8] dark:text-[#ff6b00] py-2 flex items-center gap-2"
           >
             <Code className="w-4 h-4" /> Read the Runtime API
           </button>
           <button 
             onClick={() => { setMobileMenuOpen(false); onOpenStudio(); }}
-            className="w-full mt-2 py-3 bg-[#ff6b00] text-white font-mono text-xs font-bold uppercase rounded-lg text-center"
+            className="w-full mt-2 py-3 btn-spectrum text-white font-mono text-xs font-bold uppercase rounded-lg text-center"
           >
             Open Console
           </button>
