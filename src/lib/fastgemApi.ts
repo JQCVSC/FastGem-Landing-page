@@ -1,3 +1,5 @@
+import { AgentPreset } from '../types';
+
 export type RuntimeAgent = {
   id: string;
   name: string;
@@ -16,6 +18,20 @@ type StreamEvent =
 
 const runtimeUrl = import.meta.env.VITE_FASTGEM_RUNTIME_URL || 'http://localhost:8000';
 
+export function runtimeAgentToPreset(agent: RuntimeAgent): AgentPreset {
+  return {
+    id: agent.id,
+    name: agent.name,
+    soulFile: 'SOUL.md',
+    avatarEmoji: '🤖',
+    description: agent.description,
+    model: agent.model,
+    systemInstruction: agent.systemInstruction,
+    tools: agent.tools,
+    samplePrompts: [],
+  };
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`${runtimeUrl}${path}`, {
     ...init,
@@ -29,6 +45,14 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 export async function listAgents() {
   const result = await request<RuntimeAgentsResponse>('/api/agents');
   return result.agents;
+}
+
+export async function createAgent(input: Pick<RuntimeAgent, 'name' | 'description'> & Partial<Pick<RuntimeAgent, 'systemInstruction' | 'model' | 'tools'>>) {
+  const result = await request<{ agent: RuntimeAgent }>('/api/agents', {
+    method: 'POST',
+    body: JSON.stringify(input),
+  });
+  return result.agent;
 }
 
 export async function runAgent(agentId: string, prompt: string, sessionId?: string) {

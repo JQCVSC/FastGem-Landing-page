@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CreateAgentModal } from './CreateAgentModal';
 import { ChannelsView } from './ChannelsView';
 import { ModelsView } from './ModelsView';
@@ -7,8 +7,8 @@ import { McpView } from './McpView';
 import { SkillsView } from './SkillsView';
 import { TokenUsageView } from './TokenUsageView';
 import { SchedulerView } from './SchedulerView';
-import { AGENT_PRESETS } from '../data/mockData';
 import { AgentPreset } from '../types';
+import { createAgent, listAgents, runtimeAgentToPreset, RuntimeAgent } from '../lib/fastgemApi';
 import { useTheme } from '../context/ThemeContext';
 import { 
   LayoutDashboard, 
@@ -57,10 +57,8 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
   const { theme, toggleTheme } = useTheme();
   const [activeNav, setActiveNav] = useState<'overview' | 'agents' | 'models' | 'apikeys' | 'settings' | 'account' | 'general' | 'channels' | 'mcp' | 'skills' | 'tokenusage' | 'scheduler'>('overview');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [agents, setAgents] = useState<Array<{ id: string; name: string; model: string; status: 'active' | 'idle' }>>([
-    { id: '1', name: 'SOUL.md — Tech Researcher', model: 'Gemini 3.1 Pro', status: 'active' },
-    { id: '2', name: 'SOUL.md — Code Architect', model: 'Gemini 3.6 Flash', status: 'active' }
-  ]);
+  const [agents, setAgents] = useState<RuntimeAgent[]>([]);
+  const [runtimeError, setRuntimeError] = useState<string | null>(null);
   const [apiKeys, setApiKeys] = useState<Array<{ id: string; name: string; key: string; created: string }>>([]);
   const [showKeySecret, setShowKeySecret] = useState<Record<string, boolean>>({});
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
@@ -71,7 +69,7 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
   const [newKeyValue, setNewKeyValue] = useState('');
   const [newKeyType, setNewKeyType] = useState<'User' | 'Agent'>('User');
 
-  const [defaultModel, setDefaultModel] = useState('gemini/gemini-3.6-flash');
+  const [defaultModel, setDefaultModel] = useState('');
   const [isOverride, setIsOverride] = useState(true);
   const [testedProviderStatus, setTestedProviderStatus] = useState<Record<string, 'idle' | 'testing' | 'success' | 'failed'>>({});
   const [copiedBaseUrl, setCopiedBaseUrl] = useState<string | null>(null);
@@ -103,11 +101,7 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
   const [saveSuccessNotice, setSaveSuccessNotice] = useState(false);
 
   const availableModelOptions = [
-    'gemini/gemini-3.6-flash',
-    'gemini/gemini-3.1-pro',
-    'gemini/gemini-3.0-flash-lite',
-    'fastgem/fastgem-runtime-latest',
-    'openai/gpt-4o'
+    ...Array.from(new Set(agents.map((agent) => agent.model).filter(Boolean))),
   ];
 
   const handleOpenAddProvider = () => {
@@ -209,14 +203,26 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
   };
 
   const handleCreateAgent = (data: { name: string; description: string }) => {
-    const newAgent = {
-      id: `agt_${Math.random().toString(36).substring(2, 8)}`,
-      name: data.name,
-      model: 'Gemini 3.6 Flash',
-      status: 'active' as const,
-    };
-    setAgents([newAgent, ...agents]);
+    createAgent({ name: data.name, description: data.description })
+      .then((agent) => setAgents((current) => [agent, ...current]))
+      .catch((error) => setRuntimeError(error instanceof Error ? error.message : 'FastGem runtime is unavailable'));
   };
+
+  useEffect(() => {
+    if (!isOpen) return;
+    let cancelled = false;
+    listAgents()
+      .then((runtimeAgents) => {
+        if (cancelled) return;
+        setAgents(runtimeAgents);
+        setDefaultModel(runtimeAgents[0]?.model || '');
+        setRuntimeError(null);
+      })
+      .catch((error) => {
+        if (!cancelled) setRuntimeError(error instanceof Error ? error.message : 'FastGem runtime is unavailable');
+      });
+    return () => { cancelled = true; };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -471,8 +477,8 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
                   </div>
 
                   <div className="mt-4">
-                    <div className="text-4xl font-semibold text-[#0f172a] dark:text-[#f1f5f9] tabular-nums">3</div>
-                    <div className="text-xs text-[#4b5b73] dark:text-[#94a3b8] mt-1.5">Google Gemini Models</div>
+                    <div className="text-4xl font-semibold text-[#0f172a] dark:text-[#f1f5f9] tabular-nums">{new Set(agents.map((agent) => agent.model).filter(Boolean)).size}</div>
+                    <div className="text-xs text-[#4b5b73] dark:text-[#94a3b8] mt-1.5">Models used by runtime agents</div>
                   </div>
                 </div>
 
@@ -504,7 +510,9 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
                   </button>
                 </div>
 
+                {runtimeError && <div className="mb-3 rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-xs text-red-200">{runtimeError}</div>}
                 <div className="space-y-3">
+                  {agents.length === 0 && !runtimeError && <div className="rounded-xl border border-dashed border-[#bcc8da] dark:border-[#2b3850] p-6 text-sm text-[#4b5b73] dark:text-[#94a3b8]">No agents are configured in the FastGem runtime yet.</div>}
                   {agents.map((agent) => (
                     <div key={agent.id} className="p-4 bg-[#dce3ed] dark:bg-[#090d16] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl flex items-center justify-between">
                       <div className="flex items-center gap-3">
@@ -520,8 +528,7 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => {
-                            const preset = AGENT_PRESETS.find(p => p.name.toLowerCase().includes(agent.name.toLowerCase())) || AGENT_PRESETS[0];
-                            onOpenStudio(preset);
+                            onOpenStudio(runtimeAgentToPreset(agent));
                           }}
                           className="px-3.5 py-1.5 rounded-lg text-xs font-mono btn-spectrum-outline flex items-center gap-1.5 transition-colors cursor-pointer"
                         >
@@ -564,8 +571,7 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
                     <p className="text-xs text-[#4b5b73] dark:text-[#94a3b8]">SOUL.md system rules loaded. Persistent session memory enabled.</p>
                     <button
                       onClick={() => {
-                        const preset = AGENT_PRESETS.find(p => p.name.toLowerCase().includes(agent.name.toLowerCase())) || AGENT_PRESETS[0];
-                        onOpenStudio(preset);
+                        onOpenStudio(runtimeAgentToPreset(agent));
                       }}
                       className="w-full mt-2 py-2.5 btn-spectrum-outline font-mono text-xs font-bold rounded-xl transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-xs"
                     >

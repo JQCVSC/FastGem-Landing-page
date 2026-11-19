@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { AGENT_PRESETS } from '../data/mockData';
 import { AgentPreset } from '../types';
 import { useTheme } from '../context/ThemeContext';
 import { ChannelsView } from './ChannelsView';
@@ -13,7 +12,7 @@ import { McpView } from './McpView';
 import { SkillsView } from './SkillsView';
 import { TokenUsageView } from './TokenUsageView';
 import { SchedulerView } from './SchedulerView';
-import { listAgents, streamAgent, RuntimeAgent } from '../lib/fastgemApi';
+import { listAgents, streamAgent, runtimeAgentToPreset } from '../lib/fastgemApi';
 import { 
   X, Send, Bot, Terminal, Cpu, Database, RefreshCw, Sparkles, Check, Copy, Code2, 
   ArrowLeft, Trash2, MessageSquare, Plus, ChevronDown, ChevronRight, Settings, 
@@ -42,27 +41,16 @@ interface ChatThread {
   }>;
 }
 
-const runtimeAgentToPreset = (agent: RuntimeAgent): AgentPreset => {
-  const preset = AGENT_PRESETS.find((candidate) => candidate.id === agent.id);
-  return {
-    ...(preset || {
-      id: agent.id,
-      name: agent.name,
-      soulFile: 'SOUL.md',
-      avatarEmoji: 'https://i.imgur.com/GZVnWPR.png',
-      description: agent.description,
-      model: agent.model,
-      systemInstruction: agent.systemInstruction,
-      tools: agent.tools,
-      samplePrompts: [],
-    }),
-    id: agent.id,
-    name: agent.name,
-    description: agent.description,
-    model: agent.model,
-    systemInstruction: agent.systemInstruction,
-    tools: agent.tools,
-  };
+const EMPTY_AGENT: AgentPreset = {
+  id: '',
+  name: 'FastGem Agent',
+  soulFile: 'SOUL.md',
+  avatarEmoji: '🤖',
+  description: 'Connect to the FastGem runtime to load an agent.',
+  model: '',
+  systemInstruction: '',
+  tools: [],
+  samplePrompts: [],
 };
 
 export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({ 
@@ -71,7 +59,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
   initialAgent 
 }) => {
   const { theme, toggleTheme } = useTheme();
-  const [selectedAgent, setSelectedAgent] = useState<AgentPreset>(initialAgent || AGENT_PRESETS[0]);
+  const [selectedAgent, setSelectedAgent] = useState<AgentPreset>(initialAgent || EMPTY_AGENT);
   const [userInput, setUserInput] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -114,7 +102,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
     {
       id: 'thread-1',
       title: 'how are you day',
-      agentId: AGENT_PRESETS[0].id,
+      agentId: initialAgent?.id || '',
       messages: []
     }
   ]);
@@ -645,7 +633,7 @@ export const AgentStudioModal: React.FC<AgentStudioModalProps> = ({
                 {agentDropdownOpen && (
                   <div className="absolute top-full left-0 right-0 mt-1 z-50 bg-[#eaeff6] dark:bg-[#0f172a] border border-[#bcc8da] dark:border-[#2b3850] rounded-xl shadow-2xl p-1.5 space-y-1 max-h-60 overflow-y-auto">
                     <div className="px-2.5 py-1 text-[10px] font-mono font-extrabold uppercase tracking-widest text-[#c2410c] dark:text-[#ff8c00]">Switch Agent</div>
-                    {(runtimeAgents.length > 0 ? runtimeAgents : AGENT_PRESETS).map((agent) => (
+                    {runtimeAgents.map((agent) => (
                       <button
                         key={agent.id}
                         onClick={() => handleSelectAgent(agent)}

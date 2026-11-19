@@ -13,7 +13,7 @@ export const ModelsView: React.FC<ModelsViewProps> = ({
   standalone = false,
 }) => {
   const [shareConfig, setShareConfig] = useState<boolean>(true);
-  const [activeModel, setActiveModel] = useState<string>('Inherit (gemini-3.6-flash)');
+  const [activeModel, setActiveModel] = useState<string>('Inherit (gemini-3.8-flash)');
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
 
@@ -40,9 +40,9 @@ export const ModelsView: React.FC<ModelsViewProps> = ({
   const [newApiKey, setNewApiKey] = useState('');
 
   const modelOptions = [
-    'Inherit (gemini-3.6-flash)',
-    'gemini-3.6-flash',
-    'gemini-3.1-pro',
+    'Inherit (gemini-3.8-flash)',
+    'gemini-3.8-flash',
+    'gemini-3.8-flash',
     'gemini-3.0-flash-lite',
     'fastgem/fastgem-runtime-latest',
     'openai/gpt-4o',
