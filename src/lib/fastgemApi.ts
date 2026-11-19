@@ -23,7 +23,7 @@ export function runtimeAgentToPreset(agent: RuntimeAgent): AgentPreset {
     id: agent.id,
     name: agent.name,
     soulFile: 'SOUL.md',
-    avatarEmoji: '🤖',
+    avatarEmoji: 'https://i.imgur.com/EdJkjqY.png',
     description: agent.description,
     model: agent.model,
     systemInstruction: agent.systemInstruction,

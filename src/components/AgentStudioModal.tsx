@@ -45,7 +45,7 @@ const EMPTY_AGENT: AgentPreset = {
   id: '',
   name: 'FastGem Agent',
   soulFile: 'SOUL.md',
-  avatarEmoji: '🤖',
+  avatarEmoji: 'https://i.imgur.com/EdJkjqY.png',
   description: 'Connect to the FastGem runtime to load an agent.',
   model: '',
   systemInstruction: '',
